@@ -1,0 +1,1 @@
+ yarn add   @react-native-community/slider axios jwt-decode react-native-device-info react-native-image-picker react-native-linear-gradient react-native-svg react-native-track-player react-native-vector-icons react-navigation react-redux redux redux-thunk react-native-svg-transformer
