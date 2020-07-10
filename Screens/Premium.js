@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, ToastAndroid } from 'react-native';
 import axios from 'axios';
 import data from '../constant/constant'
+import Tabbar from '../ReusableComponents/Tabbar';
 
 export default class HomeScreen extends React.Component {
 
@@ -47,7 +48,7 @@ export default class HomeScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor:'#4fc3f7' }}>
                 <Text>Purpose of payment</Text>
                 <TextInput style={{ width: '90%', borderColor: 'black', borderWidth: 1, marginBottom: 5 }} onChangeText={(event) => this.setState({ purpose: event })} placeholder="Purpose of payment"></TextInput>
 
@@ -65,6 +66,7 @@ export default class HomeScreen extends React.Component {
                     <Text style={{ color: '#FFF', margin: 10 }}>Submit</Text>
                 </TouchableOpacity>
 
+                <Tabbar click={() => props.navigation.navigate('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
 
             </View>
         );
