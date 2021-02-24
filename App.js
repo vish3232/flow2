@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { Easing } from 'react-native'
-import PushNotification from 'react-native-push-notification'
-import firebase from 'react-native-firebase'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createStore, applyMiddleware } from 'redux'
@@ -28,35 +26,81 @@ import Modal1 from './AuthenticationScreens/Modal';
 import ForgotPassword from './AuthenticationScreens/ForgotPassword';
 import { UserContext } from './AuthContext'
 import ForgotPassword2 from './AuthenticationScreens/ForgotPassword2';
+import PushNotification from "react-native-push-notification";
 
 const store = createStore(Rootreducer, applyMiddleware(thnkmiddleware))
 const Stack = createStackNavigator();
 
 function App() {
   useEffect(() => {
+    checkPermission()
     getLoginData()
-    notificationInformation()
     getUserState().then((paymentStatus) => {
       setuser(JSON.parse(paymentStatus))
       setloading(false)
     });
-  }, [])
-
-
-  const notificationInformation = async () => {
-    let fcmToken = await firebase.messaging().getToken()
-    console.log(fcmToken)
 
     PushNotification.configure({
-
       onRegister: function (token) {
         console.log("TOKEN:", token);
       },
-
       onNotification: function (notification) {
         console.log("NOTIFICATION:", notification);
+      },
+      onAction: function (notification) {
+        console.log("ACTION:", notification.action);
+        console.log("NOTIFICATION:", notification);
+      },
+      onRegistrationError: function(err) {
+        console.error(err.message, err);
+      },
+      permissions: {
+        alert: true,
+        badge: true,
+        sound: true,
+      },
+      popInitialNotification: true,
+      requestPermissions: true,
+    });
+
+  }, [])
+
+
+  const checkPermission = async () => {
+    try {
+      const enabled = await messaging().hasPermission();
+      if (enabled) {
+        getToken();
+      } else {
+        requestPermission();
       }
-    })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getToken = async () => {
+    try {
+      let fcmToken = await AsyncStorage.getItem('fcmToken');
+      if (!fcmToken) {
+        fcmToken = await messaging().getToken();
+        console.log(fcmToken)
+        if (fcmToken) {
+          await AsyncStorage.setItem('fcmToken', fcmToken);
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const requestPermission = async () => {
+      try {
+        await messaging().requestPermission();
+        getToken();
+      } catch (error) {
+        console.log('permission rejected');
+      }
   }
 
   const [loading, setloading] = useState(true)
