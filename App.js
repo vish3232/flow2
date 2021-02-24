@@ -27,6 +27,7 @@ import { Modal } from 'react-native';
 import Modal1 from './AuthenticationScreens/Modal';
 import ForgotPassword from './AuthenticationScreens/ForgotPassword';
 import { UserContext } from './AuthContext'
+import ForgotPassword2 from './AuthenticationScreens/ForgotPassword2';
 
 const store = createStore(Rootreducer, applyMiddleware(thnkmiddleware))
 const Stack = createStackNavigator();
@@ -138,6 +139,8 @@ function App() {
                     <Stack.Screen name="SignInScreen" component={SignInScreen} />
                     <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
                     <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+                    <Stack.Screen name="ForgotPassword2" component={ForgotPassword2} />
+                    <Stack.Screen name="Modal" component={Modal1} />
                   </> :
                   <>
                     <Stack.Screen name="Home" component={Home} />
@@ -148,7 +151,6 @@ function App() {
                     <Stack.Screen name="Blogs" component={Blogs} />
                     <Stack.Screen name="Profile" component={DrawerScreen} />
                     <Stack.Screen name="Webview" component={Webview} />
-                    <Stack.Screen name="Modal" component={Modal1} />
                   </>
             }
           </Stack.Navigator>

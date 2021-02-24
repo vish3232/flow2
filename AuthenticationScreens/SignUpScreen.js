@@ -120,7 +120,7 @@ const SignUpScreen = (props) => {
                     <Text style={{ fontSize: 10, color: '#fff', fontWeight: 'bold', marginLeft: 5 }}>Terms of services</Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.button} onPress={submit}>
+            <TouchableOpacity style={styles.button} /*onPress={submit}*/ onPress={()=> props.navigation.navigate("Modal")}>
                 <Text style={{ fontWeight: 'bold', color: '#fff' }}>Sign Up</Text>
             </TouchableOpacity>
             <View style={{ width: '90%', backgroundColor: '#dcdcdc', height: 0.5, alignSelf: 'center', marginTop: 20 }} />

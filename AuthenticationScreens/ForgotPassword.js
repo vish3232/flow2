@@ -2,7 +2,7 @@ import React from 'react'
 import { ScrollView, StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native'
 import constant from '../constant/constant'
 
-const ForgotPassword = () => {
+const ForgotPassword = (props) => {
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -18,7 +18,7 @@ const ForgotPassword = () => {
                         onChangeText={(value) => setpassword(value)} />
                 </View>
                 <TouchableOpacity style={styles.button}>
-                    <Text style={{ fontWeight: 'bold' }}>Submit</Text>
+                    <Text style={{ fontWeight: 'bold' }} onPress={()=> props.navigation.navigate('ForgotPassword2')}>Submit</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>
