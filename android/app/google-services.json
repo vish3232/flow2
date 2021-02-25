@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "313121356610",
+    "firebase_url": "https://flow-da773.firebaseio.com",
+    "project_id": "flow-da773",
+    "storage_bucket": "flow-da773.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313121356610:android:0d524a94eab4cc69ab26db",
+        "android_client_info": {
+          "package_name": "com.flow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313121356610-qcps3s01g1h7dncp6tr9iaeg60e5n5pl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flow",
+            "certificate_hash": "3d31170251d8bfe1c6e6f7e8db51be9175bcafc1"
+          }
+        },
+        {
+          "client_id": "313121356610-r8qa4eq58flevcdap1l86iuuo1mn6bl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnQM13d7C_VLixIANPDJW3WMuVhQ0_YwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313121356610-r8qa4eq58flevcdap1l86iuuo1mn6bl9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "313121356610-1sladu6kvtkk1g72ldsu0jsaugutu8lg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Flow"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

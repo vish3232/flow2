@@ -1,0 +1,1 @@
+yarn add react-native-push-notification @react-native-firebase/app  @react-native-firebase/messaging
