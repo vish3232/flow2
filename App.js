@@ -193,6 +193,8 @@ function App() {
                     <Stack.Screen name="Blogs" component={Blogs} />
                     <Stack.Screen name="Profile" component={DrawerScreen} />
                     <Stack.Screen name="Webview" component={Webview} />
+                    <Stack.Screen name="NewPassword" component={ForgotPassword2} />
+                    
                   
                   </> :
                   <>
@@ -204,6 +206,8 @@ function App() {
                     <Stack.Screen name="Blogs" component={Blogs} />
                     <Stack.Screen name="Profile" component={DrawerScreen} />
                     <Stack.Screen name="Webview" component={Webview} />
+                    <Stack.Screen name="NewPassword" component={ForgotPassword2} />
+                    
                   </>
             }
           </Stack.Navigator>

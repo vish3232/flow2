@@ -52,7 +52,9 @@ const SignUpScreen = (props) => {
                     setsee(true)
                     Axios.get(constant.url + `/emailOtp/send?to=${email}`).then(data => {
                         
-                        props.navigation.navigate('Modal');
+                        props.navigation.navigate('Modal',{
+                            isForgotPassword:'false'
+                        });
 
                     })
 

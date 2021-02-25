@@ -1,11 +1,36 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native'
 import constant from '../constant/constant'
+import Axios from 'axios'
+import {getEmail} from '../constant/storage'
 
-const ForgotPassword2 = () => {
+const ForgotPassword2 = (props) => {
 
     const [newPassword, setnewPassword] = useState(null)
     const [conformPassword, setconformPassword] = useState(null)
+
+    const updatePassword=async()=>{
+        if(newPassword===conformPassword){
+        getEmail().then((mail) => {
+
+          
+        Axios.post(constant.url + `/user/ForgotPassword`,{
+            email: JSON.parse(mail),
+            password:newPassword
+        }).then(data => {
+            console.log(data)
+            if(data.data.message==="Password Changed..."){     
+            props.navigation.navigate('SignInScreen');
+            }else{
+                alert(data.data.message)
+            }
+
+        })
+    })
+    }else{
+        alert("please enter same password")
+    }
+    }
 
     return (
         <View style={styles.container}>
@@ -24,8 +49,8 @@ const ForgotPassword2 = () => {
                         placeholder="Enter Conform Password"
                         onChangeText={(value) => setconformPassword(value)} />
                 </View>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={{ fontWeight: 'bold' }} onPress={() => props.navigation.navigate('ForgotPassword2')}>Submit</Text>
+                <TouchableOpacity onPress={() => updatePassword()} style={styles.button}>
+                    <Text style={{ fontWeight: 'bold' }} >Submit</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>

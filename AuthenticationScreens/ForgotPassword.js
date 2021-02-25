@@ -7,9 +7,10 @@ const ForgotPassword = (props) => {
     const [email,setEmail]=useState(null)
     const  forgotPassword =async()=>{
         Axios.get(constant.url + `/emailOtp/send?to=${email}`).then(data => {
+            console.log(data)
                         
             props.navigation.navigate('Modal',{
-                isForgotPassword:true
+                isForgotPassword:'true'
             });
 
         })
@@ -28,8 +29,8 @@ const ForgotPassword = (props) => {
                         placeholder="Enter your email address"
                         onChangeText={(value) => setEmail(value)} />
                 </View>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={{ fontWeight: 'bold' }} onPress={()=>forgotPassword()}>Submit</Text>
+                <TouchableOpacity onPress={()=>forgotPassword()} style={styles.button}>
+                    <Text style={{ fontWeight: 'bold' }} >Submit</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>

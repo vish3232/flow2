@@ -16,8 +16,13 @@ const Modal1 = (props) => {
         Axios.get(constant.url + `/emailOtp//verify?id=${totp}`).then(data => {
            // alert(JSON.stringify (data.data.message))
             if (data.data.message === "user verified") {
+                if(props.route.params.isForgotPassword==="true"){
+                    props.navigation.navigate('NewPassword');
+
+                }else{
 
                 props.navigation.navigate('Home');
+                }
 
 
             } else {
