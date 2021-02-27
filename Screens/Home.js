@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { Alert,View, BackHandler,ScrollView, Dimensions, Text, StatusBar, ActivityIndicator } from 'react-native'
 import Card from '../ReusableComponents/Card';
 import constant from '../constant/constant'
@@ -12,33 +12,34 @@ import {getPaymentStatus} from '../constant/storage'
 
 
 const Home = (props) => {
+    const [loading,setLoading]=useState(false)
+    const [songs,setSongs]=useState([])
+    const [title,setTitle]=useState([])
+    const [category,setCategory]=useState([])
+
 
     useEffect(() => {
-        getPaymentStatus().then((paymentStatus) => {
-            dispatch(loadSongs(JSON.parse(paymentStatus)))
        
-            
-          });
-          BackHandler.addEventListener('hardwareBackPress', handleBackButton);
-          return () => {
-            BackHandler.addEventListener('hardwareBackPress', handleBackButton);
-           
-        }
- 
+        getTitleData()
+        getCategoryData()
     }, [])
 
-   const  handleBackButton = () => {
-    BackHandler.exitApp()
-       } 
-    const dispatch = useDispatch()
+    const getTitleData=async()=>{
+        Axios.get('http://192.168.18.254:5000/audio/title/all').then(res => {
+            setTitle(res.data.titleData)
+        }).catch(err => console.log(err))
+    }
 
+    const getCategoryData=async()=>{
+        Axios.get('http://192.168.18.254:5000/audio/category/all').then(res => {
+            setCategory(res.data.categoryData)
+        }).catch(err => console.log(err))
+    }
+
+   
     const { height, width } = Dimensions.get('window')
-    const songs = useSelector(state => state.songs)
-    const loading = useSelector(state => state.isloading)
-    const error = useSelector(state => state.error)
-
-    console.log(loading)
-
+   
+   
     let newArray = [];
     let uniqueObject = {};
     for (let i in songs) {
@@ -60,6 +61,10 @@ const Home = (props) => {
                 <ScrollView showsHorizontalScrollIndicator={false}>
                     <Header />
                     <Text style={{ color: '#a9b7cb', marginTop: 20, fontSize: 20, fontWeight: 'bold', marginLeft: 20 }}>Popular</Text>
+                    {title.map((data1)=>{
+                        return(
+                            <View>
+                            <Text>{data1.name}</Text>
                     <ScrollView
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
@@ -67,15 +72,22 @@ const Home = (props) => {
                         snapToInterval={width - 20}
                         snapToAlignment={"center"}
                         contentContainerStyle={{ marginTop: 5 }}>
+                        
                         {
-                            newArray.map((data, i) => {
+                            category.map((data, i) => {
+                                if(data1._id===data.title_id){
                                 return (
-                                    i == 0 ? <Card title={data.category} style={{ marginRight: 20, backgroundColor: '#95d3e9', marginLeft: 15, marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} /> :
-                                        <Card title={data.category} style={{ marginRight: 20, backgroundColor: '#95d3e9', marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} />
+                                    i == 0 ? <Card title={data.category_name} style={{ marginRight: 20, backgroundColor: '#95d3e9', marginLeft: 15, marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} /> :
+                                        <Card title={data.category_name} style={{ marginRight: 20, backgroundColor: '#95d3e9', marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} />
                                 )
+                                }
                             })
                         }
                     </ScrollView>
+                    </View>
+                        )
+                })
+                    }
 
                     <Text style={{ color: '#a9b7cb', fontSize: 20, fontWeight: 'bold', marginLeft: 20 }}>New</Text>
                     <ScrollView
