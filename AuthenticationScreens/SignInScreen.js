@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, AsyncStorage, Image, ScrollView } from 'react-native'
 import DeviceInfo from 'react-native-device-info';
 import Axios from 'axios';
@@ -6,13 +6,24 @@ import jwt from 'jwt-decode'
 import constant from '../constant/constant'
 import { UserContext } from '../AuthContext'
 import { saveEmail, saveMobile, savePaymentStatus, saveUserName, saveName, saveUserState } from '../constant/storage'
-
+import {
+    GoogleSignin,
+    GoogleSigninButton,
+    statusCodes,
+} from '@react-native-community/google-signin';
 
 const SignInScreen = (props) => {
 
     const [name, setname] = useState('')
     const [password, setpassword] = useState('')
     const { logIn } = useContext(UserContext)
+
+    useEffect(() => {
+        GoogleSignin.configure({
+            scopes: ['email', 'profile'],
+            webClientId: '313121356610-r8qa4eq58flevcdap1l86iuuo1mn6bl9.apps.googleusercontent.com',
+        });
+    }, [])
 
 
     const submit = async () => {
@@ -45,7 +56,30 @@ const SignInScreen = (props) => {
             console.log(error)
         }
     }
-    
+
+    const signIn = async () => {
+        try {
+            await GoogleSignin.hasPlayServices({
+                showPlayServicesUpdateDialog: true,
+            });
+            const userInfo = await GoogleSignin.signIn();
+            console.log('User Info --> ', userInfo);
+        } catch (error) {
+            console.log('Message', JSON.stringify(error));
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                alert('User Cancelled the Login Flow');
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                alert('Signing In');
+            } else if (
+                error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE
+            ) {
+                alert('Play Services Not Available or Outdated');
+            } else {
+                alert(error.message);
+            }
+        }
+    };
+
     return (
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -73,7 +107,12 @@ const SignInScreen = (props) => {
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 16 }}>Sign In</Text>
                 </TouchableOpacity>
                 <View style={{ width: '90%', backgroundColor: '#dcdcdc', height: 0.5, alignSelf: 'center', marginTop: 25 }} />
-                <TouchableOpacity style={{ width: '50%', height: 40, backgroundColor: '#dcdcdc', marginTop: 40, alignSelf: 'center' }} />
+                <GoogleSigninButton
+                    style={{ width: '55%', height: 50, marginTop: 40, alignSelf: 'center' }}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Light}
+                    onPress={signIn}
+                />
                 <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25 }}>
                     <Text style={{ color: constant.white }}>Don't have an account?</Text>
                     <TouchableOpacity onPress={() => props.navigation.navigate('SignUpScreen')}>
@@ -119,7 +158,6 @@ const styles = StyleSheet.create({
         elevation: 10,
         marginTop: 25
     },
-
 })
 
 
