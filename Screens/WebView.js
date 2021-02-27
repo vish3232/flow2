@@ -36,6 +36,7 @@ export default class Webview extends React.Component {
         const self = this;
         axios.get(`https://test.instamojo.com/api/1.1/payment-requests/${trans_id}`, {
             headers: {
+                
                 'Content-Type': 'application/json',
                 'X-Api-Key': 'test_',
                 'X-Auth-Token': 'test_'
