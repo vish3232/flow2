@@ -14,8 +14,8 @@ const Blogs = (props) => {
     const [modalData, setmodalData] = useState([])
 
     useEffect(() => {
-        Axios.get('https://flow-mobile-backend.herokuapp.com/blog/all').then(res => {
-            setdata(res.data)
+        Axios.get('http://192.168.72.254:5000/blog/all').then(res => {
+            setdata(res.data.blogData)
         }).catch(err => console.log(err))
     }, [])
 
@@ -40,7 +40,7 @@ const Blogs = (props) => {
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={data}
-                renderItem={({ item }) => <BlogCard source={{ uri: 'http://192.168.43.93:4000/blog/blogimage/' + item._id }} title={item.title} content={item.content} click={() => toggleModal(item._id)} />}
+                renderItem={({ item }) => <BlogCard source={{ uri: 'http://192.168.72.254:5000/blog/blogimage/' + item._id }} title={item.title} content={item.content} click={() => toggleModal(item._id)} />}
                 keyExtractor={item => item._id}
             />
                 <Tabbar click={() => props.navigation.navigate('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
@@ -54,7 +54,7 @@ const Blogs = (props) => {
                 }}>
                 {
                     modalData.map(data1 => {
-                        return <BlogContent key={data1._id} source={{ uri: 'http://192.168.43.93:4000/blog/blogimage/' + data1._id }} title={data1.title} content={data1.content} />
+                        return <BlogContent key={data1._id} source={{ uri: 'http://192.168.72.254:5000/blog/blogimage/' + data1._id }} title={data1.title} content={data1.content} />
                     })
                 }
             </Modal>

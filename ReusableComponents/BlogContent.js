@@ -1,17 +1,19 @@
 import React from 'react'
 import { View, Text, Image, ScrollView, StyleSheet } from 'react-native'
 import constant from '../constant/constant'
-
+import { WebView } from 'react-native-webview';
 
 const BlogContent = (props) => {
     return (
-        <View style={{ flex: 1, backgroundColor: constant.background, justifyContent: 'center' }}>
-            <View style={{ width: '95%', height: '90%', alignSelf: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+            <View style={{ width: '95%', height: '100%', alignSelf: 'center' }}>
                 <Image style={{ height: 200 }} {...props}></Image>
                 <Text style={styles.blogTitle}>{props.title}</Text>
-                <ScrollView    showsVerticalScrollIndicator={false} >
-                    <Text style={styles.blogParagraph}>{props.content}</Text>
-                </ScrollView>
+                <WebView
+        originWhitelist={['*']}
+        style={{width:"100%",height:"100%"}}
+        source={{ html: props.content }}
+      />
             </View>
         </View>
     )
@@ -20,9 +22,10 @@ const BlogContent = (props) => {
 const styles = StyleSheet.create({
     blogTitle: {
         marginHorizontal: 10,
-        fontSize: 15,
-        fontWeight: '700',
-        marginTop: 5
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginTop: 5,
+    
     },
     blogParagraph: {
         marginHorizontal: 10,

@@ -7,17 +7,16 @@ import constant from '../constant/constant'
 const BlogCard = (props) => {
 
     return (
-        <View style={{ backgroundColor: constant.blue, ...styles.container, borderRadius:5 }}>
+        <TouchableOpacity onPress={props.click} style={{ backgroundColor: constant.blue, ...styles.container, borderRadius:5 }}>
             <View style={styles.blogContainer}>
                 <Image style={{ height: 150, borderTopLeftRadius:5, borderTopRightRadius:5 }} {...props}></Image>
                 <Text style={styles.blogTitle}>{props.title}</Text>
-                <Text style={styles.blogParagraph}>{props.content}</Text>
             </View>
-            <TouchableOpacity style={styles.seeMoreContainer} onPress={props.click}>
+            <View style={styles.seeMoreContainer} >
                 <Text style={styles.seeMore}>See More</Text>
                 <Icon1 name="arrow-forward" color='#dcdcdc' size={15} />
-            </TouchableOpacity>
-        </View>
+            </View>
+        </TouchableOpacity>
     )
 }
 
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
         marginTop:20,
     },
     blogContainer: {
-        height: 200,
+        height: 175,
         overflow: 'hidden'
     },
     blogTitle: {
