@@ -1,11 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import constant from '../constant/constant'
-import Logo from '../assets/4.svg'
+import Logo from '../assets/flow home logo.svg'
+import Axios from 'axios'
 
 
 
 const Header = () => {
+    const [queote,setQueote]=useState(null)
+
+    useEffect(() => {
+        getHomeQueote()
+    }, [])
+
+    const getHomeQueote=async()=>{
+        Axios.get('http://192.168.122.254:5000/phrases/getPhrases').then(res => {
+            setQueote(res.data.phrasesData[0].phrase)
+        }).catch(err => console.log(err))
+    }
 
     const [day] = useState(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
     const [month] = useState(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augest', 'September', 'October', 'November', 'December'])
@@ -18,9 +30,8 @@ const Header = () => {
                 <Text style={{ marginLeft: 5, ...styles.dateformat }}>{month[new Date().getMonth()]}</Text>
                 <Text style={{ marginLeft: 5, ...styles.dateformat }}>{new Date().getDate()}</Text>
             </View>
-            <Text style={{ color: constant.white, fontSize: 25, marginLeft: 20, marginTop: 40 }}>Love And Accept</Text>
-            <Text style={{ color: constant.white, fontSize: 25, marginLeft: 20 }}>Yourself</Text>
-        </View>
+            <Text style={{ width:150,color: constant.white, fontSize: 25, marginLeft: 20, marginTop: 40 }}>{queote}</Text>
+         </View>
     )
 }
 
@@ -37,7 +48,7 @@ const styles = StyleSheet.create({
     logo: {
         position: 'absolute',
         right: 20,
-        top: 0
+        top: 10
     },
     dateContainer: {
         flexDirection: 'row',

@@ -1,17 +1,21 @@
 import React from 'react'
-import { TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native'
+import { TouchableOpacity, Text, StyleSheet, Dimensions,Image } from 'react-native'
 import Heart from '../assets/1.svg'
 import Logo from '../assets/card.svg'
+import LinearGradient from 'react-native-linear-gradient';
 
 const Card = (props) => {
     const { height, width } = Dimensions.get('window')
     return (
-        <TouchableOpacity style={{ ...styles.container, ...props.style, width: width - 40, elevation:5 }} onPress={props.click}>
+        <TouchableOpacity onPress={props.click}>
+         <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
+   colors={['#b92b27','#1565C0']} style={{ ...styles.container, ...props.style, width: width - 40, elevation:5 }} >
             <Text style={{ color: 'white', fontSize: 22, fontWeight: 'bold' }}>{props.title}</Text>
-            <Text style={{ width: 150, color: '#fcfcfc', marginTop: 5 }}>Turn Down The Stress Volume</Text>
-            <Heart height={200} width={200} style={{ position: 'absolute', bottom: -125 }} />
-            <Logo height={150} width={150} style={{ position: 'absolute', right: 20, top: 20 }} />
-        </TouchableOpacity>
+            <Text style={{ width: 150, color: '#fcfcfc', marginTop: 5 }}>{props.description}</Text>
+            <Image resizeMode="cover" style={{ top:10,height: 160,right:20,width:120,position:"absolute" }} source={props.source}></Image>
+         
+           </LinearGradient>
+           </TouchableOpacity>
     )
 }
 

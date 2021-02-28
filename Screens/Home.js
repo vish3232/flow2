@@ -25,13 +25,13 @@ const Home = (props) => {
     }, [])
 
     const getTitleData=async()=>{
-        Axios.get('http://192.168.18.254:5000/audio/title/all').then(res => {
+        Axios.get('http://192.168.122.254:5000/audio/title/all').then(res => {
             setTitle(res.data.titleData)
         }).catch(err => console.log(err))
     }
 
     const getCategoryData=async()=>{
-        Axios.get('http://192.168.18.254:5000/audio/category/all').then(res => {
+        Axios.get('http://192.168.122.254:5000/audio/category/all').then(res => {
             setCategory(res.data.categoryData)
         }).catch(err => console.log(err))
     }
@@ -58,13 +58,12 @@ const Home = (props) => {
             {loading === true ? <View  style={{flex: 1, justifyContent:'center', alignItems:'center'}}><ActivityIndicator size="large" color='#0000ff' /></View> : <View style={{ flex: 1, backgroundColor: constant.background }}>
 
                 <StatusBar backgroundColor="#2e74b7" barStyle="light-content" />
-                <ScrollView showsHorizontalScrollIndicator={false}>
+                <ScrollView style={{backgroundColor:'white'}} showsHorizontalScrollIndicator={false}>
                     <Header />
-                    <Text style={{ color: '#a9b7cb', marginTop: 20, fontSize: 20, fontWeight: 'bold', marginLeft: 20 }}>Popular</Text>
                     {title.map((data1)=>{
                         return(
-                            <View>
-                            <Text>{data1.name}</Text>
+                            <View style={{marginHorizontal:20}} >
+                            <Text style={{fontSize:20,fontWeight:'bold'}} >{data1.name}</Text>
                     <ScrollView
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
@@ -77,8 +76,8 @@ const Home = (props) => {
                             category.map((data, i) => {
                                 if(data1._id===data.title_id){
                                 return (
-                                    i == 0 ? <Card title={data.category_name} style={{ marginRight: 20, backgroundColor: '#95d3e9', marginLeft: 15, marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} /> :
-                                        <Card title={data.category_name} style={{ marginRight: 20, backgroundColor: '#95d3e9', marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} />
+                                    i == 0 ? <Card title={data.category_name} description={data.category_decscription} source={{ uri: 'http://192.168.122.254:5000/' + data.filename }}  style={{ marginRight: 20, backgroundColor: '#95d3e9', marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} /> :
+                                        <Card title={data.category_name} description={data.category_decscription} source={{ uri: 'http://192.168.122.254:5000/' + data.filename }} style={{ marginRight: 20, backgroundColor: '#95d3e9', marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} />
                                 )
                                 }
                             })

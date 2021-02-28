@@ -5,6 +5,7 @@ import data from '../constant/constant'
 import Tabbar from '../ReusableComponents/Tabbar';
 import LinearGradient from 'react-native-linear-gradient';
 import {getEmail,getName,savePaymentStatus,getPaymentStatus} from '../constant/storage';
+import DeviceInfo from 'react-native-device-info';
 
 
 const Premium = (props) => {
@@ -62,8 +63,7 @@ const Premium = (props) => {
 
     const checkPaymentStatus=()=>{
         let deviceId = DeviceInfo.getDeviceId();
-        console.log(payment_Id)
-        axios.get('https://flow-mobile-backend.herokuapp.com/payment/instamojo/'+payment_Id).then(function(response){
+        axios.get('https://flow-mobile-backend.herokuapp.com/payment/instamojo/').then(function(response){
              
         //console.log(response.data.paymentData.payment_request.status)
         savePaymentStatus(JSON.stringify(response.data.paymentData.payment_request.status==="Completed"?"Premium":"Free"))
