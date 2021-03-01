@@ -11,7 +11,7 @@ const Subcategory = (props) => {
     const [subCategory,setsubCategory]=useState([])
     const getSubcategoryData=async()=>{
         console.log(props.route.params.category_id)
-        Axios.post('http://192.168.130.254:5000/audio/subCategory/all',{
+        Axios.post('http://192.168.76.254:5000/audio/subCategory/all',{
             category_id:props.route.params.category_id
         }).then(res => {
             console.log(res.data)
@@ -59,7 +59,7 @@ const Subcategory = (props) => {
                     {
                         subCategory.map(data => {
                             return (
-                             <Card2 title={data.sub_category_name} key={data._id} click={() => props.navigation.navigate('Playlist',{'category':props.route.params.text,'sub':data.sub_category})} />
+                             <Card2 title={data.sub_category_name} key={data._id} click={() => props.navigation.navigate('Playlist',{'category':data.sub_category_name,'sub':data._id,'image':props.route.params.image})} />
                             )
                         })
                     }

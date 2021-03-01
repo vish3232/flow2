@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { View, Text, Image, ScrollView, AsyncStorage } from 'react-native'
 import constant from '../constant/constant'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -9,43 +9,37 @@ import Axios from 'axios'
 
 
 const Playlist = (props) => {
+    const [song,setSong]=useState([])
+    
+    useEffect(() => {
+       getPlaylistData()
+    }, [])
 
     const getPlaylistData=async()=>{
-        Axios.post('http://192.168.130.254:5000/audio/subCategory/all',{
-            category_id:props.route.params.category_id
+        Axios.post('http://192.168.76.254:5000/audio/all',{
+            sub_category_id:props.route.params.sub,
+            audioStatus:"Free"
         }).then(res => {
-            console.log(res.data)
-            setsubCategory(res.data.sub_categoryData)
+            setSong(res.data.songData)
         }).catch(err => console.log(err))
     
     }
     
-    const songs = useSelector(state => state.songs)
-    
-    let songs_category = songs.filter(data => {
-        return data.category === props.route.params.category && data.sub_category === props.route.params.sub
-    })
-
-    let songId = []
-     songId =songs_category.map(data=>{
-       return data._id
-    })
-
+  
     return (
         <View style={{ flex: 1, backgroundColor: constant.background }}>
-            <View style={{ flexDirection: 'row', height: 60, justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 20 }}>
-                <Icon name="keyboard-backspace" color={'white'} size={30} />
-                <Icon name="more-vert" color={'white'} size={30} />
+            <View style={{ flexDirection: 'row', height: 50, alignItems: 'center', paddingHorizontal: 20,backgroundColor:'white' }}>
+                <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
+                <Text>{props.route.params.category}</Text>
             </View>
+            <View style={{flex:1,flexDirection:"column"}} >
+                <Image resizeMode="cover" style={{width:'100%',height:'100%'}} source={{uri:props.route.params.image}} />
+           </View>
+          
             <ScrollView>
-                <View style={{ marginTop: 10, marginBottom: 30 }}>
-                    <Image source={{ uri: 'https://images.unsplash.com/photo-1444491741275-3747c53c99b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' }} style={{ width: 200, height: 200, alignSelf: 'center' }}></Image>
-                    <Text style={{ color: constant.white, fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 10 }}>Bollywood Mush</Text>
-                    <Text style={{ color: "#828282", opacity: 0.5, alignSelf: 'center' }}>Sub Category</Text>
-                </View>
                 {
-                    songs_category.map(data => {
-                        return <Card3 title={data.filename} click={()=> props.navigation.navigate('Player',{'id':data._id, 'songsIdList':songId, 'title':data.filename})} key={data._id} />
+                    song.map(data => {
+                        return <Card3 title={data.filename} click={()=> props.navigation.navigate('Player',{'id':data._id, 'songsIdList':song, 'title':data.filename,'subcategory':props.route.params.category})} key={data._id} />
                     })
                 }
             </ScrollView>

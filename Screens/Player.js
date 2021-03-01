@@ -16,7 +16,6 @@ const Player = (props) => {
   const [end, setend] = useState(0)
   const [flag, setflag] = useState(1)
 
-
 const tp =props.route.params.songsIdList
   const songsId = props.route.params.songsIdList.filter(data => {
     return data != props.route.params.id
@@ -32,7 +31,7 @@ const tp =props.route.params.songsIdList
   let listOfSongs = []
   songsId.map(data1 => {
     obj.id = data1;
-    obj.url = 'https://flow-mobile-backend.herokuapp.com/audio/song/' + data1;
+    obj.url = 'http://192.168.76.254:5000/audio/song/' + data1;
     listOfSongs.push(obj)
   })
 
@@ -99,7 +98,7 @@ const tp =props.route.params.songsIdList
       try {
         await TrackPlayer.add({
           id: '123',
-          url: 'https://flow-mobile-backend.herokuapp.com/audio/song/' + props.route.params.id,
+          url: 'http://192.168.76.254:5000/audio/song/' + props.route.params.id,
           title: 'Track Title',
           artist: 'Track Artist',
           //artwork: require('track.png')
@@ -196,25 +195,25 @@ const tp =props.route.params.songsIdList
   return (
 
     <LinearGradient colors={['#4c669f', constant.background]} style={{ flex: 1 }}>
-      <View style={{ height: 60, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold', color: constant.white }}>From Flow</Text>
-        <Text style={{ color: '#dcdcdc', opacity: 0.5 }}>hi</Text>
+      <View style={{ height: 50,flexDirection:'row', alignItems: 'center',paddingHorizontal:20 }}>
+      <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={40} />
+
       </View>
-      <Image source={{ uri: 'https://images.unsplash.com/photo-1444491741275-3747c53c99b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' }} style={{ width: '90%', height: '50%', alignSelf: 'center', marginTop: 40 }}></Image>
-      <View style={{ marginTop: 10 }}>
-        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center' }}>Chal Kahi Aur</Text>
+      <Image source={{ uri: 'https://images.unsplash.com/photo-1444491741275-3747c53c99b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' }} style={{ width: '90%', height: '40%', alignSelf: 'center', marginTop: 40 }}></Image>
+      <View style={{ marginTop: 10,flexDirection:'column',alignItems:'center',justifyContent:'center' }}>
+        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center' }}>{props.route.params.subcategory}</Text>
+
+        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center',width:'90%' }}>{props.route.params.title}</Text>
       </View>
 
       <ProgressBar />
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 20 }}>
-        <Icon name="repeat" color={'white'} size={30} />
         <Icon name="fast-rewind" color={'white'} size={35} onPress={() => previousSong()} />
         <View style={{ height: 50, width: 50, borderRadius: 40, backgroundColor: 'white',elevation:5, justifyContent: 'center', alignItems: 'center' }}>
           <Icon name={getStateName(playbackState) != "Playing" ? "play-arrow" : "pause"} color={'black'} size={35} onPress={togglePlayback} />
         </View>
         <Icon name="fast-forward" color={'white'} size={35} onPress={() => nextSong()} />
-        <Icon name="shuffle" color={'white'} size={30} />
       </View>
     </LinearGradient>
 

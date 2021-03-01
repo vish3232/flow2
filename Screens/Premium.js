@@ -6,7 +6,7 @@ import Tabbar from '../ReusableComponents/Tabbar';
 import LinearGradient from 'react-native-linear-gradient';
 import {getEmail,getName,savePaymentStatus,getPaymentStatus} from '../constant/storage';
 import DeviceInfo from 'react-native-device-info';
-
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const Premium = (props) => {
     const [purpose,setPurpose]=useState('Flow Premium')
@@ -83,6 +83,12 @@ const Premium = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
+        <View style={{ backgroundColor:'white',flexDirection:"row",height: 50, paddingHorizontal: 15, alignItems: 'center', elevation: 1 }}>
+                <Icon name="keyboard-backspace" size={40} style={{marginRight:15}} />
+                <Text>Premium</Text>
+
+            </View>
+          
                 <View style={{flex:1,justifyContent:'center'}}>
                     <View style={{borderRadius:20,backgroundColor:'#616161',width:'90%',height:60,marginHorizontal:20,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>subcription</Text>

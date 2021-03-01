@@ -73,7 +73,10 @@ const Profile = (props) => {
       
     return (
         <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: constant.background }}>
-            <View style={{ height: 60, paddingHorizontal:15, flexDirection:'row-reverse', alignItems:'center' }}>
+            <View style={{ height: 60, paddingHorizontal:15, flexDirection:'row ', alignItems:'center',justifyContent:'space-between' }}>
+              <View>
+                <Icon  />
+              </View>
             <Icon name="ios-menu" color={constant.white} size={40} onPress={()=>props.navigation.toggleDrawer()} />
             </View>
 

@@ -5,6 +5,7 @@ import constant from '../constant/constant'
 import BlogCard from '../ReusableComponents/BlogCard';
 import BlogContent from '../ReusableComponents/BlogContent';
 import Axios from 'axios'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 
 const Blogs = (props) => {
@@ -14,7 +15,7 @@ const Blogs = (props) => {
     const [modalData, setmodalData] = useState([])
 
     useEffect(() => {
-        Axios.get('http://192.168.72.254:5000/blog/all').then(res => {
+        Axios.get('http://192.168.76.254:5000/blog/all').then(res => {
             setdata(res.data.blogData)
         }).catch(err => console.log(err))
     }, [])
@@ -34,13 +35,15 @@ const Blogs = (props) => {
 
     return (
         <View style={{ ...styles.container }}>
-            <View style={{ height: 60, paddingHorizontal: 15, alignItems: 'center', justifyContent: 'center', elevation: 1 }}>
+            <View style={{ backgroundColor:'white',flexDirection:"row",height: 50, paddingHorizontal: 15, alignItems: 'center', elevation: 1 }}>
+                <Icon name="keyboard-backspace" size={40} style={{marginRight:15}} />
                 <Text>Blogs</Text>
+
             </View>
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={data}
-                renderItem={({ item }) => <BlogCard source={{ uri: 'http://192.168.72.254:5000/blog/blogimage/' + item._id }} title={item.title} content={item.content} click={() => toggleModal(item._id)} />}
+                renderItem={({ item }) => <BlogCard source={{ uri: 'http://192.168.76.254:5000/blog/blogimage/' + item._id }} title={item.title} content={item.content} click={() => toggleModal(item._id)} />}
                 keyExtractor={item => item._id}
             />
                 <Tabbar click={() => props.navigation.navigate('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
@@ -54,7 +57,7 @@ const Blogs = (props) => {
                 }}>
                 {
                     modalData.map(data1 => {
-                        return <BlogContent key={data1._id} source={{ uri: 'http://192.168.72.254:5000/blog/blogimage/' + data1._id }} title={data1.title} content={data1.content} />
+                        return <BlogContent key={data1._id} source={{ uri: 'http://192.168.76.254:5000/blog/blogimage/' + data1._id }} title={data1.title} content={data1.content} />
                     })
                 }
             </Modal>
