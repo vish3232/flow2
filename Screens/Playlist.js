@@ -5,9 +5,20 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import Card3 from '../ReusableComponents/Card3';
 import Tabbar from '../ReusableComponents/Tabbar';
 import { useSelector } from 'react-redux'
+import Axios from 'axios'
 
 
 const Playlist = (props) => {
+
+    const getPlaylistData=async()=>{
+        Axios.post('http://192.168.130.254:5000/audio/subCategory/all',{
+            category_id:props.route.params.category_id
+        }).then(res => {
+            console.log(res.data)
+            setsubCategory(res.data.sub_categoryData)
+        }).catch(err => console.log(err))
+    
+    }
     
     const songs = useSelector(state => state.songs)
     

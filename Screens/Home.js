@@ -4,9 +4,6 @@ import Card from '../ReusableComponents/Card';
 import constant from '../constant/constant'
 import Tabbar from '../ReusableComponents/Tabbar';
 import Header from '../ReusableComponents/Header';
-import { useDispatch } from 'react-redux'
-import {loadSongs} from '../Redux/Action'
-import { useSelector } from 'react-redux'
 import Axios from 'axios'
 import {getPaymentStatus} from '../constant/storage'
 
@@ -25,13 +22,13 @@ const Home = (props) => {
     }, [])
 
     const getTitleData=async()=>{
-        Axios.get('http://192.168.122.254:5000/audio/title/all').then(res => {
+        Axios.get('http://192.168.130.254:5000/audio/title/all').then(res => {
             setTitle(res.data.titleData)
         }).catch(err => console.log(err))
     }
 
     const getCategoryData=async()=>{
-        Axios.get('http://192.168.122.254:5000/audio/category/all').then(res => {
+        Axios.get('http://192.168.130.254:5000/audio/category/all').then(res => {
             setCategory(res.data.categoryData)
         }).catch(err => console.log(err))
     }
@@ -75,9 +72,10 @@ const Home = (props) => {
                         {
                             category.map((data, i) => {
                                 if(data1._id===data.title_id){
+                                    
                                 return (
-                                    i == 0 ? <Card title={data.category_name} description={data.category_decscription} source={{ uri: 'http://192.168.122.254:5000/' + data.filename }}  style={{ marginRight: 20, backgroundColor: '#95d3e9', marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} /> :
-                                        <Card title={data.category_name} description={data.category_decscription} source={{ uri: 'http://192.168.122.254:5000/' + data.filename }} style={{ marginRight: 20, backgroundColor: '#95d3e9', marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { text: data.category })} />
+                                    i == 0 ? <Card title={data.category_name} description={data.category_decscription} source={{ uri: 'http://192.168.130.254:5000/' + data.filename }}  style={{ marginRight: 20, backgroundColor: '#95d3e9', marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { category_id: data._id,image: 'http://192.168.130.254:5000/' + data.filename,text:data.category_name })} /> :
+                                        <Card title={data.category_name} description={data.category_decscription} source={{ uri: 'http://192.168.130.254:5000/' + data.filename }} style={{ marginRight: 20, backgroundColor: '#95d3e9', marginBottom:10 }} key={i} click={() => props.navigation.navigate('Subcategory', { category_id: data._id,image: 'http://192.168.130.254:5000/' + data.filename,text:data.category_name })} />
                                 )
                                 }
                             })
