@@ -27,6 +27,11 @@ import ForgotPassword from './AuthenticationScreens/ForgotPassword';
 import { UserContext } from './AuthContext'
 import ForgotPassword2 from './AuthenticationScreens/ForgotPassword2';
 import PushNotification from "react-native-push-notification";
+import Terms from './Screens/Terms';
+import Privacy from './Screens/Privacy';
+import Help from './Screens/Help';
+import Settings from './Screens/Settings';
+import About from './Screens/About';
 
 const store = createStore(Rootreducer, applyMiddleware(thnkmiddleware))
 const Stack = createStackNavigator();
@@ -194,6 +199,12 @@ function App() {
                     <Stack.Screen name="Profile" component={DrawerScreen} />
                     <Stack.Screen name="Webview" component={Webview} />
                     <Stack.Screen name="NewPassword" component={ForgotPassword2} />
+                    <Stack.Screen name="Term" component={Terms} />
+                    <Stack.Screen name="Privacy" component={Privacy} />
+                    <Stack.Screen name="Help" component={Help} />
+                    <Stack.Screen name="Setting" component={Settings} />
+                    <Stack.Screen name="About" component={About} />
+                   
                     
                   
                   </> :
@@ -207,6 +218,13 @@ function App() {
                     <Stack.Screen name="Profile" component={DrawerScreen} />
                     <Stack.Screen name="Webview" component={Webview} />
                     <Stack.Screen name="NewPassword" component={ForgotPassword2} />
+                    <Stack.Screen name="Term" component={Terms} />
+                    <Stack.Screen name="Privacy" component={Privacy} />
+                    <Stack.Screen name="Help" component={Help} />
+                    <Stack.Screen name="Setting" component={Settings} />
+                    <Stack.Screen name="About" component={About} />
+                    
+                    
                     
                   </>
             }

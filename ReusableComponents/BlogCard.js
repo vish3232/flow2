@@ -2,8 +2,6 @@ import React from 'react'
 import Icon1 from 'react-native-vector-icons/MaterialIcons'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import constant from '../constant/constant'
-
-
 const BlogCard = (props) => {
 
     return (
@@ -35,7 +33,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         fontSize: 15,
         fontWeight: '700',
-        marginTop: 5
+        marginTop: 5,
+        color:'white'
     },
     blogParagraph: {
         marginHorizontal: 10,

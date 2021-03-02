@@ -7,12 +7,12 @@ import Terms from '../Screens/Terms';
 import Privacy from '../Screens/Privacy';
 import About from '../Screens/About';
 import Help from '../Screens/Help';
-
+import DrawewContent from '../Screens/DrawerContent'
 const Drawer = createDrawerNavigator();
 
 const DrawerScreen = () => {
     return (
-            <Drawer.Navigator  initialRouteName="Home"drawerPosition='left'>
+            <Drawer.Navigator drawerContent={props=><DrawewContent {...props} />}  initialRouteName="Home"drawerPosition='right'>
                 <Drawer.Screen name="Profile" component={Profile} />
                 <Drawer.Screen name="Settings"  component={Settings} />
                 <Drawer.Screen  name="EditProfile"    component={EditProfile} />

@@ -4,7 +4,7 @@ import {getMobile,getEmail} from '../constant/storage'
 import DeviceInfo from 'react-native-device-info';
 import Header from '../ReusableComponents/Header'
 import Mailer from 'react-native-mail'
-
+import Icon from 'react-native-vector-icons/MaterialIcons'
 const Help = () => {
   const [mobile,setmobile]=useState('mobile no.')
   const [email,setemail]=useState('email-id')
@@ -52,34 +52,29 @@ const Help = () => {
     
     return (
           <View style={{ flex: 1 }}>
-          <Header/>
-            
-          <ScrollView style={{ flexGrow: 1, margin: 10, backgroundColor: 'white', borderRadius: 10 }}>
-            <View style={{ justifyContent: 'center', alignContent: 'center', alignItems: 'center', marginTop: 10 }}>
-             
-              <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color:'black', marginTop: 20 }}>
-                Email:{email}
-              </Text>
-              <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: 'black', marginTop: 20 }}>
-                Mobile No:{mobile}
-              </Text>
-
-
-              <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: 'black', marginTop: 20 }}>
-                AppId:{deviceId}
-              </Text>
-              <TextInput placeholder='Enter something...' onChangeText={(text)=>{setHelp(text)}} style={{ marginTop:20,marginLeft: 10, marginRight: 10, fontSize: 14, borderWidth:0.5,borderColor:'black',borderRadius:10,borderBottomColor: 'black', width:'90%',height:40,padding:10 }} />
+          <View style={{  shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity:  0.4,
+        shadowRadius: 3,
+        elevation: 5,paddingHorizontal:20,backgroundColor:'white',height: 50, flexDirection:'row', alignItems:'center',justifyContent:'space-between' }}>
+              <View style={{flexDirection:'row',alignItems:'center'}} >
+              <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
+              <Text>Help</Text>
+              </View>
               
+            <Icon name="dehaze" color="black" size={40} onPress={()=>props.navigation.toggleDrawer()} />
             </View>
-            <TouchableOpacity onPress={sendEmail} style={{marginTop:20,width:'80%',height:40,borderRadius:10,backgroundColor:'purple',alignSelf:'center',alignItems:'center',justifyContent:'center'}} >
-              <Text style={{fontSize:15,color:'white'}}>Send</Text>
+            <View style={{flexDirection:'column',justifyContent:'space-evenly',height:180,marginHorizontal:20}} >
+            <Text style={{fontSize:25,fontWeight:'bold'}} >Reach us out</Text>
+
+            <Text style={{fontSize:15}}  >For any feedback or quiry please reach us out email address</Text>
+
+            <TouchableOpacity style={{borderRadius:15,alignItems:'center',justifyContent:'center',width:150,height:50,backgroundColor:'#2e74b7'}} >
+              <Text style={{color:'white'}} >Visit website</Text>
             </TouchableOpacity>
-            
-
-
-
-          </ScrollView>
-        </View>
+            </View>
+    
+          </View>
 
     )
 }

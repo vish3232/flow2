@@ -1,12 +1,13 @@
 import React,{ useEffect, useState } from 'react'
-import { View, Text, Image, Dimensions,ScrollView } from 'react-native'
+import { View, Text, Image, Dimensions,ScrollView,TouchableOpacity,TextInput } from 'react-native'
 import constant from '../constant/constant'
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import Tabbar from '../ReusableComponents/Tabbar';
 import ImagePicker from 'react-native-image-picker'
 import AsyncStorage from '@react-native-community/async-storage';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import {getUserName,getName,getMobile,getEmail} from '../constant/storage'
+import LinearGradient from 'react-native-linear-gradient';
+import Axios from 'axios'
 const Profile = (props) => {
     const initial=['hello']
     const {height , width} = Dimensions.get('window')
@@ -15,29 +16,30 @@ const Profile = (props) => {
     const [name,setname]=useState('Full Name')
     const [mobile,setmobile]=useState('mobile no.')
     const [email,setemail]=useState('email-id')
-    const [list,setlist]=useState(initial)
+    const [planname,setPlanname]=useState(null)
     useEffect(() => {
         // Your code here
-        getUserName().then((username1) => {
-          
-          setusername(JSON.parse (username1))
-        });
-        getEmail().then((mail) => {
-
-          setemail(JSON.parse (mail))
-        });
-        getMobile().then((mobileno) => {
-
-          setmobile(JSON.parse (mobileno))
-        });
-        getName().then((fullname) => {
-
-          setname(JSON.parse (fullname))
-        });
+        getProfileDetails()
+        
   
   
   
       }, [])
+
+      const getProfileDetails=async()=>{
+        getEmail().then((mail) => {
+
+        Axios.post('http://192.168.152.254:5000/user/getProfileDetails',{
+          email:JSON.parse( mail)
+        }).then(res => {
+          setemail(res.data.profileData[0].email)
+          setname(res.data.profileData[0].fullname)
+          setmobile(res.data.profileData[0].mobile)
+          setPlanname(res.data.subcriptionData[0].name)
+      }).catch(err => console.log(err))
+        })
+  
+      }
        const selectPhotoTapped=()=> {
         const options = {
           quality: 1.0,
@@ -70,54 +72,95 @@ const Profile = (props) => {
       const editprofile=()=>{
         props.navigation.navigate('EditProfile');
       }
+
+      const updateProfileDetails=async()=>{
+        let formdata = new FormData();
+        var photo = {
+          uri: profile,
+          type: 'image/jpeg',
+          name: 'profile-picture',
+        };
+        formdata.append("profile", photo)
+        formdata.append("fullname",name)
+        formdata.append("mobile",mobile)
+        formdata.append("email",email)
+
+         const res = await Axios({
+          url: 'http://192.168.152.254:5000/user/getProfileDetails/'+email,
+          method: 'POST',
+          data: formdata,
+          headers: {
+            Accept: '*/*',
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
+        if(res.data.message==="Updated"){
+          alert("profile updated succesfully...")
+          getProfileDetails()
+        }
+        
+
+      }
       
     return (
-        <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: constant.background }}>
-            <View style={{ height: 60, paddingHorizontal:15, flexDirection:'row ', alignItems:'center',justifyContent:'space-between' }}>
-              <View>
-                <Icon  />
+      <View style={{flex: 1, backgroundColor:'white'}} >
+        <ScrollView contentContainerStyle={{flexGrow:1,paddingHorizontal:20}} >
+            <View style={{  shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity:  0.4,
+        shadowRadius: 3,
+        elevation: 5,backgroundColor:'white',height: 50, flexDirection:'row', alignItems:'center',justifyContent:'space-between' }}>
+              <View style={{flexDirection:'row',alignItems:'center'}} >
+              <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
+              <Text>Profile</Text>
               </View>
-            <Icon name="ios-menu" color={constant.white} size={40} onPress={()=>props.navigation.toggleDrawer()} />
+              
+            <Icon name="dehaze" color="black" size={40} onPress={()=>props.navigation.toggleDrawer()} />
             </View>
 
             <View style={{justifyContent:'center', alignItems:'center', marginTop:20}}>
-                <Image source={{uri:profile}} style={{height:height/3, width:width/1.5, borderRadius:height+width/2}}></Image>
-                <View style={{height:50, width:50, backgroundColor:constant.blue, position:'absolute', left:width/1.36, top:height/5, borderRadius:width+height/2, justifyContent:'center', alignItems:'center'}}>
-                <Icon onPress={selectPhotoTapped} name="ios-camera" color={'#fff'} size={30} />
-                </View>
-                <Text style={{color:constant.white, marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}}>{username}</Text>
-                <Text style={{color:constant.white, marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}}>{name}</Text>
-            </View>
+                <Image source={{uri:profile}} style={{height:150, width:150, borderRadius:height+width/2}}></Image>
+                <TouchableOpacity onPress={()=>selectPhotoTapped()} style={{marginTop:15,width:130,height:50,backgroundColor:'blue',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
+                  <Text style={{color:'white'}} >Update Profile</Text>
+                </TouchableOpacity>
+                 
+             </View>
+              <View style={{height:300,flexDirection:'column',alignItems:'flex-start',justifyContent:'space-between'}} >
+             <Text style={{color:'black', marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}}>Name</Text>
+             <TextInput onChangeText={(value) => setname(value)} style={{width:'100%',height:40,backgroundColor:'gray',borderRadius:10}} value={name} />
+             <Text style={{color:'black', marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}}>Email</Text>
+             <TextInput style={{width:'100%',height:40,backgroundColor:'gray',borderRadius:10}} value={email} onChangeText={(value) => setemail(value)} />
+             <Text style={{color:'black', marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}}>Mobile No.</Text>
+             <TextInput style={{width:'100%',height:40,backgroundColor:'gray',borderRadius:10}} value={mobile} onChangeText={(value) => setmobile(value)} />
+             <Text style={{color:'black', marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}} >Plan: {planname}</Text>
+             
+             <TouchableOpacity style={{marginTop:20,alignSelf:'center',width:130,height:50,backgroundColor:'blue',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
+               <Text onPress={()=>updateProfileDetails()} style={{color:'white'}} >Update
 
-            <View style={{flexDirection: 'row', paddingHorizontal:20,marginTop:10, justifyContent:'space-between'}}>
-            <View style={{height:70, width:100, backgroundColor:constant.background, borderRadius:10, elevation:5,alignItems:'center', justifyContent:'center'}}>
-              <Text style={{fontSize:12,color:constant.white}}>Start Date</Text>
-               <Text style={{fontSize:10,color:constant.white, fontWeight:'bold'}}>323552</Text>
-            </View>
+               </Text>
+             </TouchableOpacity>
+          
+             </View>
 
-            <View style={{height:70, width:100, backgroundColor:constant.background, borderRadius:10, elevation:5,alignItems:'center', justifyContent:'center'}}>
-              <Text style={{fontSize:12,color:constant.white}}>Expiration Date</Text>
-               <Text style={{fontSize:10,color:constant.white, fontWeight:'bold'}}>323552</Text>
-            </View>
-            </View>
-            <TouchableOpacity onPress={editprofile} style={{alignItems:'center',justifyContent:'center',width:'80%',height:50,borderWidth:1,borderColor:'black',borderRadius:10,alignSelf:'center',marginTop:10}}>
-              <Text>Edit Profile</Text>
-            </TouchableOpacity>
-            <View style={{justifyContent:'center', alignItems:'center',marginTop:10}}>
-              <Text>Weekly Report</Text>
-              <ScrollView contentContainerStyle={{height:70}}>
-                {
-                list.map((data)=>{
-                return(
-                  <Text style={{color:constant.white, marginTop:5, fontSize:15, fontFamily: "PermanentMarker-Regular"}}>{data}</Text>
-                )}
-                )
-                }
-              </ScrollView>
-            </View>
+             <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
+   colors={['#b92b27','#1565C0']} style={{marginTop:20,marginBottom:80,width:'100%',height:200,borderRadius:15,justifyContent:'space-around'}} >
+                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
+                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
+                            </View>
+                            <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
+                        <TouchableOpacity style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
+                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Try 1 month free</Text>
+                        </TouchableOpacity>
+                </LinearGradient>
+               
            
-            <Tabbar click={() => props.navigation.navigate('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
+
+            
         </ScrollView>
+        <Tabbar click={() => props.navigation.navigate('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
+      
+        </View>
     )
 }
 

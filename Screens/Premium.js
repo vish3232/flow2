@@ -83,29 +83,30 @@ const Premium = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
-        <View style={{ backgroundColor:'white',flexDirection:"row",height: 50, paddingHorizontal: 15, alignItems: 'center', elevation: 1 }}>
+        <View style={{  shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity:  0.4,
+        shadowRadius: 3,
+        elevation: 5,backgroundColor:'white',flexDirection:"row",height: 50, paddingHorizontal: 15, alignItems: 'center', elevation: 1 }}>
                 <Icon name="keyboard-backspace" size={40} style={{marginRight:15}} />
                 <Text>Premium</Text>
 
             </View>
           
-                <View style={{flex:1,justifyContent:'center'}}>
+                <View style={{marginTop:15,justifyContent:'center'}}>
                     <View style={{borderRadius:20,backgroundColor:'#616161',width:'90%',height:60,marginHorizontal:20,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>subcription</Text>
-                        <Text style={{paddingHorizontal:10,fontSize:18,color:'#212121'}}>current plan</Text>
+                        <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Current Plan</Text>
+                        <Text style={{paddingHorizontal:10,fontSize:18,color:'#212121'}}>Free</Text>
                     </View>
 
                 </View>
                 <View style={{flex:2,alignItems:'center',justifyContent:'center'}}>
                 <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
-   colors={['#b92b27','#1565C0']} style={{width:'90%',height:200,borderRadius:15,justifyContent:'space-around'}} >
-                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
-                            <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-                                <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Free</Text>
-                                <Text style={{paddingHorizontal:10,fontSize:18,color:'#212121'}}>For 1 month</Text>
+   colors={['#b92b27','#1565C0']} style={{width:'90%',height:300,borderRadius:15,justifyContent:'space-around'}} >
 
-                            </View>
+
+                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
+                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Try Premium for 1 month</Text>
                             </View>
                             <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
                         <TouchableOpacity style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
@@ -114,18 +115,13 @@ const Premium = (props) => {
                 </LinearGradient>
                 </View>
                 <View style={{flex:2,alignItems:'center',justifyContent:'center'}}>
-                <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#fff59d','#f57f17']} style={{width:'90%',height:200,borderRadius:15,justifyContent:'space-around'}} >
+                <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#fff59d','#f57f17']} style={{width:'90%',height:300,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
-                            <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-                                <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Free</Text>
-                                <Text style={{paddingHorizontal:10,fontSize:18,color:'#212121'}}>For 1 month</Text>
-
-                            </View>
+                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium for 200/month</Text>
                             </View>
                             <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
                         <TouchableOpacity onPress={()=>processInfo()} style={{justifyContent:'center',width:'80%',backgroundColor:'white',height:40,alignSelf:'center',borderRadius:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Try 1 month free</Text>
+                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Buy Premium Now</Text>
                         </TouchableOpacity>
                 </LinearGradient>
                 

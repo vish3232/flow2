@@ -31,7 +31,7 @@ const tp =props.route.params.songsIdList
   let listOfSongs = []
   songsId.map(data1 => {
     obj.id = data1;
-    obj.url = 'http://192.168.76.254:5000/audio/song/' + data1;
+    obj.url = 'http://192.168.152.254:5000/audio/song/' + data1;
     listOfSongs.push(obj)
   })
 
@@ -98,7 +98,7 @@ const tp =props.route.params.songsIdList
       try {
         await TrackPlayer.add({
           id: '123',
-          url: 'http://192.168.76.254:5000/audio/song/' + props.route.params.id,
+          url: 'http://192.168.152.254:5000/audio/song/' + props.route.params.id,
           title: 'Track Title',
           artist: 'Track Artist',
           //artwork: require('track.png')

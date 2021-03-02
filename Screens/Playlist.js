@@ -16,7 +16,7 @@ const Playlist = (props) => {
     }, [])
 
     const getPlaylistData=async()=>{
-        Axios.post('http://192.168.76.254:5000/audio/all',{
+        Axios.post('http://192.168.152.254:5000/audio/all',{
             sub_category_id:props.route.params.sub,
             audioStatus:"Free"
         }).then(res => {
@@ -28,7 +28,11 @@ const Playlist = (props) => {
   
     return (
         <View style={{ flex: 1, backgroundColor: constant.background }}>
-            <View style={{ flexDirection: 'row', height: 50, alignItems: 'center', paddingHorizontal: 20,backgroundColor:'white' }}>
+            <View style={{  shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity:  0.4,
+        shadowRadius: 3,
+        elevation: 5,flexDirection: 'row', height: 50, alignItems: 'center', paddingHorizontal: 20,backgroundColor:'white' }}>
                 <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
                 <Text>{props.route.params.category}</Text>
             </View>

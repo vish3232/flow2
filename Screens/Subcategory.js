@@ -11,7 +11,7 @@ const Subcategory = (props) => {
     const [subCategory,setsubCategory]=useState([])
     const getSubcategoryData=async()=>{
         console.log(props.route.params.category_id)
-        Axios.post('http://192.168.76.254:5000/audio/subCategory/all',{
+        Axios.post('http://192.168.152.254:5000/audio/subCategory/all',{
             category_id:props.route.params.category_id
         }).then(res => {
             console.log(res.data)
@@ -45,7 +45,11 @@ const Subcategory = (props) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: constant.background }}>
-           <View style={{paddingLeft:15,height:50,width:'100%',flexDirection:'row',alignItems:'center',backgroundColor:'white'}} >
+           <View style={{ shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity:  0.4,
+        shadowRadius: 3,
+        elevation: 5,paddingLeft:15,height:50,width:'100%',flexDirection:'row',alignItems:'center',backgroundColor:'white'}} >
               <Icon  name="keyboard-backspace" size={40} style={{marginRight:15}} />
                <Text>{props.route.params.text}</Text>
 
