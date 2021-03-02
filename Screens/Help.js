@@ -58,7 +58,7 @@ const Help = () => {
         shadowRadius: 3,
         elevation: 5,paddingHorizontal:20,backgroundColor:'white',height: 50, flexDirection:'row', alignItems:'center',justifyContent:'space-between' }}>
               <View style={{flexDirection:'row',alignItems:'center'}} >
-              <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
+              <Icon onPress={() => props.navigation.goBack()} name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
               <Text>Help</Text>
               </View>
               

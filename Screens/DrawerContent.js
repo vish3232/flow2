@@ -14,6 +14,7 @@ const DrawerContent = (props) => {
                <Icon name="home" size={30} style={{marginLeft:20,marginRight:20}} />
                 <Text>Home</Text>
 
+
             </TouchableOpacity>
             <TouchableOpacity onPress={() => props.navigation.navigate('Profile')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="person" size={30} style={{marginLeft:20,marginRight:20}} />
