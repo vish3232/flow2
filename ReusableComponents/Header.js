@@ -14,7 +14,7 @@ const Header = () => {
     }, [])
 
     const getHomeQueote=async()=>{
-        Axios.get('http://192.168.152.254:5000/phrases/getPhrases').then(res => {
+        Axios.get('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/phrases/getPhrases').then(res => {
             setQueote(res.data.phrasesData[0].phrase)
         }).catch(err => console.log(err))
     }

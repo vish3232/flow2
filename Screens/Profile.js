@@ -29,7 +29,7 @@ const Profile = (props) => {
       const getProfileDetails=async()=>{
         getEmail().then((mail) => {
 
-        Axios.post('http://192.168.152.254:5000/user/getProfileDetails',{
+        Axios.post('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/user/getProfileDetails',{
           email:JSON.parse( mail)
         }).then(res => {
           setemail(res.data.profileData[0].email)
@@ -86,7 +86,7 @@ const Profile = (props) => {
         formdata.append("email",email)
 
          const res = await Axios({
-          url: 'http://192.168.152.254:5000/user/getProfileDetails/'+email,
+          url: 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/user/getProfileDetails/'+email,
           method: 'POST',
           data: formdata,
           headers: {

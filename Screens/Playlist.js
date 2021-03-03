@@ -16,7 +16,7 @@ const Playlist = (props) => {
     }, [])
 
     const getPlaylistData=async()=>{
-        Axios.post('http://192.168.152.254:5000/audio/all',{
+        Axios.post('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/all',{
             sub_category_id:props.route.params.sub,
             audioStatus:"Free"
         }).then(res => {

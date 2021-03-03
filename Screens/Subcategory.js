@@ -11,7 +11,7 @@ const Subcategory = (props) => {
     const [subCategory,setsubCategory]=useState([])
     const getSubcategoryData=async()=>{
         console.log(props.route.params.category_id)
-        Axios.post('http://192.168.152.254:5000/audio/subCategory/all',{
+        Axios.post('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/subCategory/all',{
             category_id:props.route.params.category_id
         }).then(res => {
             console.log(res.data)
