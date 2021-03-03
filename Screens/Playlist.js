@@ -33,7 +33,7 @@ const Playlist = (props) => {
         shadowOpacity:  0.4,
         shadowRadius: 3,
         elevation: 5,flexDirection: 'row', height: 50, alignItems: 'center', paddingHorizontal: 20,backgroundColor:'white' }}>
-                <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
+                <Icon onPress={()=>props.navigation.goBack()} name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
                 <Text>{props.route.params.category}</Text>
             </View>
             <View style={{flex:1,flexDirection:"column"}} >

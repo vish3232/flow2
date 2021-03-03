@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, ToastAndroid } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, ToastAndroid,ScrollView } from 'react-native';
 import axios from 'axios';
 import data from '../constant/constant'
 import Tabbar from '../ReusableComponents/Tabbar';
@@ -83,12 +83,13 @@ const Premium = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{flexGrow:1}} >
         <View style={{  shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity:  0.4,
         shadowRadius: 3,
         elevation: 5,backgroundColor:'white',flexDirection:"row",height: 50, paddingHorizontal: 15, alignItems: 'center', elevation: 1 }}>
-                <Icon name="keyboard-backspace" size={40} style={{marginRight:15}} />
+                <Icon onPress={()=>props.navigation.goBack()} name="keyboard-backspace" size={40} style={{marginRight:15}} />
                 <Text>Premium</Text>
 
             </View>
@@ -102,7 +103,7 @@ const Premium = (props) => {
                 </View>
                 <View style={{flex:2,alignItems:'center',justifyContent:'center'}}>
                 <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
-   colors={['#b92b27','#1565C0']} style={{width:'90%',height:300,borderRadius:15,justifyContent:'space-around'}} >
+   colors={['#b92b27','#1565C0']} style={{marginTop:50,width:'90%',height:300,borderRadius:15,justifyContent:'space-around'}} >
 
 
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
@@ -115,7 +116,7 @@ const Premium = (props) => {
                 </LinearGradient>
                 </View>
                 <View style={{flex:2,alignItems:'center',justifyContent:'center'}}>
-                <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#fff59d','#f57f17']} style={{width:'90%',height:300,borderRadius:15,justifyContent:'space-around'}} >
+                <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#fff59d','#f57f17']} style={{marginTop:50,width:'90%',height:300,borderRadius:15,justifyContent:'space-around',marginBottom:80}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium for 200/month</Text>
                             </View>
@@ -126,6 +127,7 @@ const Premium = (props) => {
                 </LinearGradient>
                 
                 </View>
+                </ScrollView>
                 <Tabbar click={() => props.navigation.navigate('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
             </View>
 

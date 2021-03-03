@@ -1,8 +1,12 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { StyleSheet, Text, View,Image,TouchableOpacity } from 'react-native'
 import {DrawerContentScrollView,DrawerItem} from '@react-navigation/drawer'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { UserContext } from '../AuthContext'
+
 const DrawerContent = (props) => {
+    const { signOut } = useContext(UserContext)
+
     return (
         <View style={{flex:1,flexDirection:'column',alignItems:'flex-start',justifyContent:'flex-start'}} >
             <View style={{flexDirection:'row',alignItems:'center',width:'70%'}} >
@@ -21,12 +25,12 @@ const DrawerContent = (props) => {
                 <Text>Profile</Text>
 
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Term')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
+            <TouchableOpacity onPress={() => alert('url of term')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="note" size={30} style={{marginLeft:20,marginRight:20}} />
                 <Text>Term of Service</Text>
 
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Privacy')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
+            <TouchableOpacity onPress={() => alert('url of privacy')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="note" size={30} style={{marginLeft:20,marginRight:20}} />
                 <Text>Privacy Policy</Text>
 
@@ -51,7 +55,7 @@ const DrawerContent = (props) => {
                 <Text>Share</Text>
 
             </TouchableOpacity>
-            <TouchableOpacity style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
+            <TouchableOpacity onPress={()=>signOut()} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="exit-to-app" size={30} style={{marginLeft:20,marginRight:20}} />
                 <Text>Sign Out</Text>
 

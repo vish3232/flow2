@@ -12,7 +12,7 @@ const Card = (props) => {
    colors={['#b92b27','#1565C0']} style={{ ...styles.container, ...props.style, width: width - 40, elevation:5 }} >
             <Text style={{ color: 'white', fontSize: 22, fontWeight: 'bold' }}>{props.title}</Text>
             <Text style={{ width: 150, color: '#fcfcfc', marginTop: 5 }}>{props.description}</Text>
-            <Image resizeMode="cover" style={{ top:10,height: 160,right:20,width:120,position:"absolute" }} source={props.source}></Image>
+            <Image resizeMode="cover" style={{ top:10,height: 160,right:20,width:120,position:"absolute",borderRadius:15 }} source={props.source}></Image>
          
            </LinearGradient>
            </TouchableOpacity>

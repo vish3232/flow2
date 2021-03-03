@@ -8,11 +8,12 @@ import AsyncStorage from '@react-native-community/async-storage'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TextInput } from 'react-native-gesture-handler';
 import {getEmail} from '../constant/storage'
+import { DrawerActions } from '@react-navigation/native';
 
 const GOOGLE_PACKAGE_NAME = 'agrawal.trial.yourfeedback';
 const APPLE_STORE_ID = 'id284882215';
 
-const Settings = (props) => {
+const UserSettings = (props) => {
 
     useEffect(() => {
     setTimeout(() => {
@@ -127,7 +128,7 @@ const Settings = (props) => {
         shadowOpacity:  0.4,
         shadowRadius: 3,
         elevation: 5,flexDirection:'row',alignItems:'center'}} >
-              <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
+              <Icon onPress={()=>props.navigation.goBack()} name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
               <Text>Setting</Text>
               </View>
               
@@ -183,4 +184,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Settings
+export default UserSettings

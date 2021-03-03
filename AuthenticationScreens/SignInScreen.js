@@ -25,6 +25,33 @@ const SignInScreen = (props) => {
         });
     }, [])
 
+    const _signIn = async () => {
+        // It will prompt google Signin Widget
+        try {
+          await GoogleSignin.hasPlayServices({
+            // Check if device has Google Play Services installed
+            // Always resolves to true on iOS
+            showPlayServicesUpdateDialog: true,
+          });
+          const userInfo = await GoogleSignin.signIn();
+          console.log('User Info --> ', userInfo);
+          setUserInfo(userInfo);
+        } catch (error) {
+          console.log('Message', JSON.stringify(error));
+          if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+            alert('User Cancelled the Login Flow');
+          } else if (error.code === statusCodes.IN_PROGRESS) {
+            alert('Signing In');
+          } else if (
+              error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE
+            ) {
+            alert('Play Services Not Available or Outdated');
+          } else {
+            alert(error.message);
+          }
+        }
+      };
+
 
     const submit = async () => {
         try {
@@ -111,7 +138,7 @@ const SignInScreen = (props) => {
                     style={{ width: '55%', height: 50, marginTop: 40, alignSelf: 'center' }}
                     size={GoogleSigninButton.Size.Wide}
                     color={GoogleSigninButton.Color.Light}
-                    onPress={signIn}
+                    onPress={_signIn}
                 />
                 <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25 }}>
                     <Text style={{ color: constant.white }}>Don't have an account?</Text>

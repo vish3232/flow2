@@ -112,7 +112,7 @@ const Profile = (props) => {
         shadowRadius: 3,
         elevation: 5,backgroundColor:'white',height: 50, flexDirection:'row', alignItems:'center',justifyContent:'space-between' }}>
               <View style={{flexDirection:'row',alignItems:'center'}} >
-              <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
+              <Icon name="keyboard-backspace" onPress={()=>props.navigation.goBack()} color="black" style={{marginRight:15}}  size={30} />
               <Text>Profile</Text>
               </View>
               
@@ -144,7 +144,7 @@ const Profile = (props) => {
              </View>
 
              <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
-   colors={['#b92b27','#1565C0']} style={{marginTop:20,marginBottom:80,width:'100%',height:200,borderRadius:15,justifyContent:'space-around'}} >
+   colors={['#b92b27','#1565C0']} style={{marginTop:40,marginBottom:80,width:'100%',height:200,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
                             </View>

@@ -5,7 +5,7 @@ import DeviceInfo from 'react-native-device-info';
 import Header from '../ReusableComponents/Header'
 import Mailer from 'react-native-mail'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-const Help = () => {
+const Help = (props) => {
   const [mobile,setmobile]=useState('mobile no.')
   const [email,setemail]=useState('email-id')
   const [deviceId,setDeviceId]=useState('')

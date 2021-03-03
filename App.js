@@ -2,10 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { Easing } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import Rootreducer from './Redux/Rootreducer'
-import thnkmiddleware from 'redux-thunk'
 import Playlist from './Screens/Playlist';
 import Subcategory from './Screens/Subcategory';
 import Player from './Screens/Player';
@@ -30,10 +27,9 @@ import PushNotification from "react-native-push-notification";
 import Terms from './Screens/Terms';
 import Privacy from './Screens/Privacy';
 import Help from './Screens/Help';
-import Settings from './Screens/Settings';
+import UserSettings from './Screens/Settings';
 import About from './Screens/About';
 
-const store = createStore(Rootreducer, applyMiddleware(thnkmiddleware))
 const Stack = createStackNavigator();
 
 function App() {
@@ -147,7 +143,7 @@ function App() {
         setInterval(() => {
           setuser(0)
           setloading(false)
-        }, 500);
+        }, 2000);
       } {
         var decoded = jwt(value);
         expirationDate = new Date(decoded.exp * 1000);
@@ -171,7 +167,6 @@ function App() {
 
   return (
     <UserContext.Provider value={authFlow}>
-      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -190,20 +185,6 @@ function App() {
                     <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
                     <Stack.Screen name="ForgotPassword2" component={ForgotPassword2} />
                     <Stack.Screen name="Modal" component={Modal1} />
-                    <Stack.Screen name="Home" component={Home} />
-                    <Stack.Screen name="Player" component={Player} />
-                    <Stack.Screen name="Playlist" component={Playlist} />
-                    <Stack.Screen name="Subcategory" component={Subcategory} />
-                    <Stack.Screen name="Premium" component={Premium} />
-                    <Stack.Screen name="Blogs" component={Blogs} />
-                    <Stack.Screen name="Profile" component={DrawerScreen} />
-                    <Stack.Screen name="Webview" component={Webview} />
-                    <Stack.Screen name="NewPassword" component={ForgotPassword2} />
-                    <Stack.Screen name="Term" component={Terms} />
-                    <Stack.Screen name="Privacy" component={Privacy} />
-                    <Stack.Screen name="Help" component={Help} />
-                    <Stack.Screen name="Setting" component={Settings} />
-                    <Stack.Screen name="About" component={About} />
                    
                     
                   
@@ -221,7 +202,7 @@ function App() {
                     <Stack.Screen name="Term" component={Terms} />
                     <Stack.Screen name="Privacy" component={Privacy} />
                     <Stack.Screen name="Help" component={Help} />
-                    <Stack.Screen name="Setting" component={Settings} />
+                    <Stack.Screen name="Setting" component={UserSettings} />
                     <Stack.Screen name="About" component={About} />
                     
                     
@@ -230,7 +211,6 @@ function App() {
             }
           </Stack.Navigator>
         </NavigationContainer>
-      </Provider>
     </UserContext.Provider>
   );
 }

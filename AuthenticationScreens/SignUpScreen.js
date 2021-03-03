@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, AsyncStorage, Image, ScrollView } from 'react-native'
 import DeviceInfo from 'react-native-device-info';
 import Axios from 'axios'
@@ -6,9 +6,23 @@ import constant from '../constant/constant'
 import Auth from '../assets/Authentication'
 import Modal from './Modal';
 import { saveEmail, saveMobile, saveName, saveUserName, saveUserState, savePaymentStatus } from '../constant/storage'
+import {
+    GoogleSignin,
+    GoogleSigninButton,
+    statusCodes,
+} from '@react-native-community/google-signin';
+
 
 
 const SignUpScreen = (props) => {
+
+    useEffect(() => {
+        GoogleSignin.configure({
+            scopes: ['email', 'profile'],
+            webClientId: '313121356610-r8qa4eq58flevcdap1l86iuuo1mn6bl9.apps.googleusercontent.com',
+        });
+    }, [])
+
 
     const [username, setusername] = useState('')
     const [mobile, setmobile] = useState('')
@@ -37,7 +51,7 @@ const SignUpScreen = (props) => {
                 email: email,
                 password: password,
                 deviceId: deviceId,
-                planId:'60379417996a220b287a5bc1',
+                planId:'603f3991ef0802ca34788323',
                 timeStamp:new Date()
             }).then(data => {
                 if (data.status === 201 && data.data.message === 'User Created') {
@@ -71,6 +85,32 @@ const SignUpScreen = (props) => {
         }
     }
 
+    const _signIn = async () => {
+        // It will prompt google Signin Widget
+        try {
+          await GoogleSignin.hasPlayServices({
+            // Check if device has Google Play Services installed
+            // Always resolves to true on iOS
+            showPlayServicesUpdateDialog: true,
+          });
+          const userInfo = await GoogleSignin.signIn();
+          console.log('User Info --> ', userInfo);
+          setUserInfo(userInfo);
+        } catch (error) {
+          console.log('Message', JSON.stringify(error));
+          if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+            alert('User Cancelled the Login Flow');
+          } else if (error.code === statusCodes.IN_PROGRESS) {
+            alert('Signing In');
+          } else if (
+              error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE
+            ) {
+            alert('Play Services Not Available or Outdated');
+          } else {
+            alert(error.message);
+          }
+        }
+      };
 
 
     const signIn = async (token) => {
@@ -124,8 +164,13 @@ const SignUpScreen = (props) => {
             <TouchableOpacity style={styles.button} onPress={()=>submit()} >
                 <Text style={{ fontWeight: 'bold', color: '#fff' }}>Sign Up</Text>
             </TouchableOpacity>
-            <View style={{ width: '90%', backgroundColor: '#dcdcdc', height: 0.5, alignSelf: 'center', marginTop: 20 }} />
-            <TouchableOpacity style={{ width: '50%', height: 40, backgroundColor: '#dcdcdc', marginTop: 30, alignSelf: 'center' }} />
+            <GoogleSigninButton
+                    style={{ width: '55%', height: 50, marginTop: 40, alignSelf: 'center' }}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Light}
+                    onPress={_signIn}
+                />
+                
             <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 20, marginBottom:20 }}>
                 <Text style={{ color: constant.white }}>Don't have an account?</Text>
                 <TouchableOpacity onPress={() => props.navigation.navigate('SignInScreen')}>

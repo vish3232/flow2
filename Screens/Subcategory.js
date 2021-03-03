@@ -50,7 +50,7 @@ const Subcategory = (props) => {
         shadowOpacity:  0.4,
         shadowRadius: 3,
         elevation: 5,paddingLeft:15,height:50,width:'100%',flexDirection:'row',alignItems:'center',backgroundColor:'white'}} >
-              <Icon  name="keyboard-backspace" size={40} style={{marginRight:15}} />
+              <Icon onPress={()=>props.navigation.goBack()}  name="keyboard-backspace" size={40} style={{marginRight:15}} />
                <Text>{props.route.params.text}</Text>
 
            </View>

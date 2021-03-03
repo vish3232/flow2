@@ -6,6 +6,7 @@ import Axios from 'axios'
 const ForgotPassword = (props) => {
     const [email,setEmail]=useState(null)
     const  forgotPassword =async()=>{
+        console.log(email)
         Axios.get(constant.url + `/emailOtp/send?to=${email}`).then(data => {
             console.log(data)
                         

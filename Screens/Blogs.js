@@ -40,7 +40,7 @@ const Blogs = (props) => {
         shadowOpacity:  0.4,
         shadowRadius: 3,
         elevation: 5,backgroundColor:'white',flexDirection:"row",height: 50, paddingHorizontal: 15, alignItems: 'center', elevation: 1 }}>
-                <Icon name="keyboard-backspace" size={40} style={{marginRight:15}} />
+                <Icon onPress={()=>props.navigation.goBack()} name="keyboard-backspace" size={40} style={{marginRight:15}} />
                 <Text>Blogs</Text>
 
             </View>

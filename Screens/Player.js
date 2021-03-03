@@ -96,6 +96,7 @@ const tp =props.route.params.songsIdList
 
     if (getStateName(playbackState) != "Playing") {
       try {
+        console.log(props.route.params.id)
         await TrackPlayer.add({
           id: '123',
           url: 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/song/' + props.route.params.id,
@@ -196,7 +197,7 @@ const tp =props.route.params.songsIdList
 
     <LinearGradient colors={['#4c669f', constant.background]} style={{ flex: 1 }}>
       <View style={{ height: 50,flexDirection:'row', alignItems: 'center',paddingHorizontal:20 }}>
-      <Icon name="keyboard-backspace" color="black" style={{marginRight:15}}  size={40} />
+      <Icon onPress={()=>props.navigation.goBack()} name="keyboard-backspace" color="black" style={{marginRight:15}}  size={40} />
 
       </View>
       <Image source={{ uri: 'https://images.unsplash.com/photo-1444491741275-3747c53c99b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' }} style={{ width: '90%', height: '40%', alignSelf: 'center', marginTop: 40 }}></Image>
