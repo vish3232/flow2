@@ -9,10 +9,8 @@ import {getUserName,getName,getMobile,getEmail} from '../constant/storage'
 import LinearGradient from 'react-native-linear-gradient';
 import Axios from 'axios'
 const Profile = (props) => {
-    const initial=['hello']
     const {height , width} = Dimensions.get('window')
     const [profile, setprofile] = useState('https://images.unsplash.com/photo-1581984433064-234b39961f3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')
-    const [username,setusername]=useState('username')
     const [name,setname]=useState('Full Name')
     const [mobile,setmobile]=useState('mobile no.')
     const [email,setemail]=useState('email-id')
@@ -36,6 +34,7 @@ const Profile = (props) => {
           setname(res.data.profileData[0].fullname)
           setmobile(res.data.profileData[0].mobile)
           setPlanname(res.data.subcriptionData[0].name)
+          
       }).catch(err => console.log(err))
         })
   
@@ -86,8 +85,8 @@ const Profile = (props) => {
         formdata.append("email",email)
 
          const res = await Axios({
-          url: 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/user/getProfileDetails/'+email,
-          method: 'POST',
+          url: 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/user/updateProfile/'+email,
+          method: 'PUT',
           data: formdata,
           headers: {
             Accept: '*/*',

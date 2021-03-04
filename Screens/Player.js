@@ -31,7 +31,7 @@ const tp =props.route.params.songsIdList
   let listOfSongs = []
   songsId.map(data1 => {
     obj.id = data1;
-    obj.url = 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/song/' + data1;
+    obj.url = 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/song/' + data1._id;
     listOfSongs.push(obj)
   })
 
@@ -57,29 +57,7 @@ const tp =props.route.params.songsIdList
     });
     resetPlayer()
     togglePlayback()
-    return async() => {
-      global.playList = global.playList.filter (function (value, index, array) { 
-        return array.indexOf (value) == index;
-    });
-    const playlist=await AsyncStorage.getItem('Playlist')
     
-    if(playlist===null){
-      await AsyncStorage.setItem('Playlist',JSON.stringify(global.playList))
-
-    }
-    else{
-     
-      global.playList.push(JSON.parse (playlist))
-      global.playList = global.playList.filter (function (value, index, array) { 
-        return array.indexOf (value) == index;
-      });
-     AsyncStorage.clear();
-      await AsyncStorage.setItem('Playlist',JSON.stringify(global.playList.split(',')))
-
-    }
-    
-     
-    }
   }, []);
 
   
@@ -119,8 +97,7 @@ const tp =props.route.params.songsIdList
       try {
  
         await TrackPlayer.play();
-        global.playList.push(props.route.params.title) 
- 
+    
       } catch (error) {
         alert(error)
       }
@@ -176,6 +153,8 @@ const tp =props.route.params.songsIdList
 
   const nextSong = async () => {
     try {
+      //console.log(listOfSongs)
+      //console.log(TrackPlayer.getCurrentTrack())
       await TrackPlayer.skipToNext();
     } catch (error) {
       togglePlayback()

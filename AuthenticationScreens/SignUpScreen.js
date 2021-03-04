@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, AsyncStorage, Image, ScrollView } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
 import DeviceInfo from 'react-native-device-info';
 import Axios from 'axios'
 import constant from '../constant/constant'
@@ -11,7 +11,7 @@ import {
     GoogleSigninButton,
     statusCodes,
 } from '@react-native-community/google-signin';
-
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 const SignUpScreen = (props) => {
@@ -52,7 +52,10 @@ const SignUpScreen = (props) => {
                 password: password,
                 deviceId: deviceId,
                 planId:'603f3991ef0802ca34788323',
-                timeStamp:new Date()
+                timeStamp:new Date(),
+                destination:null,
+                filename:null,
+                download:null
             }).then(data => {
                 if (data.status === 201 && data.data.message === 'User Created') {
                     signIn(data.data.token)
@@ -67,7 +70,8 @@ const SignUpScreen = (props) => {
                     Axios.get(constant.url + `/emailOtp/send?to=${email}`).then(data => {
                         
                         props.navigation.navigate('Modal',{
-                            isForgotPassword:'false'
+                            isForgotPassword:'false',
+                            email:email
                         });
 
                     })

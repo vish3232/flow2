@@ -6,14 +6,19 @@ import Axios from 'axios'
 const ForgotPassword = (props) => {
     const [email,setEmail]=useState(null)
     const  forgotPassword =async()=>{
-        console.log(email)
-        Axios.get(constant.url + `/emailOtp/send?to=${email}`).then(data => {
-            console.log(data)
+        alert(email)
+        Axios.get('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080' + `/emailOtp/send?to=${email}`).then(data => {
+           
+        console.log(data)
                         
+            
             props.navigation.navigate('Modal',{
-                isForgotPassword:'true'
+                isForgotPassword:'true',
+                email:email
             });
 
+        }).catch((error)=>{
+            console.log(error)
         })
     }
     return (

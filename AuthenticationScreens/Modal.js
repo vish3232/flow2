@@ -47,7 +47,7 @@ const Modal1 = (props) => {
         <View style={{ flex: 1, backgroundColor: constant.background }}>
             <View style={{ marginTop: 50, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: '#fff' }}>OTP has been send to your email</Text>
-                <Text style={{ color: '#fff' }}>vishalpurane59@gmail.com</Text>
+                <Text style={{ color: '#fff' }}>{props.route.params.email}</Text>
             </View>
             <Text style={{ marginTop: 30, letterSpacing: 2, alignSelf: 'center', color: constant.white, fontFamily: 'PermanentMarker-Regular', fontSize: 25, fontWeight: 'bold' }}>ENTER OTP</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 30 }}>

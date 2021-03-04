@@ -44,7 +44,7 @@ const Subcategory = (props) => {
 
 
     return (
-        <View style={{ flex: 1, backgroundColor: constant.background }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
            <View style={{ shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity:  0.4,

@@ -63,21 +63,36 @@ const Premium = (props) => {
 
     const checkPaymentStatus=()=>{
         let deviceId = DeviceInfo.getDeviceId();
-        axios.get('https://flow-mobile-backend.herokuapp.com/payment/instamojo/').then(function(response){
+        axios.get('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/payment/instamojo/').then(function(response){
              
         //console.log(response.data.paymentData.payment_request.status)
         savePaymentStatus(JSON.stringify(response.data.paymentData.payment_request.status==="Completed"?"Premium":"Free"))
-            axios.post(`https://flow-mobile-backend.herokuapp.com/payment/addpayment/`+deviceId,{
+            axios.put(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/payment/addpayment/`+deviceId,{
                deviceId:deviceId,
-               payment_id:response.data.paymentData.payment_request.id,
-               date:response.data.paymentData.payment_request.created_at,
-               paymentStatus: response.data.paymentData.payment_request.status==="Completed"?"Premium":"Free"
+               planId:response.data.paymentData.payment_request.status==="Completed"?"Premium plan Id":"Free Id"
             })
-        }).then(function(response){
-            
+        }).then(function(res){
+            if(res.data.message){
+                alert(res.data.message)
+            }
         }).catch(function(err){
             console.log(err)
         })
+    }
+
+    const trailPlanSubcription=async()=>{
+        const today=new Date()
+        axios.post(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/trail/createTrail`,{
+            userId:'',
+            start_Date:today,
+            end_Date:   new Date(Date.now() + (30 * 24 * 60 * 60 * 1000))
+        }).then(res=>{
+            if(res.data.message==="Trail exists"){
+                alert(res.data.message)
+            }
+        })
+        
+
     }
 
 
@@ -110,7 +125,7 @@ const Premium = (props) => {
                             <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Try Premium for 1 month</Text>
                             </View>
                             <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
-                        <TouchableOpacity style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
+                        <TouchableOpacity onPress={()=>trailPlanSubcription()} style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Try 1 month free</Text>
                         </TouchableOpacity>
                 </LinearGradient>

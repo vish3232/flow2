@@ -7,8 +7,7 @@ const Card3 = (props) => {
     return (
         <TouchableOpacity style={{ height: 50, justifyContent: 'space-between', marginHorizontal: 20, marginTop: 15,marginBottom:5, flexDirection: "row", alignItems: 'center' }} onPress={props.click}>
             <View>
-                <Text style={{ color: constant.white, fontSize:16 }}>{props.title}</Text>
-                <Text style={{ color: '#828282', opacity: 0.5 }}>Yes from me</Text>
+                <Text style={{ color: 'black', fontSize:16 }}>{props.title}</Text>
             </View>
         </TouchableOpacity>
 

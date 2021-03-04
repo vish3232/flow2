@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, AsyncStorage, Image, ScrollView } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
 import DeviceInfo from 'react-native-device-info';
 import Axios from 'axios';
 import jwt from 'jwt-decode'
@@ -11,7 +11,7 @@ import {
     GoogleSigninButton,
     statusCodes,
 } from '@react-native-community/google-signin';
-
+import AsyncStorage from '@react-native-community/async-storage'
 const SignInScreen = (props) => {
 
     const [name, setname] = useState('')
@@ -70,6 +70,7 @@ const SignInScreen = (props) => {
                     if (deviceId != decoded.deviceId) {
                         alert('You cannot use your account in other device')
                     } else {
+                        signIn(res.data.token)
                         saveUserName(JSON.stringify(res.data.userData.name))
                         saveName(JSON.stringify(res.data.userData.fullname))
                         saveMobile(JSON.stringify(res.data.userData.mobile))
@@ -84,29 +85,10 @@ const SignInScreen = (props) => {
         }
     }
 
-    const signIn = async () => {
-        try {
-            await GoogleSignin.hasPlayServices({
-                showPlayServicesUpdateDialog: true,
-            });
-            const userInfo = await GoogleSignin.signIn();
-            console.log('User Info --> ', userInfo);
-        } catch (error) {
-            console.log('Message', JSON.stringify(error));
-            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                alert('User Cancelled the Login Flow');
-            } else if (error.code === statusCodes.IN_PROGRESS) {
-                alert('Signing In');
-            } else if (
-                error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE
-            ) {
-                alert('Play Services Not Available or Outdated');
-            } else {
-                alert(error.message);
-            }
-        }
-    };
-
+    const signIn = async (token) => {
+        console.log(token)
+        await AsyncStorage.setItem('userToken', token);
+    }
     return (
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>

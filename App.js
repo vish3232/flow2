@@ -29,6 +29,12 @@ import Privacy from './Screens/Privacy';
 import Help from './Screens/Help';
 import UserSettings from './Screens/Settings';
 import About from './Screens/About';
+import { createStore, applyMiddleware } from 'redux'
+import Rootreducer from './Redux/Rootreducer'
+import thnkmiddleware from 'redux-thunk'
+
+const store = createStore(Rootreducer, applyMiddleware(thnkmiddleware))
+
 
 const Stack = createStackNavigator();
 
@@ -110,7 +116,7 @@ function App() {
   const authFlow = useMemo(() => ({
     signOut: async () => {
       try {
-        await AsyncStorage.removeItem('token')
+        await AsyncStorage.removeItem('userToken')
         setuser(0)
         setloading(false)
       } catch (error) {
@@ -138,7 +144,8 @@ function App() {
 
   const getLoginData = async () => {
     try {
-      const value = await AsyncStorage.getItem('token')
+      const value = await AsyncStorage.getItem('userToken')
+      console.log(value)
       if (value === null) {
         setInterval(() => {
           setuser(0)
@@ -163,10 +170,13 @@ function App() {
       setloading(false)
     }
   }
-
+  console.log(user)
 
   return (
+
     <UserContext.Provider value={authFlow}>
+    <Provider store={store}>
+
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -185,6 +195,20 @@ function App() {
                     <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
                     <Stack.Screen name="ForgotPassword2" component={ForgotPassword2} />
                     <Stack.Screen name="Modal" component={Modal1} />
+                    <Stack.Screen name="Home" component={Home} />
+                    <Stack.Screen name="Player" component={Player} />
+                    <Stack.Screen name="Playlist" component={Playlist} />
+                    <Stack.Screen name="Subcategory" component={Subcategory} />
+                    <Stack.Screen name="Premium" component={Premium} />
+                    <Stack.Screen name="Blogs" component={Blogs} />
+                    <Stack.Screen name="Profile" component={DrawerScreen} />
+                    <Stack.Screen name="Webview" component={Webview} />
+                    <Stack.Screen name="NewPassword" component={ForgotPassword2} />
+                    <Stack.Screen name="Term" component={Terms} />
+                    <Stack.Screen name="Privacy" component={Privacy} />
+                    <Stack.Screen name="Help" component={Help} />
+                    <Stack.Screen name="Setting" component={UserSettings} />
+                    <Stack.Screen name="About" component={About} />
                    
                     
                   
@@ -211,6 +235,7 @@ function App() {
             }
           </Stack.Navigator>
         </NavigationContainer>
+        </Provider>
     </UserContext.Provider>
   );
 }
