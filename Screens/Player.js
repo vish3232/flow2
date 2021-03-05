@@ -71,10 +71,14 @@ const tp =props.route.params.songsIdList
 
 
   const togglePlayback = async () => {
-
+    global.isMusicModal=true
+    global.id=props.route.params.id
+global.song=props.route.params.songsIdList
+global.subcategory=props.route.params.subcategory
+     
     if (getStateName(playbackState) != "Playing") {
       try {
-        console.log(props.route.params.id)
+        global.title=props.route.params.title
         await TrackPlayer.add({
           id: '123',
           url: 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/song/' + props.route.params.id,
@@ -116,14 +120,15 @@ const tp =props.route.params.songsIdList
 
 
   const goto = (data) => {
+    alert(data)
     TrackPlayer.seekTo(data);
     setslidervalue(data)
+    
   }
 
 
   const ProgressBar = () => {
     const { position, bufferedPosition, duration } = TrackPlayer.useTrackPlayerProgress()
-
     if (position != 0) {
       i = position
     }
@@ -134,14 +139,15 @@ const tp =props.route.params.songsIdList
     }
 
 
-
     if (getStateName(playbackState) === "Paused") {
       return <Progressbar position={i} duration={end} goto={goto} />
     }
     if (getStateName(playbackState) === "Buffering" || position === 0) {
+    
       return <Progressbar position={slidervalue} duration={end} goto={goto} />
     } else {
       return <Progressbar position={position} duration={duration} goto={goto} />
+      
     }
   }
 
@@ -183,7 +189,7 @@ const tp =props.route.params.songsIdList
       <View style={{ marginTop: 10,flexDirection:'column',alignItems:'center',justifyContent:'center' }}>
         <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center' }}>{props.route.params.subcategory}</Text>
 
-        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center',width:'90%' }}>{props.route.params.title}</Text>
+        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center',width:'90%' }}>{global.title}</Text>
       </View>
 
       <ProgressBar />

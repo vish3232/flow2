@@ -8,9 +8,13 @@ import { useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Axios from 'axios'
 import LoadingScreen from './LoadingScreen'
+import MusicModal from './MusicModal';
+
 const Subcategory = (props) => {
     const [subCategory,setsubCategory]=useState([])
     const [isLoading,setLoading]=useState(false)
+    const [isMusicModal,setMusicModal]=useState(global.isMusicModal)
+
     const getSubcategoryData=async()=>{
         setLoading(true)
         console.log(props.route.params.category_id)
@@ -25,6 +29,12 @@ const Subcategory = (props) => {
             console.log(err)})
     
     }
+
+    const navigateToMusicModal=()=>{
+        console.log(global.id)
+         props.navigation.push('Player',{'id':global.id, 'songsIdList':global.song, 'title':global.title,'subcategory':global.subcategory})
+    }
+   
 
     useEffect(() => {
         getSubcategoryData()
@@ -56,6 +66,9 @@ const Subcategory = (props) => {
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
         <LoadingScreen toggle={toggle} modalVisible={isLoading} />
+        {isMusicModal?
+        <MusicModal title={global.title} clickModal={navigateToMusicModal} />:<></>}
+
            <View style={{ shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity:  0.4,
@@ -74,13 +87,13 @@ const Subcategory = (props) => {
                     {
                         subCategory.map(data => {
                             return (
-                             <Card2 title={data.sub_category_name} key={data._id} click={() => props.navigation.navigate('Playlist',{'category':data.sub_category_name,'sub':data._id,'image':props.route.params.image})} />
+                             <Card2 title={data.sub_category_name} key={data._id} click={() => props.navigation.push('Playlist',{'category':data.sub_category_name,'sub':data._id,'image':props.route.params.image})} />
                             )
                         })
                     }
                 </ScrollView>
             </View>
-            <Tabbar click={() => props.navigation.navigate('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
+            <Tabbar click={() => props.navigation.push('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
         </View>
     )
 }

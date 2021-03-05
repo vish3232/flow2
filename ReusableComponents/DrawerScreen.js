@@ -8,6 +8,7 @@ import About from '../Screens/About';
 import Help from '../Screens/Help';
 import DrawewContent from '../Screens/DrawerContent'
 import UserSettings from '../Screens/Settings';
+import MusicModal from '../Screens/MusicModal';
 const Drawer = createDrawerNavigator();
 
 const DrawerScreen = () => {

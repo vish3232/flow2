@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import { Alert,View, BackHandler,ScrollView, Dimensions, Text, StatusBar, ActivityIndicator,TouchableOpacity } from 'react-native'
+import { View, BackHandler,ScrollView, Dimensions, Text, StatusBar, ActivityIndicator,TouchableOpacity } from 'react-native'
 import Card from '../ReusableComponents/Card';
 import constant from '../constant/constant'
 import Tabbar from '../ReusableComponents/Tabbar';
@@ -8,16 +8,18 @@ import Axios from 'axios'
 import {getPaymentStatus} from '../constant/storage'
 import LinearGradient from 'react-native-linear-gradient';
 import LoadingScreen from './LoadingScreen'
+import MusicModal from './MusicModal';
 
 const Home = (props) => {
     const [isLoading,setLoading]=useState(false)
     const [songs,setSongs]=useState([])
     const [title,setTitle]=useState([])
     const [category,setCategory]=useState([])
+    const [isMusicModal,setMusicModal]=useState(global.isMusicModal)
 
 
     useEffect(() => {
-       
+       setMusicModal(global.isMusicModal)
         getTitleData()
         getCategoryData()
     }, [])
@@ -79,13 +81,24 @@ const Home = (props) => {
         })
     }
 
-  
+    
+    
 
+    const navigateToMusicModal=()=>{
+        console.log(global.id)
+         props.navigation.push('Player',{'isModalOpen':'true','currentTime':global.sliderValue,'id':global.id, 'songsIdList':global.song, 'title':global.title,'subcategory':global.subcategory})
+    }
+    
+   
 
     return (
         <View style={{flex:1}}>
         <LoadingScreen toggle={toggle} modalVisible={isLoading} />
+        {isMusicModal?
+        <MusicModal title={global.title} clickModal={navigateToMusicModal} />:<></>}
+       
            <View style={{ flex: 1, backgroundColor: constant.background }}>
+            
                 <StatusBar backgroundColor="#2e74b7" barStyle="light-content" />
                 <ScrollView style={{backgroundColor:'white'}} showsHorizontalScrollIndicator={false}>
                     <Header />
@@ -114,15 +127,15 @@ const Home = (props) => {
                     </ScrollView>
                     </View>
                         )
-                })
+                        })
                     }
-       <Text style={{ color: '#a9b7cb', fontSize: 20, fontWeight: 'bold', marginLeft: 20 }}>Premium</Text>
+                   <Text style={{ color: '#a9b7cb', fontSize: 20, fontWeight: 'bold', marginLeft: 20 }}>Premium</Text>
                     <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
    colors={['#b92b27','#1565C0']} style={{alignSelf:'center',width:'90%',marginBottom:80,height:200,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
-                            </View>
-                            <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
+                        <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
+                    </View>
+                        <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
                         <TouchableOpacity onPress={()=>trailPlanSubcription()} style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Try 1 month free</Text>
                         </TouchableOpacity>

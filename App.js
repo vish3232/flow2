@@ -18,7 +18,6 @@ import Blogs from './Screens/Blogs';
 import EditProfile from './Screens/EditProfile';
 import { getUserState } from './constant/storage'
 import Webview from './Screens/WebView';
-import { Modal } from 'react-native';
 import Modal1 from './AuthenticationScreens/Modal';
 import ForgotPassword from './AuthenticationScreens/ForgotPassword';
 import { UserContext } from './AuthContext'
@@ -32,6 +31,7 @@ import About from './Screens/About';
 import { createStore, applyMiddleware } from 'redux'
 import Rootreducer from './Redux/Rootreducer'
 import thnkmiddleware from 'redux-thunk'
+import MusicModal from './Screens/MusicModal';
 
 const store = createStore(Rootreducer, applyMiddleware(thnkmiddleware))
 
@@ -197,6 +197,7 @@ function App() {
                     <Stack.Screen name="Help" component={Help} />
                     <Stack.Screen name="UserSetting" component={UserSettings} />
                     <Stack.Screen name="About" component={About} />
+                    
                     
                     
                     

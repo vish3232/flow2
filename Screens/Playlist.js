@@ -7,13 +7,23 @@ import Tabbar from '../ReusableComponents/Tabbar';
 import { useSelector } from 'react-redux'
 import Axios from 'axios'
 import LoadingScreen from './LoadingScreen'
+import MusicModal from './MusicModal';
 
 const Playlist = (props) => {
     const [song,setSong]=useState([])
-    const [isLoading,setLoading]=useState(false)    
+    const [isLoading,setLoading]=useState(false) 
+    const [isMusicModal,setMusicModal]=useState(global.isMusicModal)
+   
     useEffect(() => {
        getPlaylistData()
     }, [])
+
+     const navigateToMusicModal=()=>{
+        console.log(global.id)
+         props.navigation.push('Player',{'id':global.id, 'songsIdList':global.song, 'title':global.title,'subcategory':global.subcategory})
+    }
+   
+   
 
     const getPlaylistData=async()=>{
         setLoading(true)
@@ -37,6 +47,9 @@ const Playlist = (props) => {
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
         <LoadingScreen toggle={toggle} modalVisible={isLoading} />
+        {isMusicModal?
+        <MusicModal title={global.title} clickModal={navigateToMusicModal} />:<></>}
+
        
             <View style={{  shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
@@ -53,11 +66,11 @@ const Playlist = (props) => {
             <ScrollView>
                 {
                     song.map(data => {
-                        return <Card3 title={data.filename} click={()=> props.navigation.navigate('Player',{'id':data._id, 'songsIdList':song, 'title':data.filename,'subcategory':props.route.params.category})} key={data._id} />
+                        return <Card3 title={data.filename} click={()=> props.navigation.push('Player',{'id':data._id, 'songsIdList':song, 'title':data.filename,'subcategory':props.route.params.category})} key={data._id} />
                     })
                 }
             </ScrollView>
-            <Tabbar click={() => props.navigation.navigate('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
+            <Tabbar click={() => props.navigation.push('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
         </View>
     )
 }
