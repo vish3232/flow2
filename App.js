@@ -195,7 +195,7 @@ function App() {
                     <Stack.Screen name="Term" component={Terms} />
                     <Stack.Screen name="Privacy" component={Privacy} />
                     <Stack.Screen name="Help" component={Help} />
-                    <Stack.Screen name="Setting" component={UserSettings} />
+                    <Stack.Screen name="UserSetting" component={UserSettings} />
                     <Stack.Screen name="About" component={About} />
                     
                     

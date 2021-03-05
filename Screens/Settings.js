@@ -131,7 +131,7 @@ const UserSettings = (props) => {
               <Text>Setting</Text>
               </View>
               
-            <Icon name="dehaze" color="black" size={40} onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer())} />
+            <Icon name="dehaze" color="black" size={40} onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())} />
             </View >
             <View style={{paddingHorizontal:15,marginTop:15}} >
             <Text>Notification</Text>

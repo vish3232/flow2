@@ -41,7 +41,7 @@ const DrawerContent = (props) => {
                 <Text>Privacy Policy</Text>
 
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Setting')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
+            <TouchableOpacity onPress={() => props.navigation.navigate('UserSetting')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="settings" size={30} style={{marginLeft:20,marginRight:20}} />
                 <Text>Settings</Text>
 

@@ -14,7 +14,7 @@ const DrawerScreen = () => {
     return (
             <Drawer.Navigator drawerContent={props=><DrawewContent {...props} />}  initialRouteName="Home"drawerPosition='right'>
                 <Drawer.Screen name="Profile" component={Profile} />
-                <Drawer.Screen name="Settings"  component={UserSettings} />
+                <Drawer.Screen name="UserSetting"  component={UserSettings} />
                 <Drawer.Screen  name="EditProfile"    component={EditProfile} />
                 <Drawer.Screen name="Terms"   component={Terms} />
                 <Drawer.Screen name="Privacy"  component={Privacy} />
