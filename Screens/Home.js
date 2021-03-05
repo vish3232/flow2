@@ -7,10 +7,10 @@ import Header from '../ReusableComponents/Header';
 import Axios from 'axios'
 import {getPaymentStatus} from '../constant/storage'
 import LinearGradient from 'react-native-linear-gradient';
-
+import LoadingScreen from './LoadingScreen'
 
 const Home = (props) => {
-    const [loading,setLoading]=useState(false)
+    const [isLoading,setLoading]=useState(false)
     const [songs,setSongs]=useState([])
     const [title,setTitle]=useState([])
     const [category,setCategory]=useState([])
@@ -23,14 +23,22 @@ const Home = (props) => {
     }, [])
 
     const getTitleData=async()=>{
+        setLoading(true)
         Axios.get('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/title/all').then(res => {
+            if(res.data. message==="success"){
             setTitle(res.data.titleData)
+            setLoading(false)
+            }
         }).catch(err => console.log(err))
     }
 
     const getCategoryData=async()=>{
+        setLoading(true)
         Axios.get('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/category/all').then(res => {
-            setCategory(res.data.categoryData)
+        if(res.data.message==="success"){
+            setLoading(false)    
+        setCategory(res.data.categoryData)
+        }
         }).catch(err => console.log(err))
     }
 
@@ -48,12 +56,36 @@ const Home = (props) => {
         newArray.push(uniqueObject[i]);
     }
 
+    const toggle = () => {
+        setLoading(!isLoading);
+    };
+
+    const trailPlanSubcription=async()=>{
+        setLoading(true)
+        const today=new Date()
+        
+        axios.post(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/trail/createTrail`,{
+            userId:'',
+            start_Date:today,
+            end_Date:   new Date(Date.now() + (30 * 24 * 60 * 60 * 1000))
+        }).then(res=>{
+            if(res.data.message==="Trail exists"){
+                setLoading(false)
+                alert(res.data.message)
+            }
+        }).catch((err)=>{
+            setLoading(false)
+            console.log(err)
+        })
+    }
+
   
 
 
     return (
         <View style={{flex:1}}>
-            {loading === true ? <View  style={{flex: 1, justifyContent:'center', alignItems:'center'}}><ActivityIndicator size="large" color='#0000ff' /></View> : <View style={{ flex: 1, backgroundColor: constant.background }}>
+        <LoadingScreen toggle={toggle} modalVisible={isLoading} />
+           <View style={{ flex: 1, backgroundColor: constant.background }}>
                 <StatusBar backgroundColor="#2e74b7" barStyle="light-content" />
                 <ScrollView style={{backgroundColor:'white'}} showsHorizontalScrollIndicator={false}>
                     <Header />
@@ -89,21 +121,15 @@ const Home = (props) => {
    colors={['#b92b27','#1565C0']} style={{alignSelf:'center',width:'90%',marginBottom:80,height:200,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
-                            <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-                                <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Free</Text>
-                                <Text style={{paddingHorizontal:10,fontSize:18,color:'#212121'}}>For 1 month</Text>
-
-                            </View>
                             </View>
                             <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
-                        <TouchableOpacity style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
+                        <TouchableOpacity onPress={()=>trailPlanSubcription()} style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Try 1 month free</Text>
                         </TouchableOpacity>
                 </LinearGradient>
                 </ScrollView>
                 <Tabbar click={() => props.navigation.navigate('Home')} click4={()=> props.navigation.navigate('Blogs')} click2={() => props.navigation.navigate('Profile')} click3={()=> props.navigation.navigate('Premium')} />
             </View>
-            }
         </View>
     )
 

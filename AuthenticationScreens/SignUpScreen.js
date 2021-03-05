@@ -12,7 +12,7 @@ import {
     statusCodes,
 } from '@react-native-community/google-signin';
 import AsyncStorage from '@react-native-community/async-storage'
-
+import LoadingScreen from '../Screens/LoadingScreen'
 
 const SignUpScreen = (props) => {
 
@@ -30,19 +30,25 @@ const SignUpScreen = (props) => {
     const [email, setemail] = useState('')
     const [see, setsee] = useState(false)
     const [name, setname] = useState('')
+    const [isLoading,setLoading]=useState(false)
 
 
 
     const submit = async () => {
+        setLoading(true)
         let deviceId = DeviceInfo.getDeviceId();
         if (username === "") {
             alert('Enter Name')
+            setLoading(false)
         } else if (mobile === "") {
             alert('Enter Mobile No')
+            setLoading(false)
         } else if (email === "") {
             alert('Enter Email')
+            setLoading(false)
         } else if (password === "") {
             alert('Enter Password')
+            setLoading(false)
         } else {
             Axios.post(constant.url + '/user/signup', {
                 name: username,
@@ -58,6 +64,7 @@ const SignUpScreen = (props) => {
                 download:null
             }).then(data => {
                 if (data.status === 201 && data.data.message === 'User Created') {
+                    setLoading(false)
                     signIn(data.data.token)
                     saveUserName(JSON.stringify(data.data.userData.name))
                     saveName(JSON.stringify(data.data.userData.fullname))
@@ -78,13 +85,14 @@ const SignUpScreen = (props) => {
 
                 } else {
                     alert('this device has already account register')
-
+                    setLoading(false)
                 //    props.navigation.navigate('Home');
 
 
                 }
             }).catch(err => {
                 console.log("error" + err)
+                setLoading(false)
             })
         }
     }
@@ -121,9 +129,14 @@ const SignUpScreen = (props) => {
         await AsyncStorage.setItem('userToken', token);
     }
 
+    const toggle = () => {
+        setLoading(!isLoading);
+      };
+
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
+        <LoadingScreen toggle={toggle} modalVisible={isLoading} />
             <Image source={require('../assets/waves.png')} style={styles.logo} />
             <Text style={{ fontFamily: "PermanentMarker-Regular", alignSelf: 'center', marginTop: 10, fontSize: 30, color: "#dcdcdc" }}>Welcome To Flow</Text>
             <View style={{ width: '80%', alignSelf: 'center', marginTop: '8%' }}>
@@ -144,12 +157,14 @@ const SignUpScreen = (props) => {
                 <TextInput style={styles.input}
                     placeholder="Enter Mobile Number"
                     keyboardType="numeric"
+                    maxLength={10}
                     onChangeText={(value) => setmobile(value)} />
             </View>
             <View style={{ width: '80%', alignSelf: 'center', marginTop: 10 }}>
                 <Text style={{ color: constant.white }}>Email</Text>
                 <TextInput style={styles.input}
                     placeholder="Enter Email"
+                    keyboardType="email-address"
                     onChangeText={(value) => setemail(value)} />
             </View>
             <View style={{ width: '80%', alignSelf: 'center', marginTop: 10 }}>

@@ -8,8 +8,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TextInput } from 'react-native-gesture-handler';
 import {getEmail} from '../constant/storage'
-import { DrawerActions } from '@react-navigation/native';
-
+import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 const GOOGLE_PACKAGE_NAME = 'agrawal.trial.yourfeedback';
 const APPLE_STORE_ID = 'id284882215';
 
@@ -132,7 +131,7 @@ const UserSettings = (props) => {
               <Text>Setting</Text>
               </View>
               
-            <Icon name="dehaze" color="black" size={40} onPress={()=>props.navigation.toggleDrawer()} />
+            <Icon name="dehaze" color="black" size={40} onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer())} />
             </View >
             <View style={{paddingHorizontal:15,marginTop:15}} >
             <Text>Notification</Text>

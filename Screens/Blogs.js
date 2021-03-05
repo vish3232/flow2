@@ -6,19 +6,30 @@ import BlogCard from '../ReusableComponents/BlogCard';
 import BlogContent from '../ReusableComponents/BlogContent';
 import Axios from 'axios'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-
+import LoadingScreen from './LoadingScreen'
 
 const Blogs = (props) => {
 
     const [visible, setvisible] = useState(false)
     const [data, setdata] = useState([])
     const [modalData, setmodalData] = useState([])
+    const [isLoading,setLoading]=useState(false)
 
     useEffect(() => {
+        setLoading(true)
         Axios.get('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/blog/all').then(res => {
-            setdata(res.data.blogData)
-        }).catch(err => console.log(err))
+        if(res.data.message==="success"){ 
+            setLoading(false)   
+        setdata(res.data.blogData)
+        }
+        }).catch(err =>{ 
+            setLoading(false)
+            console.log(err)})
     }, [])
+
+    const toggle = () => {
+        setLoading(!isLoading);
+    };
 
     const toggleModal = (id) => {
         if (visible === true) {
@@ -35,6 +46,7 @@ const Blogs = (props) => {
 
     return (
         <View style={{ ...styles.container }}>
+        <LoadingScreen toggle={toggle} modalVisible={isLoading} />
             <View style={{  shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity:  0.4,

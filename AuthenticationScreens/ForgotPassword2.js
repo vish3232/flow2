@@ -3,13 +3,15 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput 
 import constant from '../constant/constant'
 import Axios from 'axios'
 import {getEmail} from '../constant/storage'
-
+import LoadingScreen from '../Screens/LoadingScreen'
 const ForgotPassword2 = (props) => {
 
     const [newPassword, setnewPassword] = useState(null)
     const [conformPassword, setconformPassword] = useState(null)
+    const [isLoading,setLoading]=useState(false)
 
     const updatePassword=async()=>{
+        setLoading(true)
         if(newPassword===conformPassword){
         getEmail().then((mail) => {
 
@@ -19,21 +21,28 @@ const ForgotPassword2 = (props) => {
             password:newPassword
         }).then(data => {
             console.log(data)
-            if(data.data.message==="Password Changed..."){     
+            if(data.data.message==="Password Changed..."){  
+                setLoading(false)   
             props.navigation.navigate('SignInScreen');
             }else{
+                setLoading(false)
                 alert(data.data.message)
             }
 
         })
     })
     }else{
+        setLoading(false)
         alert("please enter same password")
     }
     }
+    const toggle = () => {
+        setLoading(!isLoading);
+      };
 
     return (
         <View style={styles.container}>
+        <LoadingScreen toggle={toggle} modalVisible={isLoading} />
             <ScrollView>
                 <Image source={require('../assets/waves.png')} style={styles.logo} />
                 <Text style={{ letterSpacing: 2, fontWeight: 'bold', fontFamily: "PermanentMarker-Regular", alignSelf: 'center', marginTop: 40, fontSize: 30, color: "#dcdcdc" }}>Forgot Password</Text>

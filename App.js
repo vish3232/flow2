@@ -42,11 +42,7 @@ function App() {
   useEffect(() => {
     checkPermission()
     getLoginData()
-    getUserState().then((paymentStatus) => {
-      setuser(JSON.parse(paymentStatus))
-      setloading(false)
-    });
-
+  
     PushNotification.configure({
       onRegister: function (token) {
         console.log("TOKEN:", token);
@@ -143,32 +139,15 @@ function App() {
   }
 
   const getLoginData = async () => {
-    try {
       const value = await AsyncStorage.getItem('userToken')
-      console.log(value)
       if (value === null) {
-        setInterval(() => {
           setuser(0)
           setloading(false)
-        }, 2000);
-      } {
-        var decoded = jwt(value);
-        expirationDate = new Date(decoded.exp * 1000);
-        currentDate = new Date()
-        setInterval(() => {
-          if (expirationDate > currentDate) {
+      }else {
             setuser(1)
             setloading(false)
-          } else {
-            setuser(0)
-            setloading(false)
-          }
-        }, 500);
       }
-    } catch (error) {
-      setuser(0)
-      setloading(false)
-    }
+    
   }
   console.log(user)
 
@@ -189,31 +168,21 @@ function App() {
             {
               loading === true ? <Stack.Screen name="loading" component={AuthLoadingScreen} /> :
                 user === 0 ?
+                (
                   <>
                     <Stack.Screen name="SignInScreen" component={SignInScreen} />
                     <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
                     <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
                     <Stack.Screen name="ForgotPassword2" component={ForgotPassword2} />
                     <Stack.Screen name="Modal" component={Modal1} />
-                    <Stack.Screen name="Home" component={Home} />
-                    <Stack.Screen name="Player" component={Player} />
-                    <Stack.Screen name="Playlist" component={Playlist} />
-                    <Stack.Screen name="Subcategory" component={Subcategory} />
-                    <Stack.Screen name="Premium" component={Premium} />
-                    <Stack.Screen name="Blogs" component={Blogs} />
-                    <Stack.Screen name="Profile" component={DrawerScreen} />
-                    <Stack.Screen name="Webview" component={Webview} />
-                    <Stack.Screen name="NewPassword" component={ForgotPassword2} />
-                    <Stack.Screen name="Term" component={Terms} />
-                    <Stack.Screen name="Privacy" component={Privacy} />
-                    <Stack.Screen name="Help" component={Help} />
-                    <Stack.Screen name="Setting" component={UserSettings} />
-                    <Stack.Screen name="About" component={About} />
                    
                     
                   
-                  </> :
-                  <>
+                  </>
+                )
+                   :
+                 
+                 ( <>
                     <Stack.Screen name="Home" component={Home} />
                     <Stack.Screen name="Player" component={Player} />
                     <Stack.Screen name="Playlist" component={Playlist} />
@@ -232,6 +201,7 @@ function App() {
                     
                     
                   </>
+                 )
             }
           </Stack.Navigator>
         </NavigationContainer>

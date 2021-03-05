@@ -7,13 +7,14 @@ import LinearGradient from 'react-native-linear-gradient';
 import {getEmail,getName,savePaymentStatus,getPaymentStatus} from '../constant/storage';
 import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/MaterialIcons'
-
+import LoadingScreen from './LoadingScreen'
 const Premium = (props) => {
     const [purpose,setPurpose]=useState('Flow Premium')
     const [amount,setAmount]=useState('200')
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
     const [subcription,setSubcription]=useState('Flow Free')
+    const [isLoading,setLoading]=useState(false)
     useEffect(() => {
         // Your code here
         getEmail().then((mail) => {
@@ -35,6 +36,7 @@ const Premium = (props) => {
       }, [])
     
     const  processInfo=async()=> {
+        setLoading(true)
 
             axios.post(`${data.url}/payment/instamojo`,{
 
@@ -47,6 +49,7 @@ const Premium = (props) => {
                 .then(function (response) {
                    console.log(response)
                     if (response.data.statusCode === 200) {
+                        setLoading(false)
                         //we got success from server ,now pass it to our webview
                         ToastAndroid.show('Redirecting to payment gateway', ToastAndroid.SHORT);
                         props.navigation.navigate('Webview',{url:response.data.url})
@@ -54,6 +57,7 @@ const Premium = (props) => {
                     }
                 })
                 .catch(function (error) {
+                    setLoading(false)
                     console.log(JSON.stringify(error));
                     ToastAndroid.show('Error', ToastAndroid.SHORT);
                 })
@@ -81,23 +85,34 @@ const Premium = (props) => {
     }
 
     const trailPlanSubcription=async()=>{
+        setLoading(true)
         const today=new Date()
+        
         axios.post(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/trail/createTrail`,{
             userId:'',
             start_Date:today,
             end_Date:   new Date(Date.now() + (30 * 24 * 60 * 60 * 1000))
         }).then(res=>{
             if(res.data.message==="Trail exists"){
+                setLoading(false)
                 alert(res.data.message)
             }
+        }).catch((err)=>{
+            setLoading(false)
+            console.log(err)
         })
         
 
     }
 
+    const toggle = () => {
+        setLoading(!isLoading);
+      };
+
 
     return (
         <View style={{ flex: 1 }}>
+        <LoadingScreen toggle={toggle} modalVisible={isLoading} />
         <ScrollView contentContainerStyle={{flexGrow:1}} >
         <View style={{  shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },

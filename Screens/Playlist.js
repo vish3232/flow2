@@ -6,28 +6,38 @@ import Card3 from '../ReusableComponents/Card3';
 import Tabbar from '../ReusableComponents/Tabbar';
 import { useSelector } from 'react-redux'
 import Axios from 'axios'
-
+import LoadingScreen from './LoadingScreen'
 
 const Playlist = (props) => {
     const [song,setSong]=useState([])
-    
+    const [isLoading,setLoading]=useState(false)    
     useEffect(() => {
        getPlaylistData()
     }, [])
 
     const getPlaylistData=async()=>{
+        setLoading(true)
         Axios.post('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/all',{
             sub_category_id:props.route.params.sub,
             audioStatus:"Free"
         }).then(res => {
+            setLoading(false)
             setSong(res.data.songData)
-        }).catch(err => console.log(err))
+        }).catch(err =>{ 
+            setLoading(false)
+            console.log(err)})
     
     }
+
+    const toggle = () => {
+        setLoading(!isLoading);
+      };
     
   
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <LoadingScreen toggle={toggle} modalVisible={isLoading} />
+       
             <View style={{  shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity:  0.4,

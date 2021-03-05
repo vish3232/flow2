@@ -12,11 +12,13 @@ import {
     statusCodes,
 } from '@react-native-community/google-signin';
 import AsyncStorage from '@react-native-community/async-storage'
+import LoadingScreen from '../Screens/LoadingScreen'
 const SignInScreen = (props) => {
 
     const [name, setname] = useState('')
     const [password, setpassword] = useState('')
     const { logIn } = useContext(UserContext)
+    const [isLoading,setLoading]=useState(false)
 
     useEffect(() => {
         GoogleSignin.configure({
@@ -54,12 +56,15 @@ const SignInScreen = (props) => {
 
 
     const submit = async () => {
+        setLoading(true)
         try {
             let deviceId = DeviceInfo.getDeviceId();
             if (name === "") {
                 alert('Enter Name')
+                setLoading(false)
             } else if (password === "") {
                 alert('Enter Password')
+                setLoading(false)
             } else {
                 const res = await Axios.post(constant.url + '/user/signin', {
                     email: name,
@@ -69,7 +74,10 @@ const SignInScreen = (props) => {
                     var decoded = jwt(res.data.token);
                     if (deviceId != decoded.deviceId) {
                         alert('You cannot use your account in other device')
+                        setLoading(false)
                     } else {
+                        setLoading(false)
+                        
                         signIn(res.data.token)
                         saveUserName(JSON.stringify(res.data.userData.name))
                         saveName(JSON.stringify(res.data.userData.fullname))
@@ -77,6 +85,7 @@ const SignInScreen = (props) => {
                         saveEmail(JSON.stringify(res.data.userData.email))
                         savePaymentStatus(JSON.stringify(res.data.plan_name))
                         logIn()
+                   
                     }
                 }
             }
@@ -86,11 +95,15 @@ const SignInScreen = (props) => {
     }
 
     const signIn = async (token) => {
-        console.log(token)
         await AsyncStorage.setItem('userToken', token);
     }
+
+    const toggle = () => {
+        setLoading(!isLoading);
+    };
     return (
         <View style={styles.container}>
+        <LoadingScreen toggle={toggle} modalVisible={isLoading} />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Image source={require('../assets/waves.png')} style={styles.logo} />
                 <Text style={{ fontFamily: "PermanentMarker-Regular", alignSelf: 'center', marginTop: 10, fontSize: 30, color: "#dcdcdc" }}>Welcome To Flow</Text>

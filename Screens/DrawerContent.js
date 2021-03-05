@@ -7,6 +7,12 @@ import { UserContext } from '../AuthContext'
 const DrawerContent = (props) => {
     const { signOut } = useContext(UserContext)
 
+    const logout=()=>{
+        signOut()
+    
+        props.navigation.navigate('SignInScreen')
+    }
+
     return (
         <View style={{flex:1,flexDirection:'column',alignItems:'flex-start',justifyContent:'flex-start'}} >
             <View style={{flexDirection:'row',alignItems:'center',width:'70%'}} >
@@ -55,7 +61,7 @@ const DrawerContent = (props) => {
                 <Text>Share</Text>
 
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>signOut()} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
+            <TouchableOpacity onPress={()=>logout()} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="exit-to-app" size={30} style={{marginLeft:20,marginRight:20}} />
                 <Text>Sign Out</Text>
 

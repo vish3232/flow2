@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {getUserName,getName,getMobile,getEmail} from '../constant/storage'
 import LinearGradient from 'react-native-linear-gradient';
 import Axios from 'axios'
+import LoadingScreen from './LoadingScreen'
 const Profile = (props) => {
     const {height , width} = Dimensions.get('window')
     const [profile, setprofile] = useState('https://images.unsplash.com/photo-1581984433064-234b39961f3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')
@@ -15,6 +16,7 @@ const Profile = (props) => {
     const [mobile,setmobile]=useState('mobile no.')
     const [email,setemail]=useState('email-id')
     const [planname,setPlanname]=useState(null)
+    const [isLoading,setLoading]=useState(false)
     useEffect(() => {
         // Your code here
         getProfileDetails()
@@ -25,17 +27,21 @@ const Profile = (props) => {
       }, [])
 
       const getProfileDetails=async()=>{
+        setLoading(true)
         getEmail().then((mail) => {
 
         Axios.post('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/user/getProfileDetails',{
           email:JSON.parse( mail)
         }).then(res => {
+          setLoading(false)
           setemail(res.data.profileData[0].email)
           setname(res.data.profileData[0].fullname)
           setmobile(res.data.profileData[0].mobile)
           setPlanname(res.data.subcriptionData[0].name)
           
-      }).catch(err => console.log(err))
+      }).catch(err =>{ 
+        setLoading(false)
+        console.log(err)})
         })
   
       }
@@ -73,6 +79,7 @@ const Profile = (props) => {
       }
 
       const updateProfileDetails=async()=>{
+        setLoading(true)
         let formdata = new FormData();
         var photo = {
           uri: profile,
@@ -95,21 +102,26 @@ const Profile = (props) => {
         });
 
         if(res.data.message==="Updated"){
+          setLoading(false)
           alert("profile updated succesfully...")
           getProfileDetails()
         }
         
 
       }
+      const toggle = () => {
+        setLoading(!isLoading);
+      };
       
     return (
       <View style={{flex: 1, backgroundColor:'white'}} >
-        <ScrollView contentContainerStyle={{flexGrow:1,paddingHorizontal:20}} >
+      <LoadingScreen toggle={toggle} modalVisible={isLoading} />
+        <ScrollView contentContainerStyle={{flexGrow:1}} >
             <View style={{  shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity:  0.4,
         shadowRadius: 3,
-        elevation: 5,backgroundColor:'white',height: 50, flexDirection:'row', alignItems:'center',justifyContent:'space-between' }}>
+        elevation: 5,backgroundColor:'white',height: 50, flexDirection:'row', paddingHorizontal:15,alignItems:'center',justifyContent:'space-between' }}>
               <View style={{flexDirection:'row',alignItems:'center'}} >
               <Icon name="keyboard-backspace" onPress={()=>props.navigation.goBack()} color="black" style={{marginRight:15}}  size={30} />
               <Text>Profile</Text>
@@ -117,7 +129,7 @@ const Profile = (props) => {
               
             <Icon name="dehaze" color="black" size={40} onPress={()=>props.navigation.toggleDrawer()} />
             </View>
-
+            <View style={{paddingHorizontal:20}} >
             <View style={{justifyContent:'center', alignItems:'center', marginTop:20}}>
                 <Image source={{uri:profile}} style={{height:150, width:150, borderRadius:height+width/2}}></Image>
                 <TouchableOpacity onPress={()=>selectPhotoTapped()} style={{marginTop:15,width:130,height:50,backgroundColor:'blue',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
@@ -148,10 +160,11 @@ const Profile = (props) => {
                             <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
                             </View>
                             <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
-                        <TouchableOpacity style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
+                        <TouchableOpacity onPress={()=> props.navigation.navigate('Premium')} style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Try 1 month free</Text>
                         </TouchableOpacity>
                 </LinearGradient>
+                </View>
                
            
 
