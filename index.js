@@ -15,3 +15,6 @@ global.id=""
 global.song=""
 global.subcategory=""
 global.sliderValue=0
+global.transid=""
+global.userId=""
+global.startDate=""

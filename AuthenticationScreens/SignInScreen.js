@@ -77,7 +77,7 @@ const SignInScreen = (props) => {
                         setLoading(false)
                     } else {
                         setLoading(false)
-                        
+                        global.userId=res.data.userData._id
                         signIn(res.data.token)
                         saveUserName(JSON.stringify(res.data.userData.name))
                         saveName(JSON.stringify(res.data.userData.fullname))

@@ -34,11 +34,12 @@ const Profile = (props) => {
           email:JSON.parse( mail)
         }).then(res => {
           setLoading(false)
+
           setemail(res.data.profileData[0].email)
           setname(res.data.profileData[0].fullname)
           setmobile(res.data.profileData[0].mobile)
           setPlanname(res.data.subcriptionData[0].name)
-          
+          global.startDate=res.data.profileData[0].timeStamp
       }).catch(err =>{ 
         setLoading(false)
         console.log(err)})

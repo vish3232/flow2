@@ -41,7 +41,7 @@ const Premium = (props) => {
             axios.post(`${data.url}/payment/instamojo`,{
 
                 purpose: 'Flow Premium',
-                amount: '200',
+                amount: '10',
                 buyer_name: name,
                 email: email,
 
@@ -66,30 +66,56 @@ const Premium = (props) => {
     }
 
     const checkPaymentStatus=()=>{
+        if(subcription!=="Premium"){
         let deviceId = DeviceInfo.getDeviceId();
-        axios.get('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/payment/instamojo/').then(function(response){
+        console.log(global.transid)
+        axios.get('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/payment/instamojo/'+global.transid).then(function(response){
              
-        //console.log(response.data.paymentData.payment_request.status)
+        console.log(response.data.paymentData.payment_request.status,deviceId,new Date())
         savePaymentStatus(JSON.stringify(response.data.paymentData.payment_request.status==="Completed"?"Premium":"Free"))
-            axios.put(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/payment/addpayment/`+deviceId,{
+    if(response.data.paymentData.payment_request.status==="Completed"){
+        axios.put(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/paymentTrack/addpayment`,{
                deviceId:deviceId,
-               planId:response.data.paymentData.payment_request.status==="Completed"?"Premium plan Id":"Free Id"
+               planId:response.data.paymentData.payment_request.status==="Completed"?"60434aa3ef0802ca34788332":"603f3991ef0802ca34788323",
+               currentDate:new Date()
+            }).then(function(res){
+                console.log(res)
+                if(res.data.message==="Updated"){
+                    alert("Plan is updated...")
+                }
+            }).catch(function(err){
+                console.log(err)
             })
-        }).then(function(res){
+        }
+        })
+    }else{
+        alert('already plan upgraded...')
+   
+    }
+    }
+
+    const trailPlanSubcription=async()=>{
+        if(subcription!=="Trial"){
+        let deviceId = DeviceInfo.getDeviceId();
+
+        setLoading(true)
+        const today=new Date()
+
+        savePaymentStatus(JSON.stringify("Trial"))
+            axios.put(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/paymentTrack/addpayment`,{
+               deviceId:deviceId,
+               planId:"6043498bef0802ca34788331",
+               currentDate:new Date()
+            }).then(function(res){
             if(res.data.message){
                 alert(res.data.message)
             }
         }).catch(function(err){
             console.log(err)
         })
-    }
-
-    const trailPlanSubcription=async()=>{
-        setLoading(true)
-        const today=new Date()
         
         axios.post(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/trail/createTrail`,{
-            userId:'',
+            userId:global.userId,
             start_Date:today,
             end_Date:   new Date(Date.now() + (30 * 24 * 60 * 60 * 1000))
         }).then(res=>{
@@ -101,6 +127,9 @@ const Premium = (props) => {
             setLoading(false)
             console.log(err)
         })
+    }else{
+        alert('already plan upgraded...')
+    }
         
 
     }
@@ -127,7 +156,7 @@ const Premium = (props) => {
                 <View style={{marginTop:15,justifyContent:'center'}}>
                     <View style={{borderRadius:20,backgroundColor:'#616161',width:'90%',height:60,marginHorizontal:20,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Current Plan</Text>
-                        <Text style={{paddingHorizontal:10,fontSize:18,color:'#212121'}}>Free</Text>
+                        <Text style={{paddingHorizontal:10,fontSize:18,color:'#212121'}}>{subcription}</Text>
                     </View>
 
                 </View>

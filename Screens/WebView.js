@@ -30,6 +30,7 @@ export default class Webview extends React.Component {
     }
 
     getPaymentDetails(trans_id) {
+        global.transid=trans_id
         ToastAndroid.show('Getting transaction status', ToastAndroid.SHORT);
 
         //insted of this you can do whatever you wan with the response , loading a custom success page with details etc

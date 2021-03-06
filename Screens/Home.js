@@ -5,10 +5,11 @@ import constant from '../constant/constant'
 import Tabbar from '../ReusableComponents/Tabbar';
 import Header from '../ReusableComponents/Header';
 import Axios from 'axios'
-import {getPaymentStatus} from '../constant/storage'
+import {getPaymentStatus,getEmail} from '../constant/storage'
 import LinearGradient from 'react-native-linear-gradient';
 import LoadingScreen from './LoadingScreen'
 import MusicModal from './MusicModal';
+import DeviceInfo from 'react-native-device-info';
 
 const Home = (props) => {
     const [isLoading,setLoading]=useState(false)
@@ -16,13 +17,69 @@ const Home = (props) => {
     const [title,setTitle]=useState([])
     const [category,setCategory]=useState([])
     const [isMusicModal,setMusicModal]=useState(global.isMusicModal)
-
+    const [subcription,setSubcription]=useState(null)
+    
 
     useEffect(() => {
+        getPaymentStatus().then((paymentStatus) => {
+            
+            setSubcription(JSON.parse(paymentStatus))
+            
+          });
+  
        setMusicModal(global.isMusicModal)
         getTitleData()
         getCategoryData()
+        getProfileDetails()
+        checkSubcription()
+
     }, [])
+
+    const getProfileDetails=async()=>{
+        setLoading(true)
+        getEmail().then((mail) => {
+
+        Axios.post('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/user/getProfileDetails',{
+          email:JSON.parse( mail)
+        }).then(res => {
+          setLoading(false)
+
+          global.startDate=res.data.profileData[0].timeStamp
+      }).catch(err =>{ 
+        setLoading(false)
+        console.log(err)})
+        })
+  
+      }
+    
+
+
+
+    const checkSubcription=()=>{
+        const startDate=new Date(global.startDate)
+        const today=new Date()
+        var diffDays = parseInt((today - startDate) / (1000 * 60 * 60 * 24), 10);
+        //alert(diffDays)
+        if(diffDays>28){
+            if(subcription!=="Free"){
+            let deviceId = DeviceInfo.getDeviceId();
+
+            savePaymentStatus(JSON.stringify("Free"))
+            axios.put(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/paymentTrack/addpayment`,{
+               deviceId:deviceId,
+               planId:"603f3991ef0802ca34788323",
+               currentDate:new Date()
+            }).then(function(res){
+            if(res.data.message){
+                alert(res.data.message)
+            }
+        }).catch(function(err){
+            console.log(err)
+        })
+    }
+        
+        }
+    }
 
     const getTitleData=async()=>{
         setLoading(true)
@@ -62,12 +119,30 @@ const Home = (props) => {
         setLoading(!isLoading);
     };
 
+    
+
     const trailPlanSubcription=async()=>{
+        if(subcription!=="Trial"){
+        let deviceId = DeviceInfo.getDeviceId();
+
         setLoading(true)
         const today=new Date()
+
+        savePaymentStatus(JSON.stringify("Trial"))
+            axios.put(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/paymentTrack/addpayment`,{
+               deviceId:deviceId,
+               planId:"6043498bef0802ca34788331",
+               currentDate:new Date()
+            }).then(function(res){
+            if(res.data.message){
+                alert(res.data.message)
+            }
+        }).catch(function(err){
+            console.log(err)
+        })
         
         axios.post(`http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/trail/createTrail`,{
-            userId:'',
+            userId:global.userId,
             start_Date:today,
             end_Date:   new Date(Date.now() + (30 * 24 * 60 * 60 * 1000))
         }).then(res=>{
@@ -79,6 +154,11 @@ const Home = (props) => {
             setLoading(false)
             console.log(err)
         })
+    }else{
+        alert('already plan upgraded...')
+    }
+        
+
     }
 
     

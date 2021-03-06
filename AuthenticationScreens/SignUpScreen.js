@@ -65,6 +65,8 @@ const SignUpScreen = (props) => {
             }).then(data => {
                 if (data.status === 201 && data.data.message === 'User Created') {
                     setLoading(false)
+                    global.userId=res.data.userData._id
+                           
                     signIn(data.data.token)
                     saveUserName(JSON.stringify(data.data.userData.name))
                     saveName(JSON.stringify(data.data.userData.fullname))

@@ -80,7 +80,6 @@ const MusicModal = (props) => {
             paddingLeft: 20,
             alignSelf: 'center',
             width: '100%',
-            height: 70,
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'center',

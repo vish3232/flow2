@@ -8,15 +8,26 @@ import { useSelector } from 'react-redux'
 import Axios from 'axios'
 import LoadingScreen from './LoadingScreen'
 import MusicModal from './MusicModal';
+import { useIsFocused } from "@react-navigation/native";
+import {getPaymentStatus} from '../constant/storage'
 
 const Playlist = (props) => {
+    const isFocused = useIsFocused()
     const [song,setSong]=useState([])
     const [isLoading,setLoading]=useState(false) 
     const [isMusicModal,setMusicModal]=useState(global.isMusicModal)
+    const [subcription,setSubcription]=useState(null)
+   
    
     useEffect(() => {
+        getPaymentStatus().then((paymentStatus) => {
+            
+            setSubcription(JSON.parse(paymentStatus))
+            
+          });
+  
        getPlaylistData()
-    }, [])
+    }, [isFocused])
 
      const navigateToMusicModal=()=>{
         console.log(global.id)
@@ -29,7 +40,7 @@ const Playlist = (props) => {
         setLoading(true)
         Axios.post('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/all',{
             sub_category_id:props.route.params.sub,
-            audioStatus:"Free"
+            audioStatus:subcription
         }).then(res => {
             setLoading(false)
             setSong(res.data.songData)
