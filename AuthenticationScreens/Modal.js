@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react'
+import React, { useState,useContext,useRef } from 'react'
 import { View, Text, Modal, TextInput, TouchableOpacity } from 'react-native'
 import constant from '../constant/constant'
 import Axios from 'axios';
@@ -9,6 +9,10 @@ import { UserContext } from '../AuthContext'
 
 const Modal1 = (props) => {
     const { logIn } = useContext(UserContext)
+    const ref_input1 = useRef();
+  const ref_input2 = useRef();
+  const ref_input3 = useRef();
+  const ref_input4 = useRef();
     
     const [otp1, setotp1] = useState('');
     const [otp2, setotp2] = useState('');
@@ -26,7 +30,7 @@ const Modal1 = (props) => {
             if (data.data.message === "user verified") {
                 setLoading(false)
                 if(props.route.params.isForgotPassword==="true"){
-                    props.navigation.navigate('NewPassword');
+                    props.navigation.navigate('ForgotPassword2');
 
                 }else{
                     setLoading(false)
@@ -77,10 +81,38 @@ const Modal1 = (props) => {
             </View>
             <Text style={{ marginTop: 30, letterSpacing: 2, alignSelf: 'center', color: constant.white, fontFamily: 'PermanentMarker-Regular', fontSize: 25, fontWeight: 'bold' }}>ENTER OTP</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 30 }}>
-                <TextInput maxLength={1} onChangeText={(Value) => setotp1(Value)} style={{ backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
-                <TextInput maxLength={1} onChangeText={(Value) => setotp2(Value)} style={{ backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
-                <TextInput maxLength={1} onChangeText={(Value) => setotp3(Value)} style={{ backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
-                <TextInput maxLength={1} onChangeText={(Value) => setotp4(Value)} style={{ backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
+                <TextInput ref={ref_input1} maxLength={1}  onChangeText={(event) => {
+                if (event !== '') {
+                  ref_input2.current.focus();
+                  setotp1(event);
+                } else {
+                  ref_input1.current.focus();
+                }
+              }} style={{ textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
+                <TextInput ref={ref_input2} maxLength={1} onChangeText={(event) => {
+                if (event !== '') {
+                  ref_input3.current.focus();
+                  setotp2(event);
+                } else {
+                  ref_input1.current.focus();
+                }
+              }} style={{ textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
+                <TextInput ref={ref_input3} maxLength={1}  onChangeText={(event) => {
+                if (event !== '') {
+                  ref_input4.current.focus();
+                  setotp3(event);
+                } else {
+                  ref_input2.current.focus();
+                }
+              }} style={{ textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
+                <TextInput ref={ref_input4} maxLength={1}  onChangeText={(event) => {
+                if (event !== '') {
+                  ref_input4.current.focus();
+                  setotp4(event);
+                } else {
+                  ref_input3.current.focus();
+                }
+              }} style={{ textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
             </View>
             <TouchableOpacity onPress={verifyOtp} style={{ height: 50, width: '50%', backgroundColor: 'white', alignSelf: 'center', borderRadius: 20, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
                 <Text style={{ fontWeight: 'bold' }}>Verify</Text>

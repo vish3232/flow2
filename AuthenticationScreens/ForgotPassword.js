@@ -2,26 +2,40 @@ import React,{useState} from 'react'
 import { ScrollView, StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native'
 import constant from '../constant/constant'
 import Axios from 'axios'
+import LoadingScreen from '../Screens/LoadingScreen'
 
 const ForgotPassword = (props) => {
+    const [isLoading,setLoading]=useState(false)
+
     const [email,setEmail]=useState(null)
     const  forgotPassword =async()=>{
+        setLoading(true)
         Axios.get('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080' + `/emailOtp/send?to=${email}`).then(data => {
            
         console.log(data)
-                        
-            
+            setLoading(false)
+            if(data.data.message==="mail send"){
             props.navigation.navigate('Modal',{
                 isForgotPassword:'true',
                 email:email
             });
+        }
 
         }).catch((error)=>{
+            setLoading(false)
             console.log(error)
         })
     }
+
+    const toggle = () => {
+        setLoading(!isLoading);
+    };
+   
+
     return (
         <View style={styles.container}>
+        <LoadingScreen toggle={toggle} modalVisible={isLoading} />
+       
             <ScrollView>
                 <Image source={require('../assets/waves.png')} style={styles.logo} />
                 <Text style={{ fontFamily: "PermanentMarker-Regular", alignSelf: 'center', marginTop: 10, fontSize: 30, color: "#dcdcdc" }}>Forgot Password</Text>
