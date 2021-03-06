@@ -14,4 +14,4 @@ global.title=""
 global.id=""
 global.song=""
 global.subcategory=""
-global.sliderValue=""
+global.sliderValue=0

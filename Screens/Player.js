@@ -71,6 +71,7 @@ const tp =props.route.params.songsIdList
 
 
   const togglePlayback = async () => {
+    
     global.isMusicModal=true
     global.id=props.route.params.id
 global.song=props.route.params.songsIdList
@@ -78,6 +79,7 @@ global.subcategory=props.route.params.subcategory
      
     if (getStateName(playbackState) != "Playing") {
       try {
+        
         global.title=props.route.params.title
         await TrackPlayer.add({
           id: '123',
@@ -86,6 +88,7 @@ global.subcategory=props.route.params.subcategory
           artist: 'Track Artist',
           //artwork: require('track.png')
         })
+        goto(global.sliderValue)
       } catch (error) {
         console.log(error)
       }
@@ -120,7 +123,6 @@ global.subcategory=props.route.params.subcategory
 
 
   const goto = (data) => {
-    alert(data)
     TrackPlayer.seekTo(data);
     setslidervalue(data)
     
@@ -147,7 +149,6 @@ global.subcategory=props.route.params.subcategory
       return <Progressbar position={slidervalue} duration={end} goto={goto} />
     } else {
       return <Progressbar position={position} duration={duration} goto={goto} />
-      
     }
   }
 
