@@ -50,13 +50,13 @@ const ForgotPassword2 = (props) => {
                     <Text style={{ color: constant.white }}>New Password</Text>
                     <TextInput style={styles.input}
                         placeholder="Enter New Password"
-                        onChangeText={(value) => setnewPassword(value)} />
+                        onChangeText={(value) => setnewPassword(value)} secureTextEntry={true} />
                 </View>
                 <View style={{ width: '80%', alignSelf: 'center', marginTop: 20 }}>
                     <Text style={{ color: constant.white }}>Conform Password</Text>
                     <TextInput style={styles.input}
                         placeholder="Enter Conform Password"
-                        onChangeText={(value) => setconformPassword(value)} />
+                        onChangeText={(value) => setconformPassword(value)} secureTextEntry={true} />
                 </View>
                 <TouchableOpacity onPress={() => updatePassword()} style={styles.button}>
                     <Text style={{ fontWeight: 'bold' }} >Submit</Text>

@@ -19,6 +19,8 @@ const ForgotPassword = (props) => {
                 isForgotPassword:'true',
                 email:email
             });
+        }else{
+            alert(data.data.message)
         }
 
         }).catch((error)=>{

@@ -87,6 +87,8 @@ const SignInScreen = (props) => {
                         logIn()
                    
                     }
+                }else{
+                    alert('please enter valid email id and password...')
                 }
             }
         } catch (error) {
