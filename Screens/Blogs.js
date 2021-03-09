@@ -53,7 +53,7 @@ const Blogs = (props) => {
         shadowRadius: 3,
         elevation: 5,backgroundColor:'white',flexDirection:"row",height: 50, paddingHorizontal: 15, alignItems: 'center', elevation: 1 }}>
                 <Icon onPress={()=>props.navigation.goBack()} name="keyboard-backspace" size={40} style={{marginRight:15}} />
-                <Text>Blogs</Text>
+                <Text style={{fontSize:16,fontFamily: "PermanentMarker-Regular"}} >Blogs</Text>
 
             </View>
             <FlatList

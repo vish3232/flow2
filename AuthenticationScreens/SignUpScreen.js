@@ -65,7 +65,7 @@ const SignUpScreen = (props) => {
             }).then(data => {
                 if (data.status === 201 && data.data.message === 'User Created') {
                     setLoading(false)
-                    global.userId=res.data.userData._id
+                    global.userId=data.data.userData._id
                            
                     signIn(data.data.token)
                     saveUserName(JSON.stringify(data.data.userData.name))
@@ -142,20 +142,20 @@ const SignUpScreen = (props) => {
             <Image source={require('../assets/waves.png')} style={styles.logo} />
             <Text style={{ fontFamily: "PermanentMarker-Regular", alignSelf: 'center', marginTop: 10, fontSize: 30, color: "#dcdcdc" }}>Welcome To Flow</Text>
             <View style={{ width: '80%', alignSelf: 'center', marginTop: '8%' }}>
-                <Text style={{ color: constant.white }}>User Name</Text>
+                <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular",fontSize:16 }}>User Name</Text>
                 <TextInput style={styles.input}
                     placeholder="Enter User Name"
                     onChangeText={(value) => setusername(value)} />
             </View>
             <View style={{ width: '80%', alignSelf: 'center', marginTop: 10 }}>
-                <Text style={{ color: constant.white }}>Full Name</Text>
+                <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Full Name</Text>
                 <TextInput style={styles.input}
                     placeholder="Enter Full Name"
                     onChangeText={(value) => setname(value)} />
             </View>
 
             <View style={{ width: '80%', alignSelf: 'center', marginTop: 10 }}>
-                <Text style={{ color: constant.white }}>Mobile Number</Text>
+                <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Mobile Number</Text>
                 <TextInput style={styles.input}
                     placeholder="Enter Mobile Number"
                     keyboardType="numeric"
@@ -163,27 +163,27 @@ const SignUpScreen = (props) => {
                     onChangeText={(value) => setmobile(value)} />
             </View>
             <View style={{ width: '80%', alignSelf: 'center', marginTop: 10 }}>
-                <Text style={{ color: constant.white }}>Email</Text>
+                <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Email</Text>
                 <TextInput style={styles.input}
                     placeholder="Enter Email"
                     keyboardType="email-address"
                     onChangeText={(value) => setemail(value)} />
             </View>
             <View style={{ width: '80%', alignSelf: 'center', marginTop: 10 }}>
-                <Text style={{ color: constant.white }}>Password</Text>
+                <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Password</Text>
                 <TextInput style={styles.input}
                     placeholder="Enter password"
                     secureTextEntry={true}
                     onChangeText={(value) => setpassword(value)} />
             </View>
             <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 10 }}>
-                <Text style={{ fontSize: 10, color: '#fff' }}>By creating an account your ageering to our</Text>
+                <Text style={{ fontSize: 10, color: '#fff',fontFamily: "PermanentMarker-Regular" }}>By creating an account your ageering to our</Text>
                 <TouchableOpacity>
-                    <Text style={{ fontSize: 10, color: '#fff', fontWeight: 'bold', marginLeft: 5 }}>Terms of services</Text>
+                    <Text style={{ fontSize: 10, color: '#fff', fontWeight: 'bold', marginLeft: 5,fontFamily: "PermanentMarker-Regular" }}>Terms of services</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.button} onPress={()=>submit()} >
-                <Text style={{ fontWeight: 'bold', color: '#fff' }}>Sign Up</Text>
+                <Text style={{ fontWeight: 'bold', color: '#fff',fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Sign Up</Text>
             </TouchableOpacity>
             <GoogleSigninButton
                     style={{ width: '55%', height: 50, marginTop: 40, alignSelf: 'center' }}
@@ -193,9 +193,9 @@ const SignUpScreen = (props) => {
                 />
                 
             <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 20, marginBottom:20 }}>
-                <Text style={{ color: constant.white }}>Don't have an account?</Text>
+                <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Don't have an account?</Text>
                 <TouchableOpacity onPress={() => props.navigation.navigate('SignInScreen')}>
-                    <Text style={{ color: constant.blue, marginLeft: 10 }}>Sign In</Text>
+                    <Text style={{ color: constant.blue, marginLeft: 10,fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Sign In</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -216,7 +216,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignSelf: 'center',
         elevation: 10,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        fontFamily: "PermanentMarker-Regular",
+        fontSize:15
     },
     button: {
         justifyContent: 'center',

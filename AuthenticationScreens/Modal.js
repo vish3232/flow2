@@ -76,8 +76,8 @@ const Modal1 = (props) => {
         <View style={{ flex: 1, backgroundColor: constant.background }}>
         <LoadingScreen toggle={toggle} modalVisible={isLoading} />
             <View style={{ marginTop: 50, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ color: '#fff' }}>OTP has been send to your email</Text>
-                <Text style={{ color: '#fff' }}>{props.route.params.email}</Text>
+                <Text style={{ color: '#fff',fontFamily: "PermanentMarker-Regular",fontSize:16 }}>OTP has been send to your email</Text>
+                <Text style={{ color: '#fff',fontFamily: "PermanentMarker-Regular",fontSize:16 }}>{props.route.params.email}</Text>
             </View>
             <Text style={{ marginTop: 30, letterSpacing: 2, alignSelf: 'center', color: constant.white, fontFamily: 'PermanentMarker-Regular', fontSize: 25, fontWeight: 'bold' }}>ENTER OTP</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 30 }}>
@@ -88,7 +88,7 @@ const Modal1 = (props) => {
                 } else {
                   ref_input1.current.focus();
                 }
-              }} style={{ textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
+              }} style={{ fontSize:14,fontFamily: "PermanentMarker-Regular",textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
                 <TextInput ref={ref_input2} maxLength={1} onChangeText={(event) => {
                 if (event !== '') {
                   ref_input3.current.focus();
@@ -96,7 +96,7 @@ const Modal1 = (props) => {
                 } else {
                   ref_input1.current.focus();
                 }
-              }} style={{ textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
+              }} style={{ fontSize:14,fontFamily: "PermanentMarker-Regular",textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
                 <TextInput ref={ref_input3} maxLength={1}  onChangeText={(event) => {
                 if (event !== '') {
                   ref_input4.current.focus();
@@ -104,7 +104,7 @@ const Modal1 = (props) => {
                 } else {
                   ref_input2.current.focus();
                 }
-              }} style={{ textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
+              }} style={{ fontSize:14,fontFamily: "PermanentMarker-Regular",textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
                 <TextInput ref={ref_input4} maxLength={1}  onChangeText={(event) => {
                 if (event !== '') {
                   ref_input4.current.focus();
@@ -112,18 +112,18 @@ const Modal1 = (props) => {
                 } else {
                   ref_input3.current.focus();
                 }
-              }} style={{ textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
+              }} style={{ fontSize:14,fontFamily: "PermanentMarker-Regular",textAlign:'center',backgroundColor: 'white', height: 50, width: '15%', borderRadius: 10 }} />
             </View>
-            <TouchableOpacity onPress={verifyOtp} style={{ height: 50, width: '50%', backgroundColor: 'white', alignSelf: 'center', borderRadius: 20, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
+            <TouchableOpacity onPress={verifyOtp} style={{ fontSize:16,fontFamily: "PermanentMarker-Regular",height: 50, width: '50%', backgroundColor: 'white', alignSelf: 'center', borderRadius: 20, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
                 <Text style={{ fontWeight: 'bold' }}>Verify</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={resendOtp} style={{ height: 50, width: '50%', backgroundColor: '#828282', alignSelf: 'center', borderRadius: 20, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
+            <TouchableOpacity onPress={resendOtp} style={{ fontSize:16,fontFamily: "PermanentMarker-Regular",height: 50, width: '50%', backgroundColor: '#828282', alignSelf: 'center', borderRadius: 20, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
                 <Text style={{ fontWeight: 'bold' }}>Resend OTP</Text>
             </TouchableOpacity>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                <Text style={{ color: '#fff' }}>resend OTP in next 1 minute...</Text>
+                <Text style={{ color: '#fff',fontSize:16,fontFamily: "PermanentMarker-Regular" }}>resend OTP in next 1 minute...</Text>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ color: '#fff' }}>In case of wrong email </Text>
+                    <Text style={{ color: '#fff',fontSize:16,fontFamily: "PermanentMarker-Regular" }}>In case of wrong email </Text>
                     <TouchableOpacity>
                         <Text style={{ color: '#fff', textDecorationLine: 'underline' }}>Click Here</Text>
                     </TouchableOpacity>

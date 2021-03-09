@@ -185,7 +185,7 @@ const Home = (props) => {
                     {title.map((data1)=>{
                         return(
                             <View style={{marginHorizontal:20}} >
-                            <Text style={{fontSize:20,fontWeight:'bold'}} >{data1.name}</Text>
+                            <Text style={{fontSize:20,fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}} >{data1.name}</Text>
                     <ScrollView
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
@@ -209,15 +209,15 @@ const Home = (props) => {
                         )
                         })
                     }
-                   <Text style={{ color: '#a9b7cb', fontSize: 20, fontWeight: 'bold', marginLeft: 20 }}>Premium</Text>
+                   <Text style={{ color: '#a9b7cb', fontSize: 20, fontWeight: 'bold', marginLeft: 20,fontFamily: "PermanentMarker-Regular" }}>Premium</Text>
                     <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
    colors={['#b92b27','#1565C0']} style={{alignSelf:'center',width:'90%',marginBottom:80,height:200,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
-                        <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
+                        <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium</Text>
                     </View>
-                        <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
+                        <Text style={{width:'90%',alignSelf:'center',color:'white',fontFamily: "PermanentMarker-Regular"}}>Upgrade to Premium to unlock all visualisation tracks!</Text>
                         <TouchableOpacity onPress={()=>trailPlanSubcription()} style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Try 1 month free</Text>
+                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center',fontFamily: "PermanentMarker-Regular"}}>Try 1 month free</Text>
                         </TouchableOpacity>
                 </LinearGradient>
                 </ScrollView>

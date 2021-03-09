@@ -149,14 +149,14 @@ const Premium = (props) => {
         shadowRadius: 3,
         elevation: 5,backgroundColor:'white',flexDirection:"row",height: 50, paddingHorizontal: 15, alignItems: 'center', elevation: 1 }}>
                 <Icon onPress={()=>props.navigation.goBack()} name="keyboard-backspace" size={40} style={{marginRight:15}} />
-                <Text>Premium</Text>
+                <Text style={{fontSize:16,fontFamily: "PermanentMarker-Regular"}} >Premium</Text>
 
             </View>
           
                 <View style={{marginTop:15,justifyContent:'center'}}>
                     <View style={{borderRadius:20,backgroundColor:'#616161',width:'90%',height:60,marginHorizontal:20,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Current Plan</Text>
-                        <Text style={{paddingHorizontal:10,fontSize:18,color:'#212121'}}>{subcription}</Text>
+                        <Text style={{fontFamily: "PermanentMarker-Regular",paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Current Plan</Text>
+                        <Text style={{fontFamily: "PermanentMarker-Regular",paddingHorizontal:10,fontSize:18,color:'#212121'}}>{subcription}</Text>
                     </View>
 
                 </View>
@@ -166,22 +166,22 @@ const Premium = (props) => {
 
 
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Try Premium for 1 month</Text>
+                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Try Premium for 1 month</Text>
                             </View>
-                            <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
+                            <Text style={{width:'90%',alignSelf:'center',color:'white',fontFamily: "PermanentMarker-Regular"}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
                         <TouchableOpacity onPress={()=>trailPlanSubcription()} style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Try 1 month free</Text>
+                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center',fontFamily: "PermanentMarker-Regular"}}>Try 1 month free</Text>
                         </TouchableOpacity>
                 </LinearGradient>
                 </View>
                 <View style={{flex:2,alignItems:'center',justifyContent:'center'}}>
                 <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#fff59d','#f57f17']} style={{marginTop:50,width:'90%',height:300,borderRadius:15,justifyContent:'space-around',marginBottom:80}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium for 200/month</Text>
+                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium for 200/month</Text>
                             </View>
-                            <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
+                            <Text style={{width:'90%',alignSelf:'center',color:'white',fontFamily: "PermanentMarker-Regular"}}>Upgrade to Premium to unlock all visualisation tracks!</Text>
                         <TouchableOpacity onPress={()=>processInfo()} style={{justifyContent:'center',width:'80%',backgroundColor:'white',height:40,alignSelf:'center',borderRadius:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Buy Premium Now</Text>
+                            <Text style={{paddingHorizontal:10,fontFamily: "PermanentMarker-Regular",fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Buy Premium Now</Text>
                         </TouchableOpacity>
                 </LinearGradient>
                 

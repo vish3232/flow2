@@ -188,9 +188,9 @@ global.subcategory=props.route.params.subcategory
       </View>
       <Image source={{ uri: 'https://images.unsplash.com/photo-1444491741275-3747c53c99b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' }} style={{ width: '90%', height: '40%', alignSelf: 'center', marginTop: 40 }}></Image>
       <View style={{ marginTop: 10,flexDirection:'column',alignItems:'center',justifyContent:'center' }}>
-        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center' }}>{props.route.params.subcategory}</Text>
+        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center',fontFamily: "PermanentMarker-Regular" }}>{props.route.params.subcategory}</Text>
 
-        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center',width:'90%' }}>{global.title}</Text>
+        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center',width:'90%',fontFamily: "PermanentMarker-Regular" }}>{global.title}</Text>
       </View>
 
       <ProgressBar />

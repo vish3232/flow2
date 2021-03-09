@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         marginTop: 5,
+        fontFamily: "PermanentMarker-Regular"
     
     },
     blogParagraph: {

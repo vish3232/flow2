@@ -47,19 +47,19 @@ const ForgotPassword2 = (props) => {
                 <Image source={require('../assets/waves.png')} style={styles.logo} />
                 <Text style={{ letterSpacing: 2, fontWeight: 'bold', fontFamily: "PermanentMarker-Regular", alignSelf: 'center', marginTop: 40, fontSize: 30, color: "#dcdcdc" }}>Forgot Password</Text>
                 <View style={{ width: '80%', alignSelf: 'center', marginTop: 30 }}>
-                    <Text style={{ color: constant.white }}>New Password</Text>
+                    <Text style={{ color: constant.white,fontSize:16,fontFamily: "PermanentMarker-Regular" }}>New Password</Text>
                     <TextInput style={styles.input}
                         placeholder="Enter New Password"
                         onChangeText={(value) => setnewPassword(value)} secureTextEntry={true} />
                 </View>
                 <View style={{ width: '80%', alignSelf: 'center', marginTop: 20 }}>
-                    <Text style={{ color: constant.white }}>Conform Password</Text>
+                    <Text style={{ color: constant.white,fontSize:14,fontFamily: "PermanentMarker-Regular" }}>Conform Password</Text>
                     <TextInput style={styles.input}
                         placeholder="Enter Conform Password"
                         onChangeText={(value) => setconformPassword(value)} secureTextEntry={true} />
                 </View>
                 <TouchableOpacity onPress={() => updatePassword()} style={styles.button}>
-                    <Text style={{ fontWeight: 'bold' }} >Submit</Text>
+                    <Text style={{ fontWeight: 'bold',fontSize:16,fontFamily: "PermanentMarker-Regular" }} >Submit</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>
@@ -88,7 +88,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignSelf: 'center',
         elevation: 10,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        fontSize:16,
+        fontFamily: "PermanentMarker-Regular"
     },
     button: {
         alignSelf: 'center',

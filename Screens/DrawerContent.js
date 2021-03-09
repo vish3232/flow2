@@ -17,53 +17,53 @@ const DrawerContent = (props) => {
         <View style={{flex:1,flexDirection:'column',alignItems:'flex-start',justifyContent:'flex-start'}} >
             <View style={{flexDirection:'row',alignItems:'center',width:'70%'}} >
                 <Image  source={require('../assets/waves.png')} style={{marginLeft:20,marginRight:20,width:80,height:80}} resizeMode="center" />
-                <Text>Flow</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Flow</Text>
 
             </View>
             <TouchableOpacity onPress={() => props.navigation.navigate('Home')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="home" size={30} style={{marginLeft:20,marginRight:20}} />
-                <Text>Home</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Home</Text>
 
 
             </TouchableOpacity>
             <TouchableOpacity onPress={() => props.navigation.navigate('Profile')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="person" size={30} style={{marginLeft:20,marginRight:20}} />
-                <Text>Profile</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Profile</Text>
 
             </TouchableOpacity>
             <TouchableOpacity onPress={() => alert('url of term')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="note" size={30} style={{marginLeft:20,marginRight:20}} />
-                <Text>Term of Service</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Terms of Service</Text>
 
             </TouchableOpacity>
             <TouchableOpacity onPress={() => alert('url of privacy')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="note" size={30} style={{marginLeft:20,marginRight:20}} />
-                <Text>Privacy Policy</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Privacy Policy</Text>
 
             </TouchableOpacity>
             <TouchableOpacity onPress={() => props.navigation.navigate('UserSetting')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="settings" size={30} style={{marginLeft:20,marginRight:20}} />
-                <Text>Settings</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Settings</Text>
 
             </TouchableOpacity>
             <TouchableOpacity onPress={() => props.navigation.navigate('Help')}  style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="help" size={30} style={{marginLeft:20,marginRight:20}} />
-                <Text>Support</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Support</Text>
 
             </TouchableOpacity>
             <TouchableOpacity onPress={() => props.navigation.navigate('About')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="headset-mic" size={30} style={{marginLeft:20,marginRight:20}} />
-                <Text>About</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >About</Text>
 
             </TouchableOpacity>
             <TouchableOpacity style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="share" size={30} style={{marginLeft:20,marginRight:20}} />
-                <Text>Share</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Share</Text>
 
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>logout()} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="exit-to-app" size={30} style={{marginLeft:20,marginRight:20}} />
-                <Text>Sign Out</Text>
+                <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Sign Out</Text>
 
             </TouchableOpacity>
            

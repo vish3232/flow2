@@ -68,7 +68,7 @@ const Playlist = (props) => {
         shadowRadius: 3,
         elevation: 5,flexDirection: 'row', height: 50, alignItems: 'center', paddingHorizontal: 20,backgroundColor:'white' }}>
                 <Icon onPress={()=>props.navigation.goBack()} name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
-                <Text>{props.route.params.category}</Text>
+                <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >{props.route.params.category}</Text>
             </View>
             <View style={{flex:1,flexDirection:"column"}} >
                 <Image resizeMode="cover" style={{width:'100%',height:'100%'}} source={{uri:props.route.params.image}} />

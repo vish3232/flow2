@@ -125,7 +125,7 @@ const Profile = (props) => {
         elevation: 5,backgroundColor:'white',height: 50, flexDirection:'row', paddingHorizontal:15,alignItems:'center',justifyContent:'space-between' }}>
               <View style={{flexDirection:'row',alignItems:'center'}} >
               <Icon name="keyboard-backspace" onPress={()=>props.navigation.goBack()} color="black" style={{marginRight:15}}  size={30} />
-              <Text>Profile</Text>
+              <Text style={{fontSize:16,fontFamily: "PermanentMarker-Regular"}} >Profile</Text>
               </View>
               
             <Icon name="dehaze" color="black" size={40} onPress={()=>props.navigation.toggleDrawer()} />
@@ -134,7 +134,7 @@ const Profile = (props) => {
             <View style={{justifyContent:'center', alignItems:'center', marginTop:20}}>
                 <Image source={{uri:profile}} style={{height:150, width:150, borderRadius:height+width/2}}></Image>
                 <TouchableOpacity onPress={()=>selectPhotoTapped()} style={{marginTop:15,width:130,height:50,backgroundColor:'blue',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
-                  <Text style={{color:'white'}} >Update Profile</Text>
+                  <Text style={{color:'white',fontFamily: "PermanentMarker-Regular",fontWeight:'bold'}} >Update Profile</Text>
                 </TouchableOpacity>
                  
              </View>
@@ -148,7 +148,7 @@ const Profile = (props) => {
              <Text style={{color:'black', marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}} >Plan: {planname}</Text>
              
              <TouchableOpacity style={{marginTop:20,alignSelf:'center',width:130,height:50,backgroundColor:'blue',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
-               <Text onPress={()=>updateProfileDetails()} style={{color:'white'}} >Update
+               <Text onPress={()=>updateProfileDetails()} style={{color:'white',fontFamily: "PermanentMarker-Regular",fontSize:16,fontWeight:'bold'}} >Update
 
                </Text>
              </TouchableOpacity>
@@ -158,11 +158,11 @@ const Profile = (props) => {
              <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
    colors={['#b92b27','#1565C0']} style={{marginTop:40,marginBottom:80,width:'100%',height:200,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Premium Family</Text>
+                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium</Text>
                             </View>
-                            <Text style={{width:'90%',alignSelf:'center',color:'white'}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
+                            <Text style={{width:'90%',alignSelf:'center',color:'white',fontFamily: "PermanentMarker-Regular"}}>Upgrade to Premium to unlock all visualisation tracks!</Text>
                         <TouchableOpacity onPress={()=> props.navigation.navigate('Premium')} style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center'}}>Try 1 month free</Text>
+                            <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center',fontFamily: "PermanentMarker-Regular"}}>Try 1 month free</Text>
                         </TouchableOpacity>
                 </LinearGradient>
                 </View>

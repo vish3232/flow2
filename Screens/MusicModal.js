@@ -86,7 +86,7 @@ const MusicModal = (props) => {
             backgroundColor: '#ffffff',
             borderRadius: 10,
           }}>
-          <Text style={{ width:'80%',fontSize: 20}}>{props.title}</Text>
+          <Text style={{ width:'80%',fontSize: 20,fontFamily: "PermanentMarker-Regular"}}>{props.title}</Text>
           <Icon style={{position:'absolute',right:10}} name={getStateName(playbackState) != "Playing" ? "play-arrow" : "pause"} color={'black'} size={35} onPress={togglePlayback} />
      
         </TouchableOpacity>

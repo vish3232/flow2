@@ -41,17 +41,17 @@ const ForgotPassword = (props) => {
             <ScrollView>
                 <Image source={require('../assets/waves.png')} style={styles.logo} />
                 <Text style={{ fontFamily: "PermanentMarker-Regular", alignSelf: 'center', marginTop: 10, fontSize: 30, color: "#dcdcdc" }}>Forgot Password</Text>
-                <Text style={{ width: '80%', alignSelf: 'center', color: '#dcdcdc', fontSize: 16, marginTop: 20 }}>
+                <Text style={{ fontFamily: "PermanentMarker-Regular",width: '80%', alignSelf: 'center', color: '#dcdcdc', fontSize: 16, marginTop: 20 }}>
                     Enter your Email address registered with us, We will send you a reset password link
                 </Text>
                 <View style={{ width: '80%', alignSelf: 'center', marginTop: 30 }}>
-                    <Text style={{ color: constant.white }}>Email</Text>
+                    <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular" }}>Email</Text>
                     <TextInput style={styles.input}
                         placeholder="Enter your email address"
                         onChangeText={(value) => setEmail(value)} />
                 </View>
                 <TouchableOpacity onPress={()=>forgotPassword()} style={styles.button}>
-                    <Text style={{ fontWeight: 'bold' }} >Submit</Text>
+                    <Text style={{ fontWeight: 'bold',fontFamily: "PermanentMarker-Regular",fontSize:16 }} >Submit</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>
@@ -80,7 +80,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignSelf: 'center',
         elevation: 10,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        fontFamily: "PermanentMarker-Regular",
+        fontSize:14
     },
     button: {
         alignSelf: 'center',

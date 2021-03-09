@@ -128,15 +128,15 @@ const UserSettings = (props) => {
         shadowRadius: 3,
         elevation: 5,flexDirection:'row',alignItems:'center'}} >
               <Icon onPress={()=>props.navigation.goBack()} name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
-              <Text>Setting</Text>
+              <Text style={{fontSize:16,fontFamily: "PermanentMarker-Regular"}} >Setting</Text>
               </View>
               
             <Icon name="dehaze" color="black" size={40} onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())} />
             </View >
             <View style={{paddingHorizontal:15,marginTop:15}} >
-            <Text>Notification</Text>
+            <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >Notification</Text>
             <View style={{marginTop:10,alignItems:'center',width:'100%',height:50,borderWidth:1,borderColor:'black',flexDirection: 'row',justifyContent:'space-between',paddingLeft:15}} >
-                        <Text style={styles.notificationtxt}>
+                        <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}}>
                             Push Notification
                 </Text>
                 <SwitchExample
@@ -146,22 +146,22 @@ const UserSettings = (props) => {
             </View>
             <View style={{paddingHorizontal:15,marginTop:15}} >
             
-            <Text>Change Password</Text>
+            <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >Change Password</Text>
             <View style={{width:'100%',height:350,borderWidth:1,borderColor:'black',flexDirection:'column',alignItems:'center',justifyContent:'space-evenly'}} >
                 <View style={{width:'100%',marginLeft:20}} >
-                <Text>Old Password</Text>
+                <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >Old Password</Text>
                 <TextInput onChangeText={(value) => setoldPassword(value)} placeholder="enter old password" style={{marginTop:5,paddingLeft:15,borderRadius:15,width:'90%',height:40,backgroundColor:'gray'}} />
                 </View>
                 <View style={{width:'100%',marginLeft:20}} >
-                <Text>New Password</Text>
+                <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >New Password</Text>
                 <TextInput onChangeText={(value) => setnewPassword(value)} placeholder="enter old password" style={{marginTop:5,paddingLeft:15,borderRadius:15,width:'90%',height:40,backgroundColor:'gray'}} />
                 </View>
                 <View style={{width:'100%',marginLeft:20}} >
-                <Text>Confirm Password</Text>
+                <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >Confirm Password</Text>
                 <TextInput onChangeText={(value) => setconfirmPassword(value)} placeholder="enter old password" style={{marginTop:5,paddingLeft:15,borderRadius:15,width:'90%',height:40,backgroundColor:'gray'}} />
                 </View>
                 <TouchableOpacity style={{borderRadius:15,width:150,height:50,backgroundColor:'skyblue',flexDirection:'column',alignItems:'center',justifyContent:'center'}} >
-                  <Text style={{color:'white'}} >Update</Text>
+                  <Text style={{color:'white',fontFamily: "PermanentMarker-Regular",fontSize:16,fontWeight:'bold'}} >Update</Text>
                 </TouchableOpacity>
             </View>
             </View>

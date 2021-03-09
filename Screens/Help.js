@@ -59,18 +59,18 @@ const Help = (props) => {
         elevation: 5,paddingHorizontal:20,backgroundColor:'white',height: 50, flexDirection:'row', alignItems:'center',justifyContent:'space-between' }}>
               <View style={{flexDirection:'row',alignItems:'center'}} >
               <Icon onPress={() => props.navigation.goBack()} name="keyboard-backspace" color="black" style={{marginRight:15}}  size={30} />
-              <Text>Help</Text>
+              <Text style={{fontSize:16,fontFamily: "PermanentMarker-Regular"}} >Help</Text>
               </View>
               
             <Icon name="dehaze" color="black" size={40} onPress={()=>props.navigation.toggleDrawer()} />
             </View>
             <View style={{flexDirection:'column',justifyContent:'space-evenly',height:180,marginHorizontal:20}} >
-            <Text style={{fontSize:25,fontWeight:'bold'}} >Reach us out</Text>
+            <Text style={{fontSize:25,fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}} >Reach us out</Text>
 
-            <Text style={{fontSize:15}}  >For any feedback or quiry please reach us out email address</Text>
+            <Text style={{fontSize:15,fontFamily: "PermanentMarker-Regular"}}  >For any feedback or quiry please reach us out flowforsport@gmail.com</Text>
 
             <TouchableOpacity style={{borderRadius:15,alignItems:'center',justifyContent:'center',width:150,height:50,backgroundColor:'#2e74b7'}} >
-              <Text style={{color:'white'}} >Visit website</Text>
+              <Text style={{color:'white',fontFamily: "PermanentMarker-Regular",fontSize:18,fontWeight:'bold'}} >Visit website</Text>
             </TouchableOpacity>
             </View>
     

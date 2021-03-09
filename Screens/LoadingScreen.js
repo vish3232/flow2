@@ -37,7 +37,7 @@ const LoadingScreen = (props) => {
             borderRadius: 10,
           }}>
           <ActivityIndicator color="#2e74b7" size="large" />
-          <Text style={{marginLeft: 20, fontSize: 20}}>Loading...</Text>
+          <Text style={{marginLeft: 20, fontSize: 20,fontFamily: "PermanentMarker-Regular"}}>Loading...</Text>
         </View>
       </View>
     </Modal>

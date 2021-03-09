@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: '700',
         marginTop: 5,
-        color:'white'
+        color:'white',
+        fontFamily: "PermanentMarker-Regular"
     },
     blogParagraph: {
         marginHorizontal: 10,
@@ -48,7 +49,8 @@ const styles = StyleSheet.create({
         fontSize: 12,
         marginVertical: 10,
         marginLeft: 10,
-        color: '#dcdcdc'
+        color: '#dcdcdc',
+        fontFamily: "PermanentMarker-Regular"
     }
 })
 

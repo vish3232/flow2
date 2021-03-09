@@ -30,7 +30,7 @@ const Header = () => {
                 <Text style={{ marginLeft: 5, ...styles.dateformat }}>{month[new Date().getMonth()]}</Text>
                 <Text style={{ marginLeft: 5, ...styles.dateformat }}>{new Date().getDate()}</Text>
             </View>
-            <Text style={{ width:150,color: constant.white, fontSize: 25, marginLeft: 20, marginTop: 40 }}>{queote}</Text>
+            <Text style={{ width:150,color: constant.white, fontSize: 25, marginLeft: 20, marginTop: 40,fontFamily: "PermanentMarker-Regular" }}>{queote}</Text>
          </View>
     )
 }
@@ -38,7 +38,7 @@ const Header = () => {
 const styles = StyleSheet.create({
     container: {
         height: 250,
-        backgroundColor: constant.blue,
+        backgroundColor: '#28287B',
         width: '100%',
         alignSelf: 'center',
         borderBottomLeftRadius: 0,
@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     dateformat: {
         color: '#fff',
         fontSize: 12,
-        opacity: 0.5
+        opacity: 0.5,
+        fontFamily: "PermanentMarker-Regular"
     }
 })
 

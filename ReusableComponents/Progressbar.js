@@ -13,8 +13,8 @@ const Progressbar = (props) => {
     return (
         <View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '85%', alignSelf: 'center' }}>
-                <Text style={{ color: constant.white }}>{start_time}</Text>
-                <Text style={{ color: constant.white }}>{end_time}</Text>
+                <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular",fontSize:15 }}>{start_time}</Text>
+                <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular",fontSize:15 }}>{end_time}</Text>
             </View>
             <Slider
                 style={{ width: '90%', height: 40, alignSelf: 'center' }}

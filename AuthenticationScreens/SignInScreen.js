@@ -89,10 +89,14 @@ const SignInScreen = (props) => {
                     }
                 }else{
                     alert('please enter valid email id and password...')
+                    setLoading(false)
                 }
             }
         } catch (error) {
             console.log(error)
+            alert('please enter valid email id and password...')
+                
+            setLoading(false)
         }
     }
 
@@ -110,25 +114,29 @@ const SignInScreen = (props) => {
                 <Image source={require('../assets/waves.png')} style={styles.logo} />
                 <Text style={{ fontFamily: "PermanentMarker-Regular", alignSelf: 'center', marginTop: 10, fontSize: 30, color: "#dcdcdc" }}>Welcome To Flow</Text>
                 <View style={{ width: '80%', alignSelf: 'center', marginTop: '8%' }}>
-                    <Text style={{ color: '#dcdcdc' }}>Email</Text>
+                    <Text style={{ color: '#dcdcdc',fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Email</Text>
                     <TextInput style={styles.input}
                         placeholder="Enter Email"
-                        onChangeText={(value) => setname(value)} />
+                        onChangeText={(value) => setname(value)}
+                        keyboardType="email-address"
+                         />
+                        
                 </View>
                 <View style={{ width: '80%', alignSelf: 'center', marginTop: 20 }}>
-                    <Text style={{ color: '#dcdcdc' }}>Password</Text>
+                    <Text style={{ color: '#dcdcdc',fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Password</Text>
                     <TextInput style={styles.input}
                         placeholder="Enter Password"
                         secureTextEntry={true}
+                        
                         onChangeText={(value) => setpassword(value)} />
                 </View>
                 <TouchableOpacity
                     onPress={() => props.navigation.navigate('ForgotPassword')}
                     style={{ alignSelf: 'flex-end', marginRight: '10%', marginTop: 10 }}>
-                    <Text style={{ color: '#dcdcdc' }}>Forgot Password ?</Text>
+                    <Text style={{ color: '#dcdcdc',fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Forgot Password ?</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, { marginRight: 20 }]} onPress={submit}>
-                    <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 16 }}>Sign In</Text>
+                    <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 16,fontFamily: "PermanentMarker-Regular" }}>Sign In</Text>
                 </TouchableOpacity>
                 <View style={{ width: '90%', backgroundColor: '#dcdcdc', height: 0.5, alignSelf: 'center', marginTop: 25 }} />
                 <GoogleSigninButton
@@ -138,9 +146,9 @@ const SignInScreen = (props) => {
                     onPress={_signIn}
                 />
                 <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25 }}>
-                    <Text style={{ color: constant.white }}>Don't have an account?</Text>
+                    <Text style={{ color: constant.white,fontFamily: "PermanentMarker-Regular",fontSize:15 }}>Don't have an account?</Text>
                     <TouchableOpacity onPress={() => props.navigation.navigate('SignUpScreen')}>
-                        <Text style={{ color: constant.blue, marginLeft: 10 }}>Sign Up</Text>
+                        <Text style={{ color: constant.blue, marginLeft: 10,fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -168,7 +176,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignSelf: 'center',
         elevation: 10,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        fontFamily: "PermanentMarker-Regular",
+        fontSize:15
+        
     },
     button: {
         justifyContent: 'center',
