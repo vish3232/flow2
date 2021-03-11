@@ -25,13 +25,13 @@ const tp =props.route.params.songsIdList
     id: '',
     url: '',
     title: 'Track Title',
-    artist: 'Track Artist',
   }
 
   let listOfSongs = []
   songsId.map(data1 => {
-    obj.id = data1;
+    obj.id = data1._id;
     obj.url = 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/song/' + data1._id;
+    obj.title=data1.filename
     listOfSongs.push(obj)
   })
 
@@ -160,9 +160,16 @@ global.subcategory=props.route.params.subcategory
 
   const nextSong = async () => {
     try {
-      //console.log(listOfSongs)
-      //console.log(TrackPlayer.getCurrentTrack())
-
+   //alert(JSON.stringify(props.route.params.songsIdList))
+   for(var i=0;i<props.route.params.songsIdList.length;i++){
+     if(props.route.params.songsIdList[i]._id==global.id){
+       global.id=props.route.params.songsIdList[i+1]._id
+      props.route.params.title=props.route.params.songsIdList[i+1].filename
+     
+     }
+   }
+     
+       
       await TrackPlayer.skipToNext();
    } catch (error) {
       togglePlayback()
@@ -171,6 +178,16 @@ global.subcategory=props.route.params.subcategory
 
   const previousSong = async () => {
     try {
+    //  alert(JSON.stringify(listOfSongs))
+    for(var i=0;i<props.route.params.songsIdList.length;i++){
+      alert(global.id)
+      if(props.route.params.songsIdList[i]._id==global.id){
+        global.id=props.route.params.songsIdList[i-1]._id
+     
+       props.route.params.title=props.route.params.songsIdList[i-1].filename
+      
+      }
+    } 
       await TrackPlayer.skipToPrevious();
     } catch (error) {
      togglePlayback()
@@ -191,7 +208,7 @@ global.subcategory=props.route.params.subcategory
       <View style={{ marginTop: 10,flexDirection:'column',alignItems:'center',justifyContent:'center' }}>
         <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center',fontFamily: "PermanentMarker-Regular" }}>{props.route.params.subcategory}</Text>
 
-        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center',width:'90%',fontFamily: "PermanentMarker-Regular" }}>{global.title}</Text>
+        <Text style={{ color: constant.white, fontWeight: 'bold', fontSize: 18, alignSelf: 'center',width:'90%',fontFamily: "PermanentMarker-Regular" }}>{props.route.params.title}</Text>
       </View>
 
       <ProgressBar />
