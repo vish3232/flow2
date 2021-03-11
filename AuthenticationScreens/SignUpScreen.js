@@ -13,6 +13,7 @@ import {
 } from '@react-native-community/google-signin';
 import AsyncStorage from '@react-native-community/async-storage'
 import LoadingScreen from '../Screens/LoadingScreen'
+import LinearGradient from 'react-native-linear-gradient';
 
 const SignUpScreen = (props) => {
 
@@ -183,7 +184,10 @@ const SignUpScreen = (props) => {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.button} onPress={()=>submit()} >
+            <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#2193b0','#6dd5ed']} style={{width:'100%',height:40,borderRadius:15,alignItems:"center",justifyContent:"center"}}  >
+                
                 <Text style={{ fontWeight: 'bold', color: '#fff',fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Sign Up</Text>
+            </LinearGradient>
             </TouchableOpacity>
             <GoogleSigninButton
                     style={{ width: '55%', height: 50, marginTop: 40, alignSelf: 'center' }}

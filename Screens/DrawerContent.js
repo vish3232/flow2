@@ -31,12 +31,12 @@ const DrawerContent = (props) => {
                 <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Profile</Text>
 
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => alert('url of term')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
+            <TouchableOpacity onPress={() => Linking.openURL('http://google.com')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="note" size={30} style={{marginLeft:20,marginRight:20}} />
                 <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Terms of Service</Text>
 
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => alert('url of privacy')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
+            <TouchableOpacity onPress={() => Linking.openURL('http://google.com')} style={{marginTop:15,flexDirection:'row',alignItems:'center',width:'70%'}} >
                <Icon name="note" size={30} style={{marginLeft:20,marginRight:20}} />
                 <Text style={{fontSize:14,fontFamily: "PermanentMarker-Regular"}} >Privacy Policy</Text>
 

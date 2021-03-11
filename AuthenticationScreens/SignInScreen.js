@@ -13,6 +13,8 @@ import {
 } from '@react-native-community/google-signin';
 import AsyncStorage from '@react-native-community/async-storage'
 import LoadingScreen from '../Screens/LoadingScreen'
+import LinearGradient from 'react-native-linear-gradient';
+
 const SignInScreen = (props) => {
 
     const [name, setname] = useState('')
@@ -136,7 +138,10 @@ const SignInScreen = (props) => {
                     <Text style={{ color: '#dcdcdc',fontFamily: "PermanentMarker-Regular",fontSize:16 }}>Forgot Password ?</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, { marginRight: 20 }]} onPress={submit}>
+                <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#2193b0','#6dd5ed']} style={{width:'100%',height:40,borderRadius:15,alignItems:"center",justifyContent:"center"}} >
+                
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 16,fontFamily: "PermanentMarker-Regular" }}>Sign In</Text>
+                </LinearGradient>
                 </TouchableOpacity>
                 <View style={{ width: '90%', backgroundColor: '#dcdcdc', height: 0.5, alignSelf: 'center', marginTop: 25 }} />
                 <GoogleSigninButton

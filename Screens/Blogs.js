@@ -73,7 +73,7 @@ const Blogs = (props) => {
                 }}>
                 {
                     modalData.map(data1 => {
-                        return <BlogContent key={data1._id} source={{ uri: 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/blog/blogimage/' + data1._id }} title={data1.title} content={data1.content} />
+                        return <BlogContent onClick={()=>toggleModal('close')} key={data1._id} source={{ uri: 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/blog/blogimage/' + data1._id }} title={data1.title} content={data1.content} />
                     })
                 }
             </Modal>

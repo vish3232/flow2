@@ -133,21 +133,21 @@ const Profile = (props) => {
             <View style={{paddingHorizontal:20}} >
             <View style={{justifyContent:'center', alignItems:'center', marginTop:20}}>
                 <Image source={{uri:profile}} style={{height:150, width:150, borderRadius:height+width/2}}></Image>
-                <TouchableOpacity onPress={()=>selectPhotoTapped()} style={{marginTop:15,width:130,height:50,backgroundColor:'blue',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
+                <TouchableOpacity onPress={()=>selectPhotoTapped()} style={{marginTop:15,width:130,height:50,backgroundColor:'#2e74b7',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
                   <Text style={{color:'white',fontFamily: "PermanentMarker-Regular",fontWeight:'bold'}} >Update Profile</Text>
                 </TouchableOpacity>
                  
              </View>
               <View style={{height:300,flexDirection:'column',alignItems:'flex-start',justifyContent:'space-between'}} >
              <Text style={{color:'black', marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}}>Name</Text>
-             <TextInput onChangeText={(value) => setname(value)} style={{width:'100%',height:40,backgroundColor:'gray',borderRadius:10}} value={name} />
+             <TextInput onChangeText={(value) => setname(value)} style={{paddingLeft:15,width:'100%',height:40,backgroundColor:'#E8E8E8',borderRadius:10}} value={name} />
              <Text style={{color:'black', marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}}>Email</Text>
-             <TextInput style={{width:'100%',height:40,backgroundColor:'gray',borderRadius:10}} value={email} onChangeText={(value) => setemail(value)} />
+             <TextInput style={{paddingLeft:15,width:'100%',height:40,backgroundColor:'#E8E8E8',borderRadius:10}} value={email} onChangeText={(value) => setemail(value)} />
              <Text style={{color:'black', marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}}>Mobile No.</Text>
-             <TextInput style={{width:'100%',height:40,backgroundColor:'gray',borderRadius:10}} value={mobile} onChangeText={(value) => setmobile(value)} />
+             <TextInput style={{paddingLeft:15,width:'100%',height:40,backgroundColor:'#E8E8E8',borderRadius:10}} value={mobile} onChangeText={(value) => setmobile(value)} />
              <Text style={{color:'black', marginTop:5, fontSize:18, fontFamily: "PermanentMarker-Regular"}} >Plan: {planname}</Text>
              
-             <TouchableOpacity style={{marginTop:20,alignSelf:'center',width:130,height:50,backgroundColor:'blue',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
+             <TouchableOpacity style={{marginTop:20,alignSelf:'center',width:130,height:50,backgroundColor:'#2e74b7',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
                <Text onPress={()=>updateProfileDetails()} style={{color:'white',fontFamily: "PermanentMarker-Regular",fontSize:16,fontWeight:'bold'}} >Update
 
                </Text>

@@ -154,15 +154,15 @@ const Premium = (props) => {
             </View>
           
                 <View style={{marginTop:15,justifyContent:'center'}}>
-                    <View style={{borderRadius:20,backgroundColor:'#616161',width:'90%',height:60,marginHorizontal:20,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                    <View style={{borderRadius:20,backgroundColor:'#1FA2FF',width:'90%',height:60,marginHorizontal:20,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <Text style={{fontFamily: "PermanentMarker-Regular",paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold'}}>Current Plan</Text>
-                        <Text style={{fontFamily: "PermanentMarker-Regular",paddingHorizontal:10,fontSize:18,color:'#212121'}}>{subcription}</Text>
+                        <Text style={{fontFamily: "PermanentMarker-Regular",paddingHorizontal:10,fontSize:18,color:'white'}}>{subcription}</Text>
                     </View>
 
                 </View>
                 <View style={{flex:2,alignItems:'center',justifyContent:'center'}}>
-                <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
-   colors={['#b92b27','#1565C0']} style={{marginTop:50,width:'90%',height:300,borderRadius:15,justifyContent:'space-around'}} >
+                <LinearGradient  start={{x: 0.4, y: 0.1}} end={{x: 0.5, y: 1}}
+   colors={['#1565C0','#b92b27']} style={{marginTop:50,width:'90%',height:250,borderRadius:15,justifyContent:'space-around'}} >
 
 
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
@@ -175,7 +175,7 @@ const Premium = (props) => {
                 </LinearGradient>
                 </View>
                 <View style={{flex:2,alignItems:'center',justifyContent:'center'}}>
-                <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#fff59d','#f57f17']} style={{marginTop:50,width:'90%',height:300,borderRadius:15,justifyContent:'space-around',marginBottom:80}} >
+                <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#AAFFA9','#11998e']} style={{marginTop:50,width:'90%',height:250,borderRadius:15,justifyContent:'space-around',marginBottom:80}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium for 200/month</Text>
                             </View>
