@@ -11,7 +11,7 @@ import Axios from 'axios'
 import LoadingScreen from './LoadingScreen'
 const Profile = (props) => {
     const {height , width} = Dimensions.get('window')
-    const [profile, setprofile] = useState('https://images.unsplash.com/photo-1581984433064-234b39961f3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')
+    const [profile, setprofile] = useState('https://www.clipartkey.com/mpngs/m/152-1520367_user-profile-default-image-png-clipart-png-download.png')
     const [name,setname]=useState('Full Name')
     const [mobile,setmobile]=useState('mobile no.')
     const [email,setemail]=useState('email-id')
@@ -156,7 +156,7 @@ const Profile = (props) => {
              </View>
 
              <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
-   colors={['#b92b27','#1565C0']} style={{marginTop:40,marginBottom:80,width:'100%',height:200,borderRadius:15,justifyContent:'space-around'}} >
+   colors={['#AAFFA9','#11998e']} style={{marginTop:40,marginBottom:80,width:'100%',height:200,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium</Text>
                             </View>

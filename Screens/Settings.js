@@ -134,33 +134,22 @@ const UserSettings = (props) => {
             <Icon name="dehaze" color="black" size={40} onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())} />
             </View >
             <View style={{paddingHorizontal:15,marginTop:15}} >
-            <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >Notification</Text>
-            <View style={{marginTop:10,alignItems:'center',width:'100%',height:50,borderWidth:1,borderColor:'black',flexDirection: 'row',justifyContent:'space-between',paddingLeft:15}} >
-                        <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}}>
-                            Push Notification
-                </Text>
-                <SwitchExample
-            toggleSwitch1 = {toggleSwitch1}
-            switch1Value = {switchValue}/>
-                    </View>
-            </View>
-            <View style={{paddingHorizontal:15,marginTop:15}} >
             
-            <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >Change Password</Text>
+            <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16,fontWeight:"bold",marginBottom:10}} >Change Password</Text>
             <View style={{width:'100%',height:350,borderWidth:1,borderColor:'black',flexDirection:'column',alignItems:'center',justifyContent:'space-evenly'}} >
                 <View style={{width:'100%',marginLeft:20}} >
                 <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >Old Password</Text>
-                <TextInput onChangeText={(value) => setoldPassword(value)} placeholder="enter old password" style={{marginTop:5,paddingLeft:15,borderRadius:15,width:'90%',height:40,backgroundColor:'gray'}} />
+                <TextInput onChangeText={(value) => setoldPassword(value)} placeholder="enter old password" style={{marginTop:5,paddingLeft:15,borderRadius:15,width:'90%',height:40,backgroundColor:'#E8E8E8'}} />
                 </View>
                 <View style={{width:'100%',marginLeft:20}} >
                 <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >New Password</Text>
-                <TextInput onChangeText={(value) => setnewPassword(value)} placeholder="enter old password" style={{marginTop:5,paddingLeft:15,borderRadius:15,width:'90%',height:40,backgroundColor:'gray'}} />
+                <TextInput onChangeText={(value) => setnewPassword(value)} placeholder="enter old password" style={{marginTop:5,paddingLeft:15,borderRadius:15,width:'90%',height:40,backgroundColor:'#E8E8E8'}} />
                 </View>
                 <View style={{width:'100%',marginLeft:20}} >
                 <Text style={{fontFamily: "PermanentMarker-Regular",fontSize:16}} >Confirm Password</Text>
-                <TextInput onChangeText={(value) => setconfirmPassword(value)} placeholder="enter old password" style={{marginTop:5,paddingLeft:15,borderRadius:15,width:'90%',height:40,backgroundColor:'gray'}} />
+                <TextInput onChangeText={(value) => setconfirmPassword(value)} placeholder="enter old password" style={{marginTop:5,paddingLeft:15,borderRadius:15,width:'90%',height:40,backgroundColor:'#E8E8E8'}} />
                 </View>
-                <TouchableOpacity style={{borderRadius:15,width:150,height:50,backgroundColor:'skyblue',flexDirection:'column',alignItems:'center',justifyContent:'center'}} >
+                <TouchableOpacity style={{borderRadius:15,width:150,height:50,backgroundColor:'#2e74b7',flexDirection:'column',alignItems:'center',justifyContent:'center'}} >
                   <Text style={{color:'white',fontFamily: "PermanentMarker-Regular",fontSize:16,fontWeight:'bold'}} >Update</Text>
                 </TouchableOpacity>
             </View>

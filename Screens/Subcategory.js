@@ -9,8 +9,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import Axios from 'axios'
 import LoadingScreen from './LoadingScreen'
 import MusicModal from './MusicModal';
+import { useIsFocused } from "@react-navigation/native";
 
 const Subcategory = (props) => {
+    const isFocused = useIsFocused()
+
     const [subCategory,setsubCategory]=useState([])
     const [isLoading,setLoading]=useState(false)
     const [isMusicModal,setMusicModal]=useState(global.isMusicModal)
@@ -37,8 +40,11 @@ const Subcategory = (props) => {
    
 
     useEffect(() => {
+        
+        setMusicModal(global.isMusicModal)
+      
         getSubcategoryData()
-    }, [])
+    }, [isFocused])
 
     const songs = useSelector(state => state.songs)
 

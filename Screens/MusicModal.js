@@ -75,8 +75,6 @@ const MusicModal = (props) => {
         }}>
         <TouchableOpacity onPress={props.clickModal}
           style={{
-            borderColor: '#3EB16E',
-            borderWidth: 1,
             paddingLeft: 20,
             alignSelf: 'center',
             width: '100%',
@@ -84,8 +82,8 @@ const MusicModal = (props) => {
             justifyContent: 'flex-start',
             alignItems: 'center',
             backgroundColor: '#ffffff',
-            borderRadius: 10,
           }}>
+        
           <Text style={{ width:'80%',fontSize: 20,fontFamily: "PermanentMarker-Regular"}}>{props.title}</Text>
           <Icon style={{position:'absolute',right:10}} name={getStateName(playbackState) != "Playing" ? "play-arrow" : "pause"} color={'black'} size={35} onPress={togglePlayback} />
      

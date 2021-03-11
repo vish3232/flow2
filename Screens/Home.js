@@ -10,8 +10,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import LoadingScreen from './LoadingScreen'
 import MusicModal from './MusicModal';
 import DeviceInfo from 'react-native-device-info';
+import { useIsFocused } from "@react-navigation/native";
 
 const Home = (props) => {
+    const isFocused = useIsFocused()
+
     const [isLoading,setLoading]=useState(false)
     const [songs,setSongs]=useState([])
     const [title,setTitle]=useState([])
@@ -21,6 +24,8 @@ const Home = (props) => {
     
 
     useEffect(() => {
+        setMusicModal(global.isMusicModal)
+       
         getPaymentStatus().then((paymentStatus) => {
             
             setSubcription(JSON.parse(paymentStatus))
@@ -33,7 +38,7 @@ const Home = (props) => {
         getProfileDetails()
         checkSubcription()
 
-    }, [])
+    }, [isFocused])
 
     const getProfileDetails=async()=>{
         setLoading(true)
@@ -211,7 +216,7 @@ const Home = (props) => {
                     }
                    <Text style={{ color: '#a9b7cb', fontSize: 20, fontWeight: 'bold', marginLeft: 20,fontFamily: "PermanentMarker-Regular" }}>Premium</Text>
                     <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
-   colors={['#b92b27','#1565C0']} style={{alignSelf:'center',width:'90%',marginBottom:80,height:200,borderRadius:15,justifyContent:'space-around'}} >
+   colors={['#AAFFA9','#11998e']} style={{alignSelf:'center',width:'90%',marginBottom:80,height:200,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
                         <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium</Text>
                     </View>

@@ -20,6 +20,7 @@ const Playlist = (props) => {
    
    
     useEffect(() => {
+        setMusicModal(global.isMusicModal)
         getPaymentStatus().then((paymentStatus) => {
             
             setSubcription(JSON.parse(paymentStatus))

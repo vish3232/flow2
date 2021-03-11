@@ -162,8 +162,9 @@ global.subcategory=props.route.params.subcategory
     try {
       //console.log(listOfSongs)
       //console.log(TrackPlayer.getCurrentTrack())
+
       await TrackPlayer.skipToNext();
-    } catch (error) {
+   } catch (error) {
       togglePlayback()
     }
   }
