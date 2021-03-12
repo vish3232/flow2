@@ -82,10 +82,9 @@ global.subcategory=props.route.params.subcategory
         
         global.title=props.route.params.title
         await TrackPlayer.add({
-          id: '123',
+          id:props.route.params.id ,
           url: 'http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/audio/song/' + props.route.params.id,
-          title: 'Track Title',
-          artist: 'Track Artist',
+          title: props.route.params.title,
           //artwork: require('track.png')
         })
         goto(global.sliderValue)
@@ -160,17 +159,19 @@ global.subcategory=props.route.params.subcategory
 
   const nextSong = async () => {
     try {
-   //alert(JSON.stringify(props.route.params.songsIdList))
-   for(var i=0;i<props.route.params.songsIdList.length;i++){
-     if(props.route.params.songsIdList[i]._id==global.id){
-       global.id=props.route.params.songsIdList[i+1]._id
-      props.route.params.title=props.route.params.songsIdList[i+1].filename
-     
-     }
-   }
      
        
       await TrackPlayer.skipToNext();
+      const song=await TrackPlayer.getCurrentTrack()
+      console.log(song)
+      for(var i=0;i<props.route.params.songsIdList.length;i++){
+        if(props.route.params.songsIdList[i]._id===song){
+         props.route.params.title=props.route.params.songsIdList[i].filename
+        
+        }
+      }
+  
+
    } catch (error) {
       togglePlayback()
     }
@@ -179,16 +180,19 @@ global.subcategory=props.route.params.subcategory
   const previousSong = async () => {
     try {
     //  alert(JSON.stringify(listOfSongs))
-    for(var i=0;i<props.route.params.songsIdList.length;i++){
-      alert(global.id)
-      if(props.route.params.songsIdList[i]._id==global.id){
-        global.id=props.route.params.songsIdList[i-1]._id
-     
-       props.route.params.title=props.route.params.songsIdList[i-1].filename
-      
-      }
-    } 
+
       await TrackPlayer.skipToPrevious();
+      const song=await TrackPlayer.getCurrentTrack()
+      console.log(song)
+      for(var i=0;i<props.route.params.songsIdList.length;i++){
+       // alert(global.id)
+        if(props.route.params.songsIdList[i]._id===song){
+         
+         props.route.params.title=props.route.params.songsIdList[i].filename
+        
+        }
+      } 
+      
     } catch (error) {
      togglePlayback()
     }
