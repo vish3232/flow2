@@ -68,12 +68,17 @@ const Subcategory = (props) => {
         setLoading(!isLoading);
       }
 
-
+      const toggleMusicModal=()=>{
+        setMusicModal(!isMusicModal)
+        global.isMusicModal=(!global.isMusicModal)
+    
+    }
+    
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
         <LoadingScreen toggle={toggle} modalVisible={isLoading} />
         {isMusicModal?
-        <MusicModal title={global.title} clickModal={navigateToMusicModal} />:<></>}
+        <MusicModal title={global.title} clickClose={toggleMusicModal} clickModal={navigateToMusicModal} />:<></>}
 
            <View style={{ shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },

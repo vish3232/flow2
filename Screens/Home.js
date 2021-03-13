@@ -19,7 +19,7 @@ const Home = (props) => {
     const [songs,setSongs]=useState([])
     const [title,setTitle]=useState([])
     const [category,setCategory]=useState([])
-    const [isMusicModal,setMusicModal]=useState(global.isMusicModal)
+    const [isMusicModal,setMusicModal]=useState(false)
     const [subcription,setSubcription]=useState(null)
     
 
@@ -173,6 +173,11 @@ const Home = (props) => {
         console.log(global.id)
          props.navigation.push('Player',{'isModalOpen':'true','currentTime':global.sliderValue,'id':global.id, 'songsIdList':global.song, 'title':global.title,'subcategory':global.subcategory})
     }
+
+    const toggleMusicModal=()=>{
+        setMusicModal(!isMusicModal)
+        global.isMusicModal=(!global.isMusicModal)
+    }
     
    
 
@@ -180,7 +185,7 @@ const Home = (props) => {
         <View style={{flex:1}}>
         <LoadingScreen toggle={toggle} modalVisible={isLoading} />
         {isMusicModal?
-        <MusicModal title={global.title} clickModal={navigateToMusicModal} />:<></>}
+        <MusicModal title={global.title} clickClose={toggleMusicModal}  clickModal={navigateToMusicModal} />:<></>}
        
            <View style={{ flex: 1, backgroundColor: constant.background }}>
             
@@ -216,7 +221,7 @@ const Home = (props) => {
                     }
                    <Text style={{ color: '#a9b7cb', fontSize: 20, fontWeight: 'bold', marginLeft: 20,fontFamily: "PermanentMarker-Regular" }}>Premium</Text>
                     <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
-   colors={['#AAFFA9','#11998e']} style={{alignSelf:'center',width:'90%',marginBottom:80,height:200,borderRadius:15,justifyContent:'space-around'}} >
+   colors={['#00C9FF','#92FE9D']} style={{alignSelf:'center',width:'90%',marginBottom:80,height:200,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
                         <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium</Text>
                     </View>

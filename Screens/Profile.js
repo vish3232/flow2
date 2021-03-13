@@ -33,8 +33,9 @@ const Profile = (props) => {
         Axios.post('http://ec2-65-0-204-42.ap-south-1.compute.amazonaws.com:8080/user/getProfileDetails',{
           email:JSON.parse( mail)
         }).then(res => {
+          console.log(res.data)
           setLoading(false)
-
+          setprofile(res.data.profileData[0].filename===null?"https://www.clipartkey.com/mpngs/m/152-1520367_user-profile-default-image-png-clipart-png-download.png":res.data.filename)
           setemail(res.data.profileData[0].email)
           setname(res.data.profileData[0].fullname)
           setmobile(res.data.profileData[0].mobile)
@@ -134,7 +135,7 @@ const Profile = (props) => {
             <View style={{justifyContent:'center', alignItems:'center', marginTop:20}}>
                 <Image source={{uri:profile}} style={{height:150, width:150, borderRadius:height+width/2}}></Image>
                 <TouchableOpacity onPress={()=>selectPhotoTapped()} style={{marginTop:15,width:130,height:50,backgroundColor:'#2e74b7',borderRadius:10,flexDirection:'column',justifyContent:'center',alignItems:'center'}} >
-                  <Text style={{color:'white',fontFamily: "PermanentMarker-Regular",fontWeight:'bold'}} >Update Profile</Text>
+                  <Text style={{color:'white',fontFamily: "PermanentMarker-Regular",fontWeight:'bold'}} >Upload Profile</Text>
                 </TouchableOpacity>
                  
              </View>
@@ -156,7 +157,7 @@ const Profile = (props) => {
              </View>
 
              <LinearGradient  start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}}
-   colors={['#AAFFA9','#11998e']} style={{marginTop:40,marginBottom:80,width:'100%',height:200,borderRadius:15,justifyContent:'space-around'}} >
+   colors={['#00C9FF','#92FE9D']} style={{marginTop:40,marginBottom:80,width:'100%',height:200,borderRadius:15,justifyContent:'space-around'}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium</Text>
                             </View>

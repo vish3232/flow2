@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import { View, Text,ScrollView,TextInput,TouchableOpacity,Alert } from 'react-native'
+import { View, Text,ScrollView,TextInput,TouchableOpacity,Alert,Linking } from 'react-native'
 import {getMobile,getEmail} from '../constant/storage'
 import DeviceInfo from 'react-native-device-info';
 import Header from '../ReusableComponents/Header'
@@ -66,10 +66,9 @@ const Help = (props) => {
             </View>
             <View style={{flexDirection:'column',justifyContent:'space-evenly',height:180,marginHorizontal:20}} >
             <Text style={{fontSize:25,fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}} >Reach us out</Text>
-
-            <Text style={{fontSize:15,fontFamily: "PermanentMarker-Regular"}}  >For any feedback or quiry please reach us out flowforsport@gmail.com</Text>
-
-            <TouchableOpacity style={{borderRadius:15,alignItems:'center',justifyContent:'center',width:150,height:50,backgroundColor:'#2e74b7'}} >
+            <Text style={{fontSize:15,fontFamily: "PermanentMarker-Regular"}}  >For any feedback or quiry please reach us out</Text>
+            <Text  style={{fontSize:15,fontFamily: "PermanentMarker-Regular",color:"blue"}} >flowforsport@gmail.com</Text>
+            <TouchableOpacity style={{borderRadius:15,alignItems:'center',justifyContent:'center',width:150,height:50,backgroundColor:'#2e74b7'}} onPress={() => Linking.openURL('http://google.com')} >
               <Text style={{color:'white',fontFamily: "PermanentMarker-Regular",fontSize:18,fontWeight:'bold'}} >Visit website</Text>
             </TouchableOpacity>
             </View>

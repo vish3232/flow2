@@ -168,16 +168,16 @@ const Premium = (props) => {
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Try Premium for 1 month</Text>
                             </View>
-                            <Text style={{width:'90%',alignSelf:'center',color:'white',fontFamily: "PermanentMarker-Regular"}}>Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Text>
+                            <Text style={{width:'90%',alignSelf:'center',color:'white',fontFamily: "PermanentMarker-Regular"}}>Upgrade to Premium to unlock all visualisation tracks!</Text>
                         <TouchableOpacity onPress={()=>trailPlanSubcription()} style={{width:'80%',backgroundColor:'white',height:40,alignSelf:'center',justifyContent:'center',borderRadius:10}}>
                             <Text style={{paddingHorizontal:10,fontSize:20,fontWeight:'bold',alignSelf:'center',fontFamily: "PermanentMarker-Regular"}}>Try 1 month free</Text>
                         </TouchableOpacity>
                 </LinearGradient>
                 </View>
                 <View style={{flex:2,alignItems:'center',justifyContent:'center'}}>
-                <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#AAFFA9','#11998e']} style={{marginTop:50,width:'90%',height:250,borderRadius:15,justifyContent:'space-around',marginBottom:80}} >
+                <LinearGradient start={{x: 0.4, y: 0.5}} end={{x: 0.5, y: 1}} colors={['#00C9FF','#92FE9D']} style={{marginTop:50,width:'90%',height:250,borderRadius:15,justifyContent:'space-around',marginBottom:80}} >
                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginHorizontal:10}}>
-                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium for 200/month</Text>
+                            <Text style={{paddingHorizontal:10,fontSize:20,color:'white',fontWeight:'bold',fontFamily: "PermanentMarker-Regular"}}>Premium for Rs.200/month</Text>
                             </View>
                             <Text style={{width:'90%',alignSelf:'center',color:'white',fontFamily: "PermanentMarker-Regular"}}>Upgrade to Premium to unlock all visualisation tracks!</Text>
                         <TouchableOpacity onPress={()=>processInfo()} style={{justifyContent:'center',width:'80%',backgroundColor:'white',height:40,alignSelf:'center',borderRadius:10}}>
